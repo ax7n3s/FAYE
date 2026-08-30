@@ -189,3 +189,26 @@ h1 {
     padding: 14px 30px;
   }
 }
+.story-preview {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 25px;
+  background: #050816;
+}
+
+.story-preview h2 {
+  font-size: clamp(35px, 7vw, 70px);
+  font-weight: 400;
+  margin: 20px 0;
+}
+
+.story-preview p:not(.small) {
+  max-width: 550px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.8;
+  opacity: 0.75;
+}
