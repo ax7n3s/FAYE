@@ -1,733 +1,313 @@
-/* =========================================
-   REALISTIC FIREWORKS
-========================================= */
+document.addEventListener("DOMContentLoaded", function () {
 
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
+  /* =========================
+     FIREWORKS
+  ========================= */
 
-let W = 0;
-let H = 0;
+  const canvas = document.getElementById("fireworks");
+  const ctx = canvas.getContext("2d");
 
-let rockets = [];
-let sparks = [];
+  let W, H;
+  let particles = [];
+  let rockets = [];
 
-const colors = [
-  [65, 125, 255],
-  [255, 55, 85],
-  [255, 215, 95],
-  [255, 255, 255],
-  [150, 90, 255]
-];
-
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-
-resize();
-
-window.addEventListener("resize", resize);
-
-
-/* Rocket */
-
-class Rocket {
-
-  constructor() {
-
-    this.x = W * (0.08 + Math.random() * 0.84);
-    this.y = H + 20;
-
-    this.targetY =
-      H * (0.10 + Math.random() * 0.42);
-
-    this.speed =
-      7.5 + Math.random() * 2;
-
-    this.color =
-      colors[Math.floor(Math.random() * colors.length)];
-
-    this.trail = [];
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
 
-  update() {
+  resize();
+  window.addEventListener("resize", resize);
 
-    this.trail.push({
-      x: this.x,
-      y: this.y
+  const colors = [
+    "65,125,255",
+    "255,55,85",
+    "255,220,100",
+    "255,255,255"
+  ];
+
+  function explode(x, y, color) {
+    for (let i = 0; i < 140; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 1.5 + Math.random() * 5;
+
+      particles.push({
+        x: x,
+        y: y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1,
+        decay: 0.008 + Math.random() * 0.008,
+        size: 1 + Math.random() * 2,
+        color: color
+      });
+    }
+  }
+
+  function launch() {
+    rockets.push({
+      x: W * (0.1 + Math.random() * 0.8),
+      y: H + 10,
+      target: H * (0.1 + Math.random() * 0.4),
+      speed: 7 + Math.random() * 2,
+      color: colors[Math.floor(Math.random() * colors.length)]
     });
-
-    if (this.trail.length > 14) {
-      this.trail.shift();
-    }
-
-    this.y -= this.speed;
-    this.speed -= 0.015;
-
-    if (this.y <= this.targetY) {
-
-      explode(
-        this.x,
-        this.y,
-        this.color
-      );
-
-      return true;
-    }
-
-    return false;
   }
 
-  draw() {
+  function animate() {
+    ctx.fillStyle = "rgba(2,4,11,0.20)";
+    ctx.fillRect(0, 0, W, H);
 
-    const [r, g, b] = this.color;
+    for (let i = rockets.length - 1; i >= 0; i--) {
+      const r = rockets[i];
 
-    for (
-      let i = 1;
-      i < this.trail.length;
-      i++
-    ) {
-
-      const a = this.trail[i - 1];
-      const b2 = this.trail[i];
+      r.y -= r.speed;
 
       ctx.beginPath();
+      ctx.arc(r.x, r.y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgb(${r.color})`;
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = `rgb(${r.color})`;
+      ctx.fill();
+      ctx.shadowBlur = 0;
 
-      ctx.moveTo(a.x, a.y);
-      ctx.lineTo(b2.x, b2.y);
-
-      ctx.strokeStyle =
-        `rgba(${r},${g},${b},${i / this.trail.length})`;
-
-      ctx.lineWidth = 1.5;
-      ctx.stroke();
-    }
-
-    ctx.beginPath();
-
-    ctx.arc(
-      this.x,
-      this.y,
-      2,
-      0,
-      Math.PI * 2
-    );
-
-    ctx.fillStyle =
-      `rgb(${r},${g},${b})`;
-
-    ctx.shadowBlur = 15;
-    ctx.shadowColor =
-      `rgb(${r},${g},${b})`;
-
-    ctx.fill();
-
-    ctx.shadowBlur = 0;
-  }
-}
-
-
-/* Explosion */
-
-function explode(x, y, color) {
-
-  const amount =
-    170 + Math.floor(Math.random() * 100);
-
-  for (let i = 0; i < amount; i++) {
-
-    const angle =
-      Math.random() * Math.PI * 2;
-
-    const speed =
-      1.5 + Math.random() * 5;
-
-    sparks.push({
-
-      x,
-      y,
-
-      px: x,
-      py: y,
-
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-
-      gravity: 0.025,
-
-      life: 1,
-
-      decay:
-        0.006 + Math.random() * 0.009,
-
-      size:
-        0.7 + Math.random() * 2,
-
-      color
-    });
-  }
-
-  /* Secondary burst */
-
-  setTimeout(() => {
-
-    if (Math.random() < 0.75) {
-
-      for (let i = 0; i < 55; i++) {
-
-        const angle =
-          Math.random() * Math.PI * 2;
-
-        const speed =
-          1 + Math.random() * 2.8;
-
-        sparks.push({
-
-          x: x + (Math.random() - .5) * 12,
-          y: y + (Math.random() - .5) * 12,
-
-          px: x,
-          py: y,
-
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-
-          gravity: 0.03,
-
-          life: 1,
-
-          decay: .012,
-
-          size:
-            .6 + Math.random() * 1.4,
-
-          color:
-            colors[
-              Math.floor(
-                Math.random() * colors.length
-              )
-            ]
-        });
+      if (r.y <= r.target) {
+        explode(r.x, r.y, r.color);
+        rockets.splice(i, 1);
       }
     }
 
-  }, 180 + Math.random() * 300);
-}
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
 
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.035;
+      p.vx *= 0.985;
+      p.life -= p.decay;
 
-/* Animation */
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color},${p.life})`;
+      ctx.shadowBlur = 12;
+      ctx.shadowColor = `rgb(${p.color})`;
+      ctx.fill();
+      ctx.shadowBlur = 0;
 
-function fireworksLoop() {
-
-  ctx.fillStyle =
-    "rgba(1,3,10,0.18)";
-
-  ctx.fillRect(
-    0,
-    0,
-    W,
-    H
-  );
-
-  /* Rockets */
-
-  for (
-    let i = rockets.length - 1;
-    i >= 0;
-    i--
-  ) {
-
-    const finished =
-      rockets[i].update();
-
-    rockets[i].draw();
-
-    if (finished) {
-      rockets.splice(i, 1);
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+      }
     }
+
+    requestAnimationFrame(animate);
   }
 
+  setInterval(launch, 700);
 
-  /* Sparks */
+  launch();
+  launch();
+  launch();
 
-  for (
-    let i = sparks.length - 1;
-    i >= 0;
-    i--
-  ) {
-
-    const p = sparks[i];
-
-    p.px = p.x;
-    p.py = p.y;
-
-    p.x += p.vx;
-    p.y += p.vy;
-
-    p.vx *= .985;
-    p.vy *= .985;
-
-    p.vy += p.gravity;
-
-    p.life -= p.decay;
-
-    const [r, g, b] = p.color;
-
-    ctx.beginPath();
-
-    ctx.moveTo(p.px, p.py);
-    ctx.lineTo(p.x, p.y);
-
-    ctx.strokeStyle =
-      `rgba(${r},${g},${b},${p.life})`;
-
-    ctx.lineWidth = p.size;
-
-    ctx.shadowBlur = 10;
-    ctx.shadowColor =
-      `rgb(${r},${g},${b})`;
-
-    ctx.stroke();
-
-    ctx.shadowBlur = 0;
-
-    if (p.life <= 0) {
-      sparks.splice(i, 1);
-    }
-  }
-
-  requestAnimationFrame(fireworksLoop);
-}
+  animate();
 
 
-/* Launch fireworks */
+  /* =========================
+     YES / NO
+  ========================= */
 
-setInterval(() => {
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const questionText = document.getElementById("questionText");
+  const questionHint = document.getElementById("questionHint");
+  const ending = document.getElementById("ending");
 
-  if (rockets.length < 5) {
-    rockets.push(new Rocket());
-  }
+  let noCount = 0;
 
-}, 650);
+  if (yesBtn && noBtn) {
 
+    noBtn.addEventListener("click", function () {
 
-/* Occasional fireworks burst */
+      noCount++;
 
-setInterval(() => {
+      const messages = [
+        "Are you sure? 😭",
+        "Think again 😂",
+        "Really? 👀",
+        "One more chance?",
+        "I don't believe you 😭"
+      ];
 
-  const amount =
-    2 + Math.floor(Math.random() * 3);
+      questionHint.textContent =
+        messages[Math.min(noCount - 1, messages.length - 1)];
 
-  for (let i = 0; i < amount; i++) {
-
-    setTimeout(() => {
-      rockets.push(new Rocket());
-    }, i * 180);
-  }
-
-}, 4500);
-
-
-/* Start immediately */
-
-rockets.push(new Rocket());
-rockets.push(new Rocket());
-
-fireworksLoop();
-
-
-/* =========================================
-   YES / NO PRANK
-========================================= */
-
-const yesBtn =
-  document.getElementById("yesBtn");
-
-const noBtn =
-  document.getElementById("noBtn");
-
-const questionText =
-  document.getElementById("questionText");
-
-const questionHint =
-  document.getElementById("questionHint");
-
-const ending =
-  document.getElementById("ending");
-
-let noCount = 0;
-
-const noMessages = [
-  "Are you sure? 😭",
-  "Think again.",
-  "Really? 😂",
-  "That answer feels suspicious.",
-  "One more chance? 👀",
-  "Okay okay... your choice. 😭"
-];
-
-noBtn.addEventListener("click", () => {
-
-  noCount++;
-
-  questionHint.textContent =
-    noMessages[
-      Math.min(
-        noCount - 1,
-        noMessages.length - 1
-      )
-    ];
-
-  /* Playful visual change */
-
-  noBtn.style.transform =
-    `translateX(${Math.sin(noCount * 2) * 10}px)`;
-
-  yesBtn.style.transform =
-    `scale(${1 + Math.min(noCount * .04, .18)})`;
-
-});
-
-
-yesBtn.addEventListener("click", () => {
-
-  questionText.textContent =
-    "I knew it. ❤️";
-
-  questionHint.textContent =
-    "Okay... now look.";
-
-  document.querySelector(".answers").style.display =
-    "none";
-
-  setTimeout(() => {
-
-    ending.scrollIntoView({
-      behavior: "smooth"
+      noBtn.animate(
+        [
+          { transform: "translateX(0)" },
+          { transform: "translateX(-10px)" },
+          { transform: "translateX(10px)" },
+          { transform: "translateX(0)" }
+        ],
+        {
+          duration: 300
+        }
+      );
     });
 
-    ending.classList.add("show");
 
-    startCats();
+    yesBtn.addEventListener("click", function () {
 
-  }, 1000);
-});
+      questionText.textContent = "I knew it. ❤️";
+      questionHint.textContent = "Okay... look at this.";
 
+      document.querySelector(".answers").style.display = "none";
 
-/* =========================================
-   CUTE CAT COUPLE ENDING
-========================================= */
+      setTimeout(function () {
 
-const catCanvas =
-  document.getElementById("cats");
+        ending.classList.add("show");
 
-const catCtx =
-  catCanvas.getContext("2d");
+        ending.scrollIntoView({
+          behavior: "smooth"
+        });
 
-let CW;
-let CH;
+        startCats();
 
-function resizeCats() {
+      }, 900);
+    });
 
-  CW = catCanvas.width =
-    window.innerWidth;
-
-  CH = catCanvas.height =
-    window.innerHeight;
-}
-
-resizeCats();
-
-window.addEventListener(
-  "resize",
-  resizeCats
-);
-
-
-function drawCat(
-  x,
-  y,
-  scale,
-  flip,
-  ring
-) {
-
-  catCtx.save();
-
-  catCtx.translate(x, y);
-
-  if (flip) {
-    catCtx.scale(-scale, scale);
-  } else {
-    catCtx.scale(scale, scale);
   }
 
-  /* Body */
 
-  catCtx.fillStyle =
-    "#d9b18d";
+  /* =========================
+     CUTE CATS
+  ========================= */
 
-  catCtx.beginPath();
+  const cats = document.getElementById("cats");
 
-  catCtx.ellipse(
-    0,
-    65,
-    48,
-    60,
-    0,
-    0,
-    Math.PI * 2
-  );
+  if (!cats) return;
 
-  catCtx.fill();
+  const c = cats.getContext("2d");
 
-  /* Head */
-
-  catCtx.beginPath();
-
-  catCtx.arc(
-    0,
-    0,
-    45,
-    0,
-    Math.PI * 2
-  );
-
-  catCtx.fill();
-
-  /* Ears */
-
-  catCtx.beginPath();
-
-  catCtx.moveTo(-35,-28);
-  catCtx.lineTo(-28,-72);
-  catCtx.lineTo(-5,-38);
-
-  catCtx.fill();
-
-  catCtx.beginPath();
-
-  catCtx.moveTo(35,-28);
-  catCtx.lineTo(28,-72);
-  catCtx.lineTo(5,-38);
-
-  catCtx.fill();
-
-  /* Eyes */
-
-  catCtx.fillStyle =
-    "#15151b";
-
-  catCtx.beginPath();
-
-  catCtx.arc(
-    -16,
-    -3,
-    4,
-    0,
-    Math.PI * 2
-  );
-
-  catCtx.arc(
-    16,
-    -3,
-    4,
-    0,
-    Math.PI * 2
-  );
-
-  catCtx.fill();
-
-  /* Nose */
-
-  catCtx.beginPath();
-
-  catCtx.arc(
-    0,
-    10,
-    4,
-    0,
-    Math.PI * 2
-  );
-
-  catCtx.fill();
-
-  /* Smile */
-
-  catCtx.beginPath();
-
-  catCtx.arc(
-    0,
-    10,
-    12,
-    0,
-    Math.PI
-  );
-
-  catCtx.strokeStyle =
-    "#15151b";
-
-  catCtx.lineWidth = 2;
-
-  catCtx.stroke();
-
-  /* Tail */
-
-  catCtx.beginPath();
-
-  catCtx.arc(
-    flip ? 50 : -50,
-    70,
-    35,
-    Math.PI,
-    Math.PI * 1.6
-  );
-
-  catCtx.strokeStyle =
-    "#d9b18d";
-
-  catCtx.lineWidth = 12;
-
-  catCtx.lineCap = "round";
-
-  catCtx.stroke();
-
-  /* Ring */
-
-  if (ring) {
-
-    catCtx.strokeStyle =
-      "#ffd86b";
-
-    catCtx.lineWidth = 5;
-
-    catCtx.beginPath();
-
-    catCtx.arc(
-      48,
-      62,
-      9,
-      0,
-      Math.PI * 2
-    );
-
-    catCtx.stroke();
-
-    catCtx.fillStyle =
-      "#ffffff";
-
-    catCtx.beginPath();
-
-    catCtx.arc(
-      48,
-      53,
-      3,
-      0,
-      Math.PI * 2
-    );
-
-    catCtx.fill();
+  function resizeCats() {
+    cats.width = window.innerWidth;
+    cats.height = window.innerHeight;
   }
 
-  catCtx.restore();
-}
+  resizeCats();
+  window.addEventListener("resize", resizeCats);
 
+  let catsStarted = false;
 
-function startCats() {
+  function startCats() {
 
-  let start = null;
+    if (catsStarted) return;
 
-  function animateCats(time) {
+    catsStarted = true;
 
-    if (!start) {
-      start = time;
+    function draw(time) {
+
+      const w = cats.width;
+      const h = cats.height;
+
+      c.clearRect(0, 0, w, h);
+
+      const center = w / 2;
+      const y = h / 2 + 100;
+      const distance = w < 600 ? 60 : 105;
+      const scale = w < 600 ? 0.7 : 0.9;
+
+      function cat(x, flip, ring) {
+
+        c.save();
+
+        c.translate(x, y);
+
+        if (flip) c.scale(-scale, scale);
+        else c.scale(scale, scale);
+
+        /* body */
+        c.fillStyle = "#d9ad88";
+
+        c.beginPath();
+        c.ellipse(0, 60, 42, 55, 0, 0, Math.PI * 2);
+        c.fill();
+
+        /* head */
+        c.beginPath();
+        c.arc(0, 0, 40, 0, Math.PI * 2);
+        c.fill();
+
+        /* ears */
+        c.beginPath();
+        c.moveTo(-32, -25);
+        c.lineTo(-25, -62);
+        c.lineTo(-5, -32);
+        c.fill();
+
+        c.beginPath();
+        c.moveTo(32, -25);
+        c.lineTo(25, -62);
+        c.lineTo(5, -32);
+        c.fill();
+
+        /* eyes */
+        c.fillStyle = "#171717";
+
+        c.beginPath();
+        c.arc(-14, -3, 3.5, 0, Math.PI * 2);
+        c.arc(14, -3, 3.5, 0, Math.PI * 2);
+        c.fill();
+
+        /* nose */
+        c.beginPath();
+        c.arc(0, 9, 3, 0, Math.PI * 2);
+        c.fill();
+
+        /* tail */
+        c.strokeStyle = "#d9ad88";
+        c.lineWidth = 10;
+        c.lineCap = "round";
+
+        c.beginPath();
+        c.arc(-42, 60, 30, Math.PI, Math.PI * 1.6);
+        c.stroke();
+
+        /* ring */
+        if (ring) {
+          c.strokeStyle = "#ffd85c";
+          c.lineWidth = 4;
+
+          c.beginPath();
+          c.arc(42, 55, 9, 0, Math.PI * 2);
+          c.stroke();
+
+          c.fillStyle = "#fff";
+
+          c.beginPath();
+          c.arc(42, 46, 3, 0, Math.PI * 2);
+          c.fill();
+        }
+
+        c.restore();
+      }
+
+      cat(center - distance, false, false);
+      cat(center + distance, true, true);
+
+      c.font = "28px Georgia";
+      c.fillStyle = "rgba(255,120,150,.8)";
+
+      const floating = Math.sin(time / 500) * 8;
+
+      c.fillText(
+        "♡",
+        center - 12,
+        y - 100 + floating
+      );
+
+      requestAnimationFrame(draw);
     }
 
-    const elapsed =
-      time - start;
-
-    catCtx.clearRect(
-      0,
-      0,
-      CW,
-      CH
-    );
-
-    const mobile =
-      CW < 600;
-
-    const scale =
-      mobile ? .72 : .95;
-
-    const distance =
-      mobile ? 65 : 110;
-
-    const centerX =
-      CW / 2;
-
-    const baseY =
-      CH / 2 + 120;
-
-    /* Soft ground */
-
-    catCtx.fillStyle =
-      "rgba(255,255,255,.06)";
-
-    catCtx.beginPath();
-
-    catCtx.ellipse(
-      centerX,
-      baseY + 55,
-      mobile ? 130 : 210,
-      25,
-      0,
-      0,
-      Math.PI * 2
-    );
-
-    catCtx.fill();
-
-    /* Couple */
-
-    drawCat(
-      centerX - distance,
-      baseY,
-      scale,
-      false,
-      false
-    );
-
-    drawCat(
-      centerX + distance,
-      baseY,
-      scale,
-      true,
-      true
-    );
-
-    /* Little floating hearts */
-
-    catCtx.font =
-      `${mobile ? 18 : 24}px Georgia`;
-
-    catCtx.fillStyle =
-      "rgba(255,110,140,.8)";
-
-    const float =
-      Math.sin(elapsed / 500) * 8;
-
-    catCtx.fillText(
-      "♡",
-      centerX - 12,
-      baseY - 115 + float
-    );
-
-    requestAnimationFrame(
-      animateCats
-    );
+    requestAnimationFrame(draw);
   }
 
-  requestAnimationFrame(
-    animateCats
-  );
-}
+});
