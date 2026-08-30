@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>For Fatema ♡</title>
-
-<style>
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -19,350 +10,900 @@ html {
 
 body {
   min-height: 100vh;
-  background: #02040b;
-  color: white;
+  background: #03020a;
+  color: #fff;
   font-family: Georgia, serif;
   overflow-x: hidden;
 }
 
-.screen {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 30px;
+/* =========================
+   MAIN NEON BACKGROUND
+========================= */
+
+.page {
+  position: relative;
+  overflow: hidden;
 }
 
-.hidden {
-  display: none !important;
-}
+.page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -5;
 
-.box {
-  width: 100%;
-  max-width: 700px;
-}
-
-.small {
-  font-family: Arial, sans-serif;
-  font-size: 11px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  opacity: .6;
-  margin-bottom: 25px;
-}
-
-h1 {
-  font-size: clamp(55px, 13vw, 110px);
-  font-weight: 400;
-  letter-spacing: 8px;
-}
-
-h2 {
-  font-size: clamp(40px, 8vw, 75px);
-  font-weight: 400;
-  line-height: 1.15;
-  margin-bottom: 25px;
-}
-
-p {
-  font-size: 18px;
-  line-height: 1.8;
-  opacity: .75;
-}
-
-.line {
-  width: 80px;
-  height: 1px;
-  background: rgba(255,255,255,.5);
-  margin: 30px auto;
-}
-
-.enter,
-button {
-  display: inline-block;
-  margin-top: 40px;
-  padding: 15px 35px;
-  border-radius: 50px;
-  border: 1px solid rgba(255,255,255,.5);
-  background: transparent;
-  color: white;
-  font-family: Arial, sans-serif;
-  letter-spacing: 3px;
-  font-size: 12px;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-button:hover,
-.enter:hover {
-  background: white;
-  color: #050712;
-}
-
-.story {
-  min-height: 100vh;
-  padding: 100px 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.story-box {
-  max-width: 700px;
-}
-
-.story-box p {
-  margin: 25px 0;
-}
-
-.question {
   background:
     radial-gradient(
-      circle at center,
-      rgba(50,80,170,.15),
-      transparent 60%
+      circle at 10% 15%,
+      rgba(255, 0, 70, 0.30),
+      transparent 34%
     ),
-    #02040b;
+    radial-gradient(
+      circle at 90% 25%,
+      rgba(20, 80, 255, 0.32),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(170, 0, 255, 0.20),
+      transparent 42%
+    ),
+    linear-gradient(
+      135deg,
+      #05000c,
+      #050b24,
+      #120008
+    );
 }
 
-.answers {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
+/* Soft moving glow */
 
-#yesBtn {
-  border-color: rgba(255,70,100,.7);
-  background: rgba(255,50,80,.08);
-}
+.page::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -4;
+  pointer-events: none;
 
-#nextScreen {
   background:
     radial-gradient(
-      circle at center,
-      rgba(80,100,180,.18),
-      transparent 60%
+      circle at 30% 40%,
+      rgba(255, 30, 90, 0.08),
+      transparent 25%
     ),
-    #03050d;
+    radial-gradient(
+      circle at 70% 60%,
+      rgba(40, 100, 255, 0.08),
+      transparent 25%
+    );
+
+  animation: backgroundGlow 10s ease-in-out infinite alternate;
 }
 
-.cats {
-  font-size: 70px;
-  margin-bottom: 30px;
-}
-
-.ring {
-  font-size: 60px;
-  margin: 25px 0;
-  animation: ring 1.5s ease-in-out infinite;
-}
-
-@keyframes ring {
-  0%,100% {
+@keyframes backgroundGlow {
+  from {
     transform: scale(1);
   }
-  50% {
+
+  to {
     transform: scale(1.15);
   }
 }
 
-@media (max-width:600px) {
+
+/* =========================
+   SLIDES
+========================= */
+
+.slide {
+  min-height: 100vh;
+  width: 100%;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 80px 24px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.box {
+  width: 100%;
+  max-width: 720px;
+
+  position: relative;
+  z-index: 3;
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+.label {
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+
+  opacity: 0.58;
+
+  margin-bottom: 25px;
+}
+
+h1 {
+  font-size: clamp(55px, 14vw, 120px);
+
+  font-weight: 400;
+
+  letter-spacing: 9px;
+
+  line-height: 1;
+
+  text-shadow:
+    0 0 20px rgba(255, 30, 80, 0.32),
+    0 0 45px rgba(30, 90, 255, 0.28);
+}
+
+h2 {
+  font-size: clamp(38px, 7vw, 70px);
+
+  line-height: 1.15;
+
+  font-weight: 400;
+
+  margin: 15px 0 32px;
+
+  text-shadow:
+    0 0 22px rgba(80, 100, 255, 0.18);
+}
+
+p {
+  font-size: 18px;
+
+  line-height: 2;
+
+  opacity: 0.78;
+
+  margin: 20px 0;
+}
+
+.line {
+  width: 85px;
+  height: 1px;
+
+  margin: 32px auto;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff2758,
+      #527cff
+    );
+
+  box-shadow:
+    0 0 12px rgba(255, 40, 90, 0.4),
+    0 0 12px rgba(50, 100, 255, 0.4);
+}
+
+
+/* =========================
+   ENTER / BUTTONS
+========================= */
+
+.enter,
+button {
+  display: inline-block;
+
+  margin-top: 35px;
+
+  padding: 15px 35px;
+
+  border-radius: 50px;
+
+  border: 1px solid rgba(255, 255, 255, 0.42);
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: #fff;
+
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+
+  letter-spacing: 4px;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.enter:hover,
+button:hover {
+  background: #fff;
+
+  color: #05000b;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 0 25px rgba(255, 40, 90, 0.25),
+    0 0 35px rgba(40, 100, 255, 0.22);
+}
+
+
+/* =========================
+   CUTE STICKERS
+========================= */
+
+.sticker {
+  position: absolute;
+
+  font-size: 48px;
+
+  opacity: 0.85;
+
+  pointer-events: none;
+
+  filter:
+    drop-shadow(
+      0 0 12px rgba(255, 50, 130, 0.35)
+    );
+
+  animation:
+    stickerFloat 4s ease-in-out infinite;
+}
+
+.s1 {
+  left: 7%;
+  top: 15%;
+}
+
+.s2 {
+  right: 7%;
+  top: 20%;
+
+  animation-delay: 1s;
+}
+
+.s3 {
+  left: 8%;
+  bottom: 15%;
+
+  animation-delay: 2s;
+}
+
+.s4 {
+  right: 8%;
+  bottom: 12%;
+
+  animation-delay: 1.5s;
+}
+
+@keyframes stickerFloat {
+  0%,
+  100% {
+    transform:
+      translateY(0)
+      rotate(-3deg);
+  }
+
+  50% {
+    transform:
+      translateY(-13px)
+      rotate(3deg);
+  }
+}
+
+
+/* =========================
+   EXTRA FLOATING SPARKLES
+========================= */
+
+.slide::before {
+  content: "✦  ✧  ˚  ✦  ·  ✧";
+
+  position: absolute;
+
+  top: 8%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 100%;
+
+  font-size: 14px;
+
+  letter-spacing: 30px;
+
+  opacity: 0.18;
+
+  pointer-events: none;
+
+  animation:
+    sparkleFloat 6s ease-in-out infinite;
+}
+
+@keyframes sparkleFloat {
+  0%,
+  100% {
+    transform:
+      translateX(-50%)
+      translateY(0);
+    opacity: 0.12;
+  }
+
+  50% {
+    transform:
+      translateX(-50%)
+      translateY(-10px);
+    opacity: 0.30;
+  }
+}
+
+
+/* =========================
+   PHOTO PLACEHOLDERS
+========================= */
+
+.photo {
+  width: 100%;
+  max-width: 560px;
+
+  height: 280px;
+
+  margin: 50px auto;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.15);
+
+  border-radius: 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-direction: column;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 20, 80, 0.07),
+      rgba(30, 90, 255, 0.08)
+    );
+
+  box-shadow:
+    inset 0 0 35px rgba(255, 255, 255, 0.015),
+    0 0 30px rgba(30, 80, 255, 0.07);
+
+  font-family: Arial, sans-serif;
+
+  font-size: 11px;
+
+  letter-spacing: 4px;
+
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.photo:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 0 30px rgba(255, 30, 80, 0.12),
+    0 0 40px rgba(30, 90, 255, 0.12);
+}
+
+.photo small {
+  margin-top: 12px;
+
+  letter-spacing: 1px;
+
+  opacity: 0.4;
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+.question {
+  background:
+    radial-gradient(
+      circle at 30% 50%,
+      rgba(255, 20, 70, 0.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 75% 50%,
+      rgba(20, 80, 255, 0.18),
+      transparent 40%
+    );
+}
+
+.answers {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 18px;
+
+  margin-top: 25px;
+}
+
+#yes {
+  border-color:
+    rgba(255, 40, 90, 0.75);
+
+  background:
+    rgba(255, 30, 70, 0.08);
+
+  box-shadow:
+    0 0 15px rgba(255, 30, 70, 0.08);
+}
+
+#no {
+  border-color:
+    rgba(70, 110, 255, 0.65);
+
+  background:
+    rgba(40, 80, 255, 0.06);
+}
+
+
+/* =========================
+   FLOATING TEXT
+========================= */
+
+.floating-text {
+  position: fixed;
+
+  z-index: 10;
+
+  pointer-events: none;
+
+  font-family: Georgia, serif;
+
+  font-size: 14px;
+
+  font-style: italic;
+
+  opacity: 0;
+
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.5);
+
+  animation:
+    floatingText 5s ease forwards;
+}
+
+@keyframes floatingText {
+
+  0% {
+    transform:
+      translateY(30px)
+      scale(0.95);
+
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.7;
+  }
+
+  70% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform:
+      translateY(-100px)
+      scale(1.05);
+
+    opacity: 0;
+  }
+}
+
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope-area {
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  padding: 70px 20px;
+
+  position: relative;
+}
+
+.envelope {
+  width: 330px;
+  height: 215px;
+
+  position: relative;
+
+  cursor: pointer;
+
+  perspective: 1000px;
+
+  filter:
+    drop-shadow(
+      0 15px 35px
+      rgba(0, 0, 0, 0.45)
+    );
+}
+
+.envelope-back {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #15162b,
+      #28101e
+    );
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.16);
+}
+
+.envelope-flap {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 105px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #321323,
+      #11172f
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
+
+  transform-origin: top;
+
+  transition:
+    transform 0.9s ease;
+
+  z-index: 5;
+}
+
+.envelope-card {
+  position: absolute;
+
+  left: 10%;
+
+  bottom: 5px;
+
+  width: 80%;
+  height: 190px;
+
+  padding: 22px;
+
+  overflow: hidden;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fffdf9,
+      #f3edf1
+    );
+
+  color: #211722;
+
+  z-index: 2;
+
+  transform:
+    translateY(0);
+
+  transition:
+    transform 1s ease;
+
+  box-shadow:
+    0 0 25px
+    rgba(255, 255, 255, 0.12);
+}
+
+.envelope.open .envelope-flap {
+  transform:
+    rotateX(180deg);
+}
+
+.envelope.open .envelope-card {
+  transform:
+    translateY(-145px);
+}
+
+.envelope-card h3 {
+  font-family: Georgia, serif;
+
+  font-size: 25px;
+
+  font-weight: 400;
+
+  margin-bottom: 14px;
+}
+
+.envelope-card p {
+  color: #302531;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+
+  opacity: 0.85;
+}
+
+.envelope-front {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 4;
+
+  pointer-events: none;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      145deg,
+      transparent 49%,
+      rgba(255,255,255,.05) 50%
+    );
+}
+
+.envelope-hint {
+  margin-top: 35px;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 10px;
+
+  letter-spacing: 4px;
+
+  opacity: 0.55;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   FINAL SCREEN
+========================= */
+
+#end {
+  display: none;
+
+  min-height: 100vh;
+
+  width: 100%;
+
+  position: relative;
+
+  overflow: hidden;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 20, 70, 0.12),
+      transparent 38%
+    ),
+    #02030a;
+}
+
+#fireworks {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+}
+
+.end-content {
+  position: relative;
+
+  z-index: 5;
+
+  padding: 30px;
+
+  max-width: 800px;
+}
+
+.end-stickers {
+  font-size: 65px;
+
+  margin-bottom: 25px;
+
+  animation:
+    celebrate 1.5s
+    ease-in-out infinite;
+}
+
+@keyframes celebrate {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+.end-content h2 {
+  text-shadow:
+    0 0 20px rgba(255, 40, 90, 0.35),
+    0 0 40px rgba(50, 100, 255, 0.30);
+}
+
+.end-content p {
+  opacity: 0.75;
+}
+
+
+/* =========================
+   FINAL TEXT
+========================= */
+
+.final-title {
+  font-size:
+    clamp(40px, 8vw, 78px);
+
+  line-height: 1.15;
+
+  font-weight: 400;
+
+  margin-bottom: 25px;
+}
+
+.final-line {
+  margin: 18px 0;
+
+  font-size: 17px;
+
+  opacity: 0.78;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .slide {
+    padding:
+      75px
+      20px;
+  }
+
+  h1 {
+    font-size: 58px;
+
+    letter-spacing: 6px;
+  }
+
+  h2 {
+    font-size: 40px;
+  }
+
   p {
     font-size: 16px;
+
+    line-height: 1.85;
+  }
+
+  .label {
+    font-size: 9px;
+
+    letter-spacing: 4px;
+  }
+
+  .sticker {
+    font-size: 36px;
+  }
+
+  .s1 {
+    left: 5%;
+  }
+
+  .s2 {
+    right: 5%;
+  }
+
+  .s3 {
+    left: 5%;
+  }
+
+  .s4 {
+    right: 5%;
+  }
+
+  .photo {
+    height: 220px;
+
+    margin: 38px auto;
   }
 
   .answers {
     gap: 12px;
   }
 
-  button {
-    padding: 14px 25px;
+  .answers button {
+    min-width: 105px;
+
+    padding:
+      14px
+      22px;
+  }
+
+  .envelope {
+    width: 285px;
+    height: 185px;
+  }
+
+  .envelope-card {
+    height: 165px;
+  }
+
+  .envelope-card p {
+    font-size: 11px;
+  }
+
+  .envelope.open .envelope-card {
+    transform:
+      translateY(-125px);
+  }
+
+  .end-stickers {
+    font-size: 50px;
   }
 }
-</style>
-</head>
-
-<body>
-
-<!-- OPENING -->
-
-<section class="screen">
-  <div class="box">
-
-    <div class="small">A little something</div>
-
-    <h1>FAYE ♡</h1>
-
-    <div class="line"></div>
-
-    <p>Made with a little too much nostalgia.</p>
-
-    <a href="#story" class="enter">ENTER</a>
-
-  </div>
-</section>
-
-
-<!-- STORY -->
-
-<section id="story" class="story">
-  <div class="story-box">
-
-    <div class="small">OUR STORY</div>
-
-    <h2>It all started in October.</h2>
-
-    <p>
-      Back in October, when I opened my other account and saw your ID,
-      I sent you a text just for fun.
-    </p>
-
-    <p>
-      You told me you had changed and that's how we became friends.
-      I never knew that one random text would become something that
-      would mean this much to me.
-    </p>
-
-    <p>
-      We talked, laughed, argued, made up and somehow kept finding
-      our way back to each other.
-    </p>
-
-    <div class="line"></div>
-
-    <p>
-      Some memories don't need a photograph to stay unforgettable.
-    </p>
-
-  </div>
-</section>
-
-
-<!-- QUESTION -->
-
-<section id="question" class="screen question">
-
-  <div class="box">
-
-    <div class="small">ONE LAST THING</div>
-
-    <h2 id="questionText">
-      Do you love me Faye?
-    </h2>
-
-    <p id="questionHint">
-      Be honest.
-    </p>
-
-    <div class="answers">
-
-      <button id="yesBtn" type="button">
-        YES
-      </button>
-
-      <button id="noBtn" type="button">
-        NO
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- NEXT SCREEN -->
-
-<section id="nextScreen" class="screen hidden">
-
-  <div class="box">
-
-    <div class="small">
-      I KNEW IT
-    </div>
-
-    <div class="cats">
-      🐱 ♡ 🐱
-    </div>
-
-    <h2>
-      Some things are worth waiting for.
-    </h2>
-
-    <div class="ring">
-      💍
-    </div>
-
-    <p>
-      A little promise.
-    </p>
-
-  </div>
-
-</section>
-
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const yesBtn = document.getElementById("yesBtn");
-  const noBtn = document.getElementById("noBtn");
-
-  const questionText =
-    document.getElementById("questionText");
-
-  const questionHint =
-    document.getElementById("questionHint");
-
-  const question =
-    document.getElementById("question");
-
-  const nextScreen =
-    document.getElementById("nextScreen");
-
-  let noCount = 0;
-
-  const messages = [
-    "Are you sure? 😭",
-    "Think again. 👀",
-    "Really? 😂",
-    "I don't believe you. 🥹"
-  ];
-
-  noBtn.addEventListener("click", function () {
-
-    noCount++;
-
-    questionHint.textContent =
-      messages[
-        Math.min(
-          noCount - 1,
-          messages.length - 1
-        )
-      ];
-
-  });
-
-
-  yesBtn.addEventListener("click", function () {
-
-    question.classList.add("hidden");
-
-    nextScreen.classList.remove("hidden");
-
-    window.scrollTo({
-      top: nextScreen.offsetTop,
-      behavior: "smooth"
-    });
-
-  });
-
-});
-
-</script>
-
-</body>
-</html>
