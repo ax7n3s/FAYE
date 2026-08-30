@@ -1,1 +1,191 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: #02040b;
+  color: #fff;
+  font-family: Georgia, serif;
+  overflow-x: hidden;
+}
+
+/* Night sky */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 20% 25%,
+      rgba(30, 80, 255, 0.18),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 80% 75%,
+      rgba(220, 25, 60, 0.14),
+      transparent 38%
+    ),
+    linear-gradient(
+      180deg,
+      #01030a 0%,
+      #050917 50%,
+      #02040b 100%
+    );
+  z-index: -3;
+}
+
+/* Fireworks canvas */
+
+#fireworks {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Dark cinematic overlay */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 12, 0.28);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Opening */
+
+.container {
+  min-height: 100vh;
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.content {
+  width: 100%;
+  max-width: 750px;
+}
+
+/* Small text */
+
+.small {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin-bottom: 28px;
+}
+
+/* FAYE */
+
+h1 {
+  font-size: clamp(55px, 13vw, 120px);
+  font-weight: 400;
+  letter-spacing: 10px;
+  line-height: 1;
+  text-shadow:
+    0 0 18px rgba(255, 255, 255, 0.12),
+    0 0 45px rgba(50, 90, 255, 0.20);
+}
+
+/* Divider */
+
+.line {
+  width: 90px;
+  height: 1px;
+  margin: 32px auto;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* Nostalgia text */
+
+.message {
+  max-width: 550px;
+  margin: auto;
+  font-size: 18px;
+  line-height: 1.8;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Enter button */
+
+.enter {
+  display: inline-block;
+  margin-top: 42px;
+  padding: 15px 38px;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 40px;
+
+  color: #fff;
+  background: rgba(255, 255, 255, 0.02);
+
+  text-decoration: none;
+
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 4px;
+
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.enter:hover {
+  background: rgba(255, 255, 255, 0.92);
+  color: #050712;
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 0 25px rgba(80, 110, 255, 0.25),
+    0 0 45px rgba(255, 50, 80, 0.12);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .container {
+    padding: 24px;
+  }
+
+  h1 {
+    font-size: 58px;
+    letter-spacing: 6px;
+  }
+
+  .small {
+    font-size: 10px;
+    letter-spacing: 4px;
+  }
+
+  .message {
+    font-size: 16px;
+  }
+
+  .enter {
+    margin-top: 32px;
+    padding: 14px 30px;
+  }
+}
