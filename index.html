@@ -1,909 +1,1458 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Faye ♡</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth}
+
+body{
+  overflow-x:hidden;
+  color:#fff;
+  background:#03040b;
+  font-family:Georgia,serif;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  min-height: 100vh;
-  background: #03020a;
-  color: #fff;
-  font-family: Georgia, serif;
-  overflow-x: hidden;
-}
-
-/* =========================
-   MAIN NEON BACKGROUND
-========================= */
-
-.page {
-  position: relative;
-  overflow: hidden;
-}
-
-.page::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -5;
-
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-10;
   background:
-    radial-gradient(
-      circle at 10% 15%,
-      rgba(255, 0, 70, 0.30),
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at 90% 25%,
-      rgba(20, 80, 255, 0.32),
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at 50% 90%,
-      rgba(170, 0, 255, 0.20),
-      transparent 42%
-    ),
-    linear-gradient(
-      135deg,
-      #05000c,
-      #050b24,
-      #120008
-    );
+    radial-gradient(circle at 10% 20%,rgba(255,0,65,.25),transparent 32%),
+    radial-gradient(circle at 90% 30%,rgba(0,90,255,.25),transparent 34%),
+    linear-gradient(135deg,#08000d,#02091a,#100007);
 }
 
-/* Soft moving glow */
-
-.page::after {
-  content: "";
-  position: fixed;
-  inset: -20%;
-  z-index: -4;
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      circle at 30% 40%,
-      rgba(255, 30, 90, 0.08),
-      transparent 25%
-    ),
-    radial-gradient(
-      circle at 70% 60%,
-      rgba(40, 100, 255, 0.08),
-      transparent 25%
-    );
-
-  animation: backgroundGlow 10s ease-in-out infinite alternate;
+/* NEON SIDE LIGHTS */
+.neon{
+  position:fixed;
+  top:8%;
+  bottom:8%;
+  width:2px;
+  z-index:20;
+  pointer-events:none;
+  opacity:.7;
 }
 
-@keyframes backgroundGlow {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(1.15);
-  }
+.neon.left{
+  left:10px;
+  background:linear-gradient(transparent,#ff174f,transparent);
+  box-shadow:0 0 10px #ff174f,0 0 30px #ff174f;
 }
 
-
-/* =========================
-   SLIDES
-========================= */
-
-.slide {
-  min-height: 100vh;
-  width: 100%;
-
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-
-  padding: 80px 24px;
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+.neon.right{
+  right:10px;
+  background:linear-gradient(transparent,#397cff,transparent);
+  box-shadow:0 0 10px #397cff,0 0 30px #397cff;
 }
 
-.box {
-  width: 100%;
-  max-width: 720px;
-
-  position: relative;
-  z-index: 3;
+/* SOFT ORBS */
+.orb{
+  position:fixed;
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  filter:blur(35px);
+  opacity:.18;
+  z-index:-1;
+  pointer-events:none;
+  animation:orb 6s ease-in-out infinite;
 }
 
-
-/* =========================
-   TEXT
-========================= */
-
-.label {
-  font-family: Arial, sans-serif;
-  font-size: 10px;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-
-  opacity: 0.58;
-
-  margin-bottom: 25px;
+.redOrb{
+  left:-40px;
+  top:40%;
+  background:#ff174f;
 }
 
-h1 {
-  font-size: clamp(55px, 14vw, 120px);
+.blueOrb{
+  right:-40px;
+  top:55%;
+  background:#397cff;
+  animation-delay:2s;
+}
 
-  font-weight: 400;
+@keyframes orb{
+  50%{transform:translateY(-25px) scale(1.2)}
+}
 
-  letter-spacing: 9px;
+/* SECTIONS */
+section{
+  min-height:76vh;
+  padding:38px 17px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
 
-  line-height: 1;
+.box{
+  width:100%;
+  max-width:680px;
+  position:relative;
+  z-index:5;
+}
 
+.label{
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  letter-spacing:5px;
+  opacity:.5;
+  margin-bottom:12px;
+}
+
+h1{
+  font-size:clamp(58px,15vw,105px);
+  font-weight:400;
+  letter-spacing:6px;
+  line-height:1;
+  animation:glow 3s ease-in-out infinite;
+}
+
+h2{
+  font-size:clamp(32px,7vw,56px);
+  font-weight:400;
+  line-height:1.1;
+  margin:7px 0 17px;
   text-shadow:
-    0 0 20px rgba(255, 30, 80, 0.32),
-    0 0 45px rgba(30, 90, 255, 0.28);
+    0 0 10px rgba(255,255,255,.4),
+    0 0 25px rgba(255,20,80,.25),
+    0 0 35px rgba(40,100,255,.2);
 }
 
-h2 {
-  font-size: clamp(38px, 7vw, 70px);
+p{
+  max-width:650px;
+  margin:9px auto;
+  font-size:15px;
+  line-height:1.68;
+  color:rgba(255,255,255,.87);
+}
 
-  line-height: 1.15;
+@keyframes glow{
+  0%,100%{
+    text-shadow:
+      0 0 12px rgba(255,20,80,.45),
+      0 0 30px rgba(40,100,255,.2);
+  }
+  50%{
+    text-shadow:
+      0 0 20px rgba(255,20,80,.8),
+      0 0 45px rgba(40,100,255,.4);
+  }
+}
 
-  font-weight: 400;
+/* DIVIDER */
+.line{
+  width:70px;
+  height:1px;
+  margin:18px auto;
+  background:linear-gradient(90deg,#ff174f,#fff,#397cff);
+  box-shadow:0 0 10px #ff174f,0 0 12px #397cff;
+}
 
-  margin: 15px 0 32px;
+/* BUTTON */
+button,.start{
+  display:inline-block;
+  margin-top:12px;
+  padding:12px 25px;
+  border-radius:50px;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.045);
+  color:white;
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  letter-spacing:4px;
+  cursor:pointer;
+  text-decoration:none;
+  transition:.3s;
+  box-shadow:
+    0 0 15px rgba(255,20,80,.12),
+    0 0 20px rgba(40,100,255,.12);
+}
 
+button:hover,.start:hover{
+  transform:translateY(-3px);
+  background:white;
+  color:#05050b;
+}
+
+/* STICKERS */
+.sticker{
+  position:absolute;
+  z-index:3;
+  font-size:30px;
+  opacity:.82;
+  pointer-events:none;
+  animation:stickerFloat 4.5s ease-in-out infinite;
+  filter:drop-shadow(0 0 10px rgba(255,255,255,.3));
+}
+
+.s1{left:5%;top:10%}
+.s2{right:5%;top:14%;animation-delay:1s}
+.s3{left:7%;bottom:10%;animation-delay:2s}
+.s4{right:7%;bottom:9%;animation-delay:1.5s}
+
+@keyframes stickerFloat{
+  0%,100%{transform:translateY(0) rotate(-4deg)}
+  50%{transform:translateY(-12px) rotate(5deg)}
+}
+
+/* FLOATING TEXT */
+.float{
+  position:fixed;
+  z-index:50;
+  pointer-events:none;
+  font-size:12px;
+  font-style:italic;
+  white-space:nowrap;
   text-shadow:
-    0 0 22px rgba(80, 100, 255, 0.18);
+    0 0 7px white,
+    0 0 15px #ff285b,
+    0 0 20px #397cff;
+  animation:rise 5s linear forwards;
 }
 
-p {
-  font-size: 18px;
-
-  line-height: 2;
-
-  opacity: 0.78;
-
-  margin: 20px 0;
+@keyframes rise{
+  0%{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  15%{opacity:.75}
+  80%{opacity:.45}
+  100%{
+    opacity:0;
+    transform:translateY(-120px);
+  }
 }
 
-.line {
-  width: 85px;
-  height: 1px;
-
-  margin: 32px auto;
-
-  background:
-    linear-gradient(
-      90deg,
-      #ff2758,
-      #527cff
-    );
-
+/* PHOTO BOXES */
+.photo{
+  width:100%;
+  height:155px;
+  margin:18px auto;
+  border-radius:17px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.035);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Arial,sans-serif;
+  font-size:9px;
+  letter-spacing:3px;
+  color:rgba(255,255,255,.45);
   box-shadow:
-    0 0 12px rgba(255, 40, 90, 0.4),
-    0 0 12px rgba(50, 100, 255, 0.4);
+    inset 0 0 25px rgba(255,255,255,.025),
+    0 0 25px rgba(255,20,80,.05),
+    0 0 25px rgba(40,100,255,.05);
 }
 
-
-/* =========================
-   ENTER / BUTTONS
-========================= */
-
-.enter,
-button {
-  display: inline-block;
-
-  margin-top: 35px;
-
-  padding: 15px 35px;
-
-  border-radius: 50px;
-
-  border: 1px solid rgba(255, 255, 255, 0.42);
-
-  background: rgba(255, 255, 255, 0.04);
-
-  color: #fff;
-
-  font-family: Arial, sans-serif;
-  font-size: 11px;
-
-  letter-spacing: 4px;
-
-  cursor: pointer;
-
-  text-decoration: none;
-
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    color 0.3s ease,
-    box-shadow 0.3s ease;
+/* TIMELINE */
+.timeline{
+  position:relative;
+  max-width:550px;
+  margin:23px auto 0;
 }
 
-.enter:hover,
-button:hover {
-  background: #fff;
+.timeline:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:1px;
+  background:linear-gradient(#ff174f,#397cff);
+  box-shadow:0 0 8px #ff174f,0 0 12px #397cff;
+}
 
-  color: #05000b;
+.event{
+  position:relative;
+  width:50%;
+  padding:7px 19px;
+  margin:11px 0;
+  font-family:Arial,sans-serif;
+  font-size:12px;
+  line-height:1.5;
+}
 
-  transform: translateY(-3px);
+.event:nth-child(odd){text-align:right}
 
+.event:nth-child(even){
+  margin-left:50%;
+  text-align:left;
+}
+
+.dot{
+  position:absolute;
+  top:15px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 9px #ff174f,0 0 15px #397cff;
+}
+
+.event:nth-child(odd) .dot{right:-4px}
+.event:nth-child(even) .dot{left:-4px}
+
+/* SECRET */
+#secret{
+  display:none;
+  margin-top:18px;
+}
+
+/* QUESTION */
+.ring{
+  font-size:45px;
+  margin:13px 0;
+  filter:drop-shadow(0 0 12px rgba(255,255,255,.5));
+  animation:ringPulse 2s infinite;
+}
+
+@keyframes ringPulse{
+  50%{transform:scale(1.07)}
+}
+
+/* FIREWORKS */
+#fireworkSlide{
+  display:none;
+  min-height:100vh;
+  padding:20px;
+}
+
+#fireworks{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.final{
+  position:relative;
+  z-index:5;
+  max-width:680px;
+}
+
+#fireworkSlide h2{
+  text-shadow:
+    0 0 10px white,
+    0 0 25px #ff174f,
+    0 0 45px #397cff;
+}
+
+/* DIRECT LETTER */
+#letterSlide{
+  display:none;
+  min-height:85vh;
+  padding:30px 15px;
+}
+
+.letter{
+  width:100%;
+  max-width:570px;
+  max-height:57vh;
+  overflow-y:auto;
+  margin:20px auto 10px;
+  padding:19px 18px;
+  border-radius:18px;
+  background:rgba(255,250,246,.97);
+  color:#292026;
+  text-align:left;
+  border:1px solid rgba(255,255,255,.65);
   box-shadow:
-    0 0 25px rgba(255, 40, 90, 0.25),
-    0 0 35px rgba(40, 100, 255, 0.22);
+    0 10px 40px rgba(0,0,0,.4),
+    0 0 25px rgba(255,20,80,.15),
+    0 0 30px rgba(40,100,255,.12);
 }
 
+.letter h3{
+  text-align:center;
+  font-size:21px;
+  font-weight:400;
+  color:#30262b;
+  margin-bottom:10px;
+}
 
-/* =========================
-   CUTE STICKERS
-========================= */
+.letter p{
+  color:#30262b;
+  font-size:12px;
+  line-height:1.55;
+  margin:7px 0;
+  text-shadow:none;
+}
 
-.sticker {
-  position: absolute;
+/* LOVE MESSAGE */
+.loveMessage{
+  margin-top:15px;
+}
 
-  font-size: 48px;
+.loveMessage h2{
+  animation:glow 2.5s infinite;
+}
 
-  opacity: 0.85;
+.loveIcons{
+  font-size:42px;
+  margin:9px 0;
+}
 
-  pointer-events: none;
+/* LILY RAIN */
+#lily{
+  display:none;
+  min-height:100vh;
+}
 
+.petal{
+  position:absolute;
+  top:-40px;
+  z-index:2;
+  font-size:22px;
+  pointer-events:none;
+  opacity:.8;
+  animation:lilyFall linear infinite;
   filter:
-    drop-shadow(
-      0 0 12px rgba(255, 50, 130, 0.35)
-    );
-
-  animation:
-    stickerFloat 4s ease-in-out infinite;
+    drop-shadow(0 0 7px rgba(255,255,255,.5))
+    drop-shadow(0 0 12px rgba(255,30,80,.3));
 }
 
-.s1 {
-  left: 7%;
-  top: 15%;
-}
-
-.s2 {
-  right: 7%;
-  top: 20%;
-
-  animation-delay: 1s;
-}
-
-.s3 {
-  left: 8%;
-  bottom: 15%;
-
-  animation-delay: 2s;
-}
-
-.s4 {
-  right: 8%;
-  bottom: 12%;
-
-  animation-delay: 1.5s;
-}
-
-@keyframes stickerFloat {
-  0%,
-  100% {
-    transform:
-      translateY(0)
-      rotate(-3deg);
+@keyframes lilyFall{
+  0%{
+    transform:translateY(-30px) rotate(0deg);
+    opacity:0;
   }
-
-  50% {
-    transform:
-      translateY(-13px)
-      rotate(3deg);
+  10%{opacity:.8}
+  100%{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
   }
 }
 
+/* MOBILE */
+@media(max-width:600px){
 
-/* =========================
-   EXTRA FLOATING SPARKLES
-========================= */
-
-.slide::before {
-  content: "✦  ✧  ˚  ✦  ·  ✧";
-
-  position: absolute;
-
-  top: 8%;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  width: 100%;
-
-  font-size: 14px;
-
-  letter-spacing: 30px;
-
-  opacity: 0.18;
-
-  pointer-events: none;
-
-  animation:
-    sparkleFloat 6s ease-in-out infinite;
-}
-
-@keyframes sparkleFloat {
-  0%,
-  100% {
-    transform:
-      translateX(-50%)
-      translateY(0);
-    opacity: 0.12;
+  section{
+    min-height:74vh;
+    padding:34px 15px;
   }
 
-  50% {
-    transform:
-      translateX(-50%)
-      translateY(-10px);
-    opacity: 0.30;
+  h1{
+    font-size:57px;
+  }
+
+  h2{
+    font-size:35px;
+  }
+
+  p{
+    font-size:14px;
+    line-height:1.6;
+  }
+
+  .sticker{
+    font-size:27px;
+  }
+
+  .photo{
+    height:140px;
+  }
+
+  .letter{
+    max-height:55vh;
+    padding:17px 15px;
+  }
+
+  .letter p{
+    font-size:11.8px;
+  }
+
+  .event{
+    font-size:11px;
   }
 }
 
+@media(max-height:700px){
 
-/* =========================
-   PHOTO PLACEHOLDERS
-========================= */
-
-.photo {
-  width: 100%;
-  max-width: 560px;
-
-  height: 280px;
-
-  margin: 50px auto;
-
-  border:
-    1px solid
-    rgba(255, 255, 255, 0.15);
-
-  border-radius: 22px;
-
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  flex-direction: column;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255, 20, 80, 0.07),
-      rgba(30, 90, 255, 0.08)
-    );
-
-  box-shadow:
-    inset 0 0 35px rgba(255, 255, 255, 0.015),
-    0 0 30px rgba(30, 80, 255, 0.07);
-
-  font-family: Arial, sans-serif;
-
-  font-size: 11px;
-
-  letter-spacing: 4px;
-
-  transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease;
-}
-
-.photo:hover {
-  transform: translateY(-5px);
-
-  box-shadow:
-    0 0 30px rgba(255, 30, 80, 0.12),
-    0 0 40px rgba(30, 90, 255, 0.12);
-}
-
-.photo small {
-  margin-top: 12px;
-
-  letter-spacing: 1px;
-
-  opacity: 0.4;
-}
-
-
-/* =========================
-   QUESTION
-========================= */
-
-.question {
-  background:
-    radial-gradient(
-      circle at 30% 50%,
-      rgba(255, 20, 70, 0.18),
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 75% 50%,
-      rgba(20, 80, 255, 0.18),
-      transparent 40%
-    );
-}
-
-.answers {
-  display: flex;
-
-  justify-content: center;
-
-  gap: 18px;
-
-  margin-top: 25px;
-}
-
-#yes {
-  border-color:
-    rgba(255, 40, 90, 0.75);
-
-  background:
-    rgba(255, 30, 70, 0.08);
-
-  box-shadow:
-    0 0 15px rgba(255, 30, 70, 0.08);
-}
-
-#no {
-  border-color:
-    rgba(70, 110, 255, 0.65);
-
-  background:
-    rgba(40, 80, 255, 0.06);
-}
-
-
-/* =========================
-   FLOATING TEXT
-========================= */
-
-.floating-text {
-  position: fixed;
-
-  z-index: 10;
-
-  pointer-events: none;
-
-  font-family: Georgia, serif;
-
-  font-size: 14px;
-
-  font-style: italic;
-
-  opacity: 0;
-
-  text-shadow:
-    0 0 12px rgba(255, 255, 255, 0.5);
-
-  animation:
-    floatingText 5s ease forwards;
-}
-
-@keyframes floatingText {
-
-  0% {
-    transform:
-      translateY(30px)
-      scale(0.95);
-
-    opacity: 0;
+  section{
+    min-height:82vh;
+    padding:27px 14px;
   }
 
-  20% {
-    opacity: 0.7;
+  p{
+    line-height:1.5;
+    margin:7px 0;
   }
 
-  70% {
-    opacity: 0.7;
+  .photo{
+    height:120px;
   }
+}
+</style>
+</head>
 
-  100% {
-    transform:
-      translateY(-100px)
-      scale(1.05);
+<body>
 
-    opacity: 0;
-  }
+<div class="neon left"></div>
+<div class="neon right"></div>
+<div class="orb redOrb"></div>
+<div class="orb blueOrb"></div>
+
+
+<!-- START -->
+<section>
+
+<span class="sticker s1">🐼</span>
+<span class="sticker s2">💗</span>
+
+<div class="box">
+
+<div class="label">FOR YOU</div>
+
+<h1>FAYE ♡</h1>
+
+<div class="line"></div>
+
+<p>
+Hey Faye… I made a little something for you. 🥹❤️
+</p>
+
+<a href="#october" class="start">
+START ✨
+</a>
+
+</div>
+</section>
+
+
+<!-- OCTOBER -->
+<section id="october">
+
+<span class="sticker s3">🎀</span>
+<span class="sticker s4">🌸</span>
+
+<div class="box">
+
+<div class="label">OCTOBER</div>
+
+<h2>Where it started.</h2>
+
+<p>
+Back in October, I opened my other account and saw your ID.
+I sent you a text just for fun, and you told me you had changed.
+I honestly didn't know that one random message would turn into
+such a big part of my memories.
+</p>
+
+<p>
+That's how we started talking and slowly became friends.
+It wasn't planned. It just happened naturally.
+</p>
+
+<div class="photo">
+📸 YOUR FIRST SCREENSHOT
+</div>
+
+</div>
+</section>
+
+
+<!-- AND THEN -->
+<section>
+
+<span class="sticker s1">💌</span>
+<span class="sticker s2">✨</span>
+
+<div class="box">
+
+<div class="label">AND THEN</div>
+
+<h2>We just kept talking.</h2>
+
+<p>
+One conversation became another, and eventually talking to you
+became one of those normal parts of my day that I actually
+looked forward to.
+</p>
+
+</div>
+</section>
+
+
+<!-- NOVEMBER -->
+<section>
+
+<span class="sticker s3">🌸</span>
+<span class="sticker s4">🐼</span>
+
+<div class="box">
+
+<div class="label">NOVEMBER</div>
+
+<h2>Those Pakistan days.</h2>
+
+<p>
+When I went to Pakistan in November, we would talk until 6 AM,
+send each other reels, laugh and talk about random things.
+Somehow the hours just disappeared.
+</p>
+
+<p>
+Those were genuinely some of my favourite memories with you.
+</p>
+
+<div class="photo">
+📸 YOUR NOVEMBER MEMORY
+</div>
+
+</div>
+</section>
+
+
+<!-- 6 AM -->
+<section>
+
+<span class="sticker s1">🌙</span>
+<span class="sticker s2">✨</span>
+
+<div class="box">
+
+<div class="label">LATE NIGHTS</div>
+
+<h2>6 AM moments.</h2>
+
+<p>
+We would keep talking and suddenly realise how late it had
+become. It was crazy how easily hours disappeared when we talked.
+</p>
+
+</div>
+</section>
+
+
+<!-- CALLS -->
+<section>
+
+<span class="sticker s3">📱</span>
+<span class="sticker s4">🧸</span>
+
+<div class="box">
+
+<div class="label">CALLS</div>
+
+<h2>Our calls.</h2>
+
+<p>
+Video calls, long conversations, reels, random jokes and just
+staying there talking. Sometimes you would even fall asleep
+while we were still on call.
+</p>
+
+<div class="photo">
+📸 YOUR CALL SCREENSHOT
+</div>
+
+</div>
+</section>
+
+
+<!-- HER -->
+<section>
+
+<span class="sticker s1">🦋</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">🌸</span>
+
+<div class="box">
+
+<div class="label">JUST SAYING</div>
+
+<h2>You really are pretty.</h2>
+
+<p>
+You're genuinely so pretty yaar, mashallah 🥹❤️.
+And you still keep finding flaws in yourself, idk why.
+You're honestly just so amazing.
+</p>
+
+<p>
+Your mole, your smile, your eyes, your expressions, your little
+habits and the way you talk — I genuinely like all of it. 🫶🏻
+</p>
+
+<p>
+Even the things you see as flaws in yourself, I actually find
+cute too. You don't need to be perfect. You're already pretty
+just the way you are.
+</p>
+
+<p>
+Just be a little kinder to yourself sometimes, because you're
+much more amazing than you give yourself credit for. 🥹❤️
+</p>
+
+</div>
+</section>
+
+
+<!-- LITTLE THINGS -->
+<section>
+
+<span class="sticker s1">🐼</span>
+<span class="sticker s2">🎀</span>
+<span class="sticker s3">🌸</span>
+<span class="sticker s4">💌</span>
+
+<div class="box">
+
+<div class="label">LITTLE THINGS</div>
+
+<h2>The small stuff mattered.</h2>
+
+<p>
+The random texts, reels, calls, jokes and stupid little
+conversations didn't always seem important at the time,
+but somehow they became some of the memories I remember most.
+</p>
+
+</div>
+</section>
+
+
+<!-- MEMORIES -->
+<section>
+
+<span class="sticker s1">💭</span>
+<span class="sticker s4">🌷</span>
+
+<div class="box">
+
+<div class="label">MEMORIES</div>
+
+<h2>Good days and hard days.</h2>
+
+<p>
+Obviously everything wasn't perfect. We had our ups and downs,
+misunderstandings and moments where things felt difficult too.
+But that's also part of what made it real.
+</p>
+
+<p>
+And then there was our meetup — one of those memories that
+still makes me smile.
+</p>
+
+<div class="photo">
+📸 YOUR MEETUP PHOTO
+</div>
+
+</div>
+</section>
+
+
+<!-- THROUGH EVERYTHING -->
+<section>
+
+<span class="sticker s2">🫶🏻</span>
+<span class="sticker s3">✨</span>
+
+<div class="box">
+
+<div class="label">THROUGH EVERYTHING</div>
+
+<h2>All the little moments.</h2>
+
+<p>
+Our story wasn't just one perfect moment. It was all the
+conversations, jokes, calls, good days, difficult days,
+and everything in between.
+</p>
+
+<p>
+Somehow, all those little things became something worth
+remembering.
+</p>
+
+</div>
+</section>
+
+
+<!-- JULY -->
+<section>
+
+<span class="sticker s1">🌙</span>
+<span class="sticker s4">💙</span>
+
+<div class="box">
+
+<div class="label">JULY</div>
+
+<h2>Things got quiet.</h2>
+
+<p>
+When you went to Pakistan in July, we didn't have contact.
+Before that things had gotten better between us, but distance
+and network problems made everything harder.
+</p>
+
+<p>
+Even when we weren't talking, I still thought about you
+throughout the day and wondered how you were doing.
+</p>
+
+</div>
+</section>
+
+
+<!-- OLD MEMORIES -->
+<section>
+
+<span class="sticker s2">💌</span>
+<span class="sticker s3">🧸</span>
+
+<div class="box">
+
+<div class="label">OLD MEMORIES</div>
+
+<h2>Things I still look back at.</h2>
+
+<p>
+Sometimes I go through our old messages and remember how
+we used to talk. The old voice messages are one of my
+favourite memories too.
+</p>
+
+<div class="photo">
+📸 FAVOURITE VOICE-MESSAGE SCREENSHOT
+</div>
+
+</div>
+</section>
+
+
+<!-- COLLAGE -->
+<section>
+
+<div class="box">
+
+<div class="label">MEMORIES</div>
+
+<h2>A few moments.</h2>
+
+<div class="photo">📸 PHOTO / SCREENSHOT 1</div>
+<div class="photo">📸 PHOTO / SCREENSHOT 2</div>
+<div class="photo">📸 PHOTO / SCREENSHOT 3</div>
+
+</div>
+</section>
+
+
+<!-- TIMELINE -->
+<section>
+
+<div class="box">
+
+<div class="label">OUR STORY</div>
+
+<h2>A simple timeline.</h2>
+
+<div class="timeline">
+
+<div class="event">
+<span class="dot"></span>
+<b>October</b><br>
+First message & friendship
+</div>
+
+<div class="event">
+<span class="dot"></span>
+<b>November</b><br>
+Pakistan & 6 AM conversations
+</div>
+
+<div class="event">
+<span class="dot"></span>
+<b>Calls</b><br>
+Reels, calls & late nights
+</div>
+
+<div class="event">
+<span class="dot"></span>
+<b>Meetup</b><br>
+A memory together
+</div>
+
+<div class="event">
+<span class="dot"></span>
+<b>July</b><br>
+Distance & network problems
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- SECRET -->
+<section>
+
+<span class="sticker s2">🎁</span>
+
+<div class="box">
+
+<div class="label">ONE MORE THING</div>
+
+<h2>There's something hidden.</h2>
+
+<p>
+Maybe there's one more little memory here…
+</p>
+
+<button onclick="showSecret()">
+OPEN ✨
+</button>
+
+<div id="secret">
+
+<p>
+Sometimes the memories that stay with us aren't the biggest
+moments. They're just the little things that happened when
+everything felt normal and happy. 💗
+</p>
+
+<div class="photo">
+📸 YOUR SPECIAL PHOTO
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- QUESTION -->
+<section id="question">
+
+<span class="sticker s1">🐼</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">🎀</span>
+<span class="sticker s4">✨</span>
+
+<div class="box">
+
+<div class="label">ONE LAST QUESTION</div>
+
+<h2>
+Do you love me, Faye? 🥺❤️
+</h2>
+
+<div class="ring">
+🧍🏼‍♂️💍🧍🏼‍♀️
+</div>
+
+<p id="hint">
+Be honest. 🥺
+</p>
+
+<div>
+<button id="yes">YES</button>
+<button id="no">NO</button>
+</div>
+
+</div>
+</section>
+
+
+<!-- FIREWORKS -->
+<section id="fireworkSlide">
+
+<canvas id="fireworks"></canvas>
+
+<div class="final">
+
+<h2>YAY FAYE 🥺❤️</h2>
+
+<p><b>IK U DA BEST ✨</b></p>
+
+<p>
+THANK YOU FOR BEING A PART OF MY STORY 💗
+</p>
+
+<p>
+NOW SMILE, YOU DESERVE IT 🥹✨
+</p>
+
+<div class="loveIcons">
+🧍🏼‍♂️💍🧍🏼‍♀️
+</div>
+
+<button onclick="openLetter()">
+CONTINUE 💌
+</button>
+
+</div>
+</section>
+
+
+<!-- LETTER -->
+<section id="letterSlide">
+
+<span class="sticker s1">💗</span>
+<span class="sticker s2">🐼</span>
+<span class="sticker s3">🌸</span>
+<span class="sticker s4">✨</span>
+
+<div class="letter-wrap">
+
+<div class="label">FOR YOU</div>
+
+<h2>A little letter.</h2>
+
+<div class="letter">
+
+<h3>For Faye ♡</h3>
+
+<p>
+You're genuinely so pretty yaar, mashallah 🥹❤️ and you still
+keep finding flaws in yourself, idk why.
+</p>
+
+<p>
+You're just so amazing. Your mole, your smile, your eyes,
+your expressions, your little habits — honestly, I like
+all of it. 🫶🏻
+</p>
+
+<p>
+And the things you see as flaws in yourself, I actually find
+cute too. You don't need to be perfect. You're already pretty
+just the way you are.
+</p>
+
+<p>
+If you're ever hard on yourself, just remember there are so
+many good things about you that you probably don't notice.
+</p>
+
+<p>
+Thank you for being a part of my story and for all the little
+memories we've made. I'm genuinely glad those moments happened. 🥹❤️
+</p>
+
+</div>
+
+<button onclick="showLove()">
+ONE MORE THING ✨
+</button>
+
+</div>
+</section>
+
+
+<!-- LOVE + LILIES -->
+<section id="lily">
+
+<div class="final">
+
+<div class="loveIcons">
+🌸 🤍 🌸
+</div>
+
+<h2>
+I LOVE YOU SO MUCH, FAYE 🥺❤️
+</h2>
+
+<p>
+Thank you for being a beautiful part of my story. 💗
+</p>
+
+<p>
+Whatever happens, I'll always be grateful for
+the memories we've made. 🌸
+</p>
+
+<p>
+Now smile, okay? You deserve it. 🥹❤️
+</p>
+
+</div>
+
+</section>
+
+
+<script>
+
+/* FLOATING TEXT */
+
+const words=[
+"💗 little moments",
+"✨ hehe",
+"🐼 keep smiling",
+"💌 good memories",
+"🦋 little things",
+"🌸 6 AM talks",
+"✨ remember this",
+"💗 always"
+];
+
+setInterval(()=>{
+
+const el=document.createElement("div");
+
+el.className="float";
+
+el.textContent=
+words[Math.floor(Math.random()*words.length)];
+
+el.style.left=(5+Math.random()*85)+"%";
+el.style.top=(55+Math.random()*30)+"%";
+
+document.body.appendChild(el);
+
+setTimeout(()=>{
+el.remove();
+},5000);
+
+},1800);
+
+
+/* SECRET */
+
+function showSecret(){
+
+document.getElementById("secret").style.display="block";
+
 }
 
 
-/* =========================
-   ENVELOPE
-========================= */
+/* NO BUTTON */
 
-.envelope-area {
-  min-height: 100vh;
+let noCount=0;
 
-  display: flex;
+document.getElementById("no").onclick=()=>{
 
-  align-items: center;
-  justify-content: center;
+noCount++;
 
-  text-align: center;
+const messages=[
+"Are you sure? 🥺",
+"Think again 👀💌",
+"Really? 😭",
+"Come onnn 🥹"
+];
 
-  padding: 70px 20px;
+document.getElementById("hint").textContent=
+messages[Math.min(noCount-1,3)];
 
-  position: relative;
+};
+
+
+/* YES */
+
+document.getElementById("yes").onclick=()=>{
+
+document.getElementById("question").style.display="none";
+
+const slide=
+document.getElementById("fireworkSlide");
+
+slide.style.display="flex";
+
+window.scrollTo({
+top:slide.offsetTop,
+behavior:"smooth"
+});
+
+startFireworks();
+
+};
+
+
+/* FIREWORKS */
+
+function startFireworks(){
+
+const canvas=
+document.getElementById("fireworks");
+
+const ctx=
+canvas.getContext("2d");
+
+let W,H;
+let rockets=[];
+let particles=[];
+
+function resize(){
+
+W=canvas.width=window.innerWidth;
+H=canvas.height=window.innerHeight;
+
 }
 
-.envelope {
-  width: 330px;
-  height: 215px;
+resize();
 
-  position: relative;
+window.addEventListener("resize",resize);
 
-  cursor: pointer;
+const colours=[
+[255,30,80],
+[35,100,255],
+[255,70,170],
+[70,160,255],
+[255,255,255]
+];
 
-  perspective: 1000px;
+function launch(){
 
-  filter:
-    drop-shadow(
-      0 15px 35px
-      rgba(0, 0, 0, 0.45)
-    );
+rockets.push({
+
+x:Math.random()*W,
+y:H+15,
+
+target:
+H*.08+
+Math.random()*H*.48,
+
+speed:
+7+Math.random()*4,
+
+colour:
+colours[
+Math.floor(Math.random()*colours.length)
+]
+
+});
+
 }
 
-.envelope-back {
-  position: absolute;
+function explode(x,y,colour){
 
-  inset: 0;
+for(let i=0;i<210;i++){
 
-  border-radius: 8px;
+const angle=
+Math.random()*Math.PI*2;
 
-  background:
-    linear-gradient(
-      135deg,
-      #15162b,
-      #28101e
-    );
+const speed=
+1+Math.random()*7;
 
-  border:
-    1px solid
-    rgba(255, 255, 255, 0.16);
+particles.push({
+
+x:x,
+y:y,
+
+vx:Math.cos(angle)*speed,
+vy:Math.sin(angle)*speed,
+
+life:1,
+
+size:
+1+Math.random()*2.6,
+
+colour:colour
+
+});
+
 }
 
-.envelope-flap {
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 105px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #321323,
-      #11172f
-    );
-
-  clip-path:
-    polygon(
-      0 0,
-      100% 0,
-      50% 100%
-    );
-
-  transform-origin: top;
-
-  transition:
-    transform 0.9s ease;
-
-  z-index: 5;
 }
 
-.envelope-card {
-  position: absolute;
+function animate(){
 
-  left: 10%;
+ctx.fillStyle=
+"rgba(2,3,10,.16)";
 
-  bottom: 5px;
+ctx.fillRect(0,0,W,H);
 
-  width: 80%;
-  height: 190px;
 
-  padding: 22px;
+/* ROCKETS */
 
-  overflow: hidden;
+for(let i=rockets.length-1;i>=0;i--){
 
-  border-radius: 8px;
+const r=rockets[i];
 
-  background:
-    linear-gradient(
-      135deg,
-      #fffdf9,
-      #f3edf1
-    );
+r.y-=r.speed;
 
-  color: #211722;
+ctx.beginPath();
 
-  z-index: 2;
+ctx.arc(
+r.x,
+r.y,
+2,
+0,
+Math.PI*2
+);
 
-  transform:
-    translateY(0);
+ctx.fillStyle=
+`rgb(${r.colour.join(",")})`;
 
-  transition:
-    transform 1s ease;
+ctx.shadowBlur=18;
 
-  box-shadow:
-    0 0 25px
-    rgba(255, 255, 255, 0.12);
+ctx.shadowColor=
+`rgb(${r.colour.join(",")})`;
+
+ctx.fill();
+
+ctx.shadowBlur=0;
+
+if(r.y<=r.target){
+
+explode(
+r.x,
+r.y,
+r.colour
+);
+
+rockets.splice(i,1);
+
 }
 
-.envelope.open .envelope-flap {
-  transform:
-    rotateX(180deg);
-}
-
-.envelope.open .envelope-card {
-  transform:
-    translateY(-145px);
-}
-
-.envelope-card h3 {
-  font-family: Georgia, serif;
-
-  font-size: 25px;
-
-  font-weight: 400;
-
-  margin-bottom: 14px;
-}
-
-.envelope-card p {
-  color: #302531;
-
-  font-size: 13px;
-
-  line-height: 1.7;
-
-  opacity: 0.85;
-}
-
-.envelope-front {
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 4;
-
-  pointer-events: none;
-
-  border-radius: 8px;
-
-  background:
-    linear-gradient(
-      145deg,
-      transparent 49%,
-      rgba(255,255,255,.05) 50%
-    );
-}
-
-.envelope-hint {
-  margin-top: 35px;
-
-  font-family: Arial, sans-serif;
-
-  font-size: 10px;
-
-  letter-spacing: 4px;
-
-  opacity: 0.55;
-
-  text-transform: uppercase;
 }
 
 
-/* =========================
-   FINAL SCREEN
-========================= */
+/* PARTICLES */
 
-#end {
-  display: none;
+for(let i=particles.length-1;i>=0;i--){
 
-  min-height: 100vh;
+const p=particles[i];
 
-  width: 100%;
+p.x+=p.vx;
+p.y+=p.vy;
 
-  position: relative;
+p.vx*=.985;
+p.vy*=.985;
+p.vy+=.035;
 
-  overflow: hidden;
+p.life-=.008;
 
-  align-items: center;
+ctx.beginPath();
 
-  justify-content: center;
+ctx.arc(
+p.x,
+p.y,
+p.size,
+0,
+Math.PI*2
+);
 
-  text-align: center;
+ctx.fillStyle=
+`rgba(${p.colour.join(",")},${p.life})`;
 
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(255, 20, 70, 0.12),
-      transparent 38%
-    ),
-    #02030a;
+ctx.shadowBlur=14;
+
+ctx.shadowColor=
+`rgb(${p.colour.join(",")})`;
+
+ctx.fill();
+
+ctx.shadowBlur=0;
+
+if(p.life<=0){
+
+particles.splice(i,1);
+
 }
 
-#fireworks {
-  position: absolute;
-
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  z-index: 1;
 }
 
-.end-content {
-  position: relative;
+requestAnimationFrame(animate);
 
-  z-index: 5;
-
-  padding: 30px;
-
-  max-width: 800px;
-}
-
-.end-stickers {
-  font-size: 65px;
-
-  margin-bottom: 25px;
-
-  animation:
-    celebrate 1.5s
-    ease-in-out infinite;
-}
-
-@keyframes celebrate {
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.12);
-  }
-}
-
-.end-content h2 {
-  text-shadow:
-    0 0 20px rgba(255, 40, 90, 0.35),
-    0 0 40px rgba(50, 100, 255, 0.30);
-}
-
-.end-content p {
-  opacity: 0.75;
 }
 
 
-/* =========================
-   FINAL TEXT
-========================= */
+/* MANY INITIAL FIREWORKS */
 
-.final-title {
-  font-size:
-    clamp(40px, 8vw, 78px);
+for(let i=0;i<18;i++){
 
-  line-height: 1.15;
+setTimeout(
+launch,
+i*130
+);
 
-  font-weight: 400;
-
-  margin-bottom: 25px;
 }
 
-.final-line {
-  margin: 18px 0;
+setInterval(
+launch,
+300
+);
 
-  font-size: 17px;
+animate();
 
-  opacity: 0.78;
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* OPEN LETTER */
 
-@media (max-width: 600px) {
+function openLetter(){
 
-  .slide {
-    padding:
-      75px
-      20px;
-  }
+document.getElementById("fireworkSlide").style.display=
+"none";
 
-  h1 {
-    font-size: 58px;
+const slide=
+document.getElementById("letterSlide");
 
-    letter-spacing: 6px;
-  }
+slide.style.display="flex";
 
-  h2 {
-    font-size: 40px;
-  }
+window.scrollTo({
+top:slide.offsetTop,
+behavior:"smooth"
+});
 
-  p {
-    font-size: 16px;
-
-    line-height: 1.85;
-  }
-
-  .label {
-    font-size: 9px;
-
-    letter-spacing: 4px;
-  }
-
-  .sticker {
-    font-size: 36px;
-  }
-
-  .s1 {
-    left: 5%;
-  }
-
-  .s2 {
-    right: 5%;
-  }
-
-  .s3 {
-    left: 5%;
-  }
-
-  .s4 {
-    right: 5%;
-  }
-
-  .photo {
-    height: 220px;
-
-    margin: 38px auto;
-  }
-
-  .answers {
-    gap: 12px;
-  }
-
-  .answers button {
-    min-width: 105px;
-
-    padding:
-      14px
-      22px;
-  }
-
-  .envelope {
-    width: 285px;
-    height: 185px;
-  }
-
-  .envelope-card {
-    height: 165px;
-  }
-
-  .envelope-card p {
-    font-size: 11px;
-  }
-
-  .envelope.open .envelope-card {
-    transform:
-      translateY(-125px);
-  }
-
-  .end-stickers {
-    font-size: 50px;
-  }
 }
+
+
+/* SHOW LOVE */
+
+function showLove(){
+
+document.getElementById("letterSlide").style.display=
+"none";
+
+const final=
+document.getElementById("lily");
+
+final.style.display="flex";
+
+window.scrollTo({
+top:final.offsetTop,
+behavior:"smooth"
+});
+
+
+/* LILY / PETAL RAIN */
+
+for(let i=0;i<55;i++){
+
+const petal=
+document.createElement("div");
+
+petal.className="petal";
+
+petal.textContent=
+Math.random()>.35
+?"🌸"
+:"✦";
+
+petal.style.left=
+Math.random()*100+"%";
+
+petal.style.animationDuration=
+(5+Math.random()*8)+"s";
+
+petal.style.animationDelay=
+Math.random()*5+"s";
+
+petal.style.fontSize=
+(15+Math.random()*15)+"px";
+
+final.appendChild(petal);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
