@@ -1,958 +1,975 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Faye ♡</title>
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:#03040b;
-  color:white;
-  overflow-x:hidden;
-  font-family:Georgia,serif;
-}
-
-body:before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-10;
-  background:
-    radial-gradient(circle at 0% 20%,rgba(255,0,70,.25),transparent 35%),
-    radial-gradient(circle at 100% 70%,rgba(40,100,255,.25),transparent 38%),
-    linear-gradient(135deg,#08000d,#020714,#100008);
-}
-
-/* NEON */
-.neon{
-  position:fixed;
-  top:0;
-  bottom:0;
-  width:3px;
-  z-index:50;
-  pointer-events:none;
-}
-.neon.left{
-  left:8px;
-  background:linear-gradient(transparent,#ff174f,transparent);
-  box-shadow:0 0 15px #ff174f,0 0 40px #ff174f;
-}
-.neon.right{
-  right:8px;
-  background:linear-gradient(transparent,#397cff,transparent);
-  box-shadow:0 0 15px #397cff,0 0 40px #397cff;
-}
-
-/* SECTIONS — 9:16 FEEL */
-section{
-  min-height:100svh;
-  padding:50px 20px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  position:relative;
-  overflow:hidden;
-  text-align:center;
-}
-
-.box{
-  width:100%;
-  max-width:620px;
-  position:relative;
-  z-index:3;
-}
-
-.label{
-  font-family:Arial,sans-serif;
-  font-size:10px;
-  letter-spacing:5px;
-  opacity:.55;
-  margin-bottom:15px;
-}
-
-h1{
-  font-size:clamp(62px,17vw,110px);
-  font-weight:400;
-  letter-spacing:7px;
-}
-
-h2{
-  font-size:clamp(34px,9vw,58px);
-  font-weight:400;
-  line-height:1.1;
-  margin-bottom:22px;
-  text-shadow:0 0 20px rgba(255,30,90,.4),
-              0 0 35px rgba(50,110,255,.3);
-}
-
-p{
-  font-size:15px;
-  line-height:1.75;
-  color:rgba(255,255,255,.88);
-  margin:14px auto;
-  max-width:600px;
-}
-
-.line{
-  width:100px;
-  height:1px;
-  margin:20px auto;
-  background:linear-gradient(90deg,#ff174f,#fff,#397cff);
-  box-shadow:0 0 10px #ff174f,0 0 15px #397cff;
-}
-
-/* STICKERS */
-.sticker{
-  position:absolute;
-  font-size:32px;
-  pointer-events:none;
-  z-index:2;
-  filter:drop-shadow(0 0 10px rgba(255,255,255,.3));
-  animation:float 4s ease-in-out infinite;
-}
-.s1{left:5%;top:7%}
-.s2{right:5%;top:10%;animation-delay:1s}
-.s3{left:6%;bottom:8%;animation-delay:2s}
-.s4{right:6%;bottom:7%;animation-delay:3s}
-
-@keyframes float{
-  50%{transform:translateY(-18px) rotate(8deg)}
-}
-
-/* EXTRA DECORATION */
-.spark{
-  position:absolute;
-  opacity:.5;
-  animation:pulse 2s infinite alternate;
-}
-@keyframes pulse{
-  to{transform:scale(1.5);opacity:1}
-}
-
-/* BUTTON */
-button,.start{
-  position:relative;
-  z-index:20;
-  display:inline-block;
-  margin-top:18px;
-  padding:15px 28px;
-  border-radius:50px;
-  border:1px solid rgba(255,255,255,.4);
-  background:rgba(255,255,255,.08);
-  color:white;
-  text-decoration:none;
-  font-family:Arial,sans-serif;
-  font-size:11px;
-  letter-spacing:3px;
-  cursor:pointer;
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-}
-
-button:active,.start:active{
-  transform:scale(.96);
-}
-
-/* BLACK ONE MORE THING */
-.black-btn{
-  background:#050505!important;
-  color:#fff!important;
-  border:1px solid rgba(255,255,255,.5);
-}
-
-/* TIMELINE */
-.timeline{
-  max-width:500px;
-  margin:25px auto;
-}
-.time{
-  padding:18px;
-  margin:12px 0;
-  border-radius:18px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.1);
-  box-shadow:0 0 20px rgba(255,30,80,.08);
-}
-
-/* PHOTOS */
-.memories-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  width:100%;
-}
-
-.memories-grid img{
-  width:100%;
-  aspect-ratio:9/16;
-  object-fit:cover;
-  display:block;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:
-    0 0 20px rgba(255,23,79,.2),
-    0 0 20px rgba(57,124,255,.15);
-}
-
-/* QUESTION */
-#answerMessage{
-  min-height:35px;
-  margin-top:20px;
-  font-size:18px;
-}
-
-#afterAnswer{
-  display:none;
-}
-
-/* FIREWORK SECTION */
-#fireworkSlide{
-  display:none;
-  min-height:100svh;
-  position:relative;
-}
-
-#fireworks{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:1;
-}
-
-.fire-content{
-  position:relative;
-  z-index:3;
-}
-
-/* LETTER */
-#letterSlide{display:none}
-.letter{
-  background:rgba(255,250,247,.98);
-  color:#2c2027;
-  padding:25px 20px;
-  border-radius:22px;
-  text-align:left;
-  max-height:72svh;
-  overflow-y:auto;
-  box-shadow:0 0 35px rgba(255,255,255,.15);
-}
-
-.letter h3{
-  text-align:center;
-  font-size:25px;
-  font-weight:400;
-  margin-bottom:18px;
-}
-.letter p{
-  color:#30242a;
-  font-size:14px;
-  line-height:1.7;
-}
-
-/* FINAL */
-#finalSlide{display:none}
-.petal{
-  position:absolute;
-  top:-60px;
-  z-index:1;
-  pointer-events:none;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  from{transform:translateY(-60px) rotate(0deg)}
-  to{transform:translateY(115vh) rotate(720deg)}
-}
-
-.final-content{
-  position:relative;
-  z-index:4;
-}
-
-@media(max-width:500px){
-  section{padding:45px 17px}
-  p{font-size:14px;line-height:1.68}
-  .sticker{font-size:28px}
-}
-</style>
-</head>
-
-<body>
-
-<div class="neon left"></div>
-<div class="neon right"></div>
-
-<!-- OPENING -->
-<section>
-
-<span class="sticker s1">🐼</span>
-<span class="sticker s2">💗</span>
-<span class="sticker s3">🎀</span>
-<span class="sticker s4">🦋</span>
-
-<div class="box">
-<div class="label">MADE FOR YOU</div>
-<h1>FAYE ♡</h1>
-<div class="line"></div>
-<p>Hey Faye… I made something for you. 🥹❤️</p>
-<p>Just a little place where some of our memories can stay together. ✨</p>
-<a class="start" href="#october">START ✨</a>
-</div>
-
-</section>
-
-
-<!-- STORY -->
-<section id="october">
-<span class="sticker s1">💌</span>
-<span class="sticker s2">🌸</span>
-<span class="sticker s3">✨</span>
-
-<div class="box">
-<div class="label">OCTOBER</div>
-<h2>Where Everything Unexpectedly Began</h2>
-
-<p>
-Back in October, when I opened my other account and saw your ID, I sent you a text just for fun. You told me you had changed and that's how we became friends. You always used to talk about death and said you wanted to die. I told you I'll come to bury you and you replied that I should have some rights for that too. Then you said you would die and I told you even if you die I still want you. After that I fell for you deeply, very deeply.
-</p>
-
-<p>
-It's honestly crazy how one random message could slowly become something I would remember this much.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">🥺</span>
-<span class="sticker s2">💗</span>
-<span class="sticker s3">🫶🏻</span>
-<span class="sticker s4">✨</span>
-
-<div class="box">
-<div class="label">THE WAY WE BECAME</div>
-<h2>Your Efforts Meant More Than You Know</h2>
-
-<p>
-At one time you used to love me a lot too. I remember when you didn't have a phone you would somehow find a way to message me at random times. We never used to ignore each other and we always listened to each other.
-</p>
-
-<p>
-Your efforts at that time, trust me, that's one of the biggest things that made me fall even more for you. It wasn't something huge or complicated. It was simply the fact that you still found a way to talk to me.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">🇵🇰</span>
-<span class="sticker s2">🌙</span>
-<span class="sticker s3">📱</span>
-<span class="sticker s4">💗</span>
-
-<div class="box">
-<div class="label">NOVEMBER</div>
-<h2>Those Nights That Reached 6 AM</h2>
-
-<p>
-When I went to Pakistan in November we would talk until 6 AM and send each other reels. Life was so happy back then honestly. We could keep talking for hours and suddenly realise how late it had become.
-</p>
-
-<p>
-After that we kept getting closer but at the same time we drifted apart too. You would get upset and I would keep trying to make it up to you over and over again. But those nights, those reels and those conversations are still some of the memories that stay with me.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">📱</span>
-<span class="sticker s2">🧸</span>
-<span class="sticker s3">💬</span>
-<span class="sticker s4">🌙</span>
-
-<div class="box">
-<div class="label">OUR CALLS</div>
-<h2>From Messages To Looking At Each Other</h2>
-
-<p>
-We used to call each other too. When I woke up I would see your message and it would be around 12 in the morning. Then after a while you would call me and we would talk. Then we would text and at night we would video call and just keep looking at each other.
-</p>
-
-<p>
-We used to watch reels together and sometimes you would even fall asleep on the call. Those simple calls weren't always about doing something special. Sometimes it was just you being there, and somehow that was enough.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">🥺</span>
-<span class="sticker s2">💧</span>
-<span class="sticker s3">🫶🏻</span>
-<span class="sticker s4">❤️</span>
-
-<div class="box">
-<div class="label">THAT ONE CALL</div>
-<h2>When We Both Couldn't Stop Crying</h2>
-
-<p>
-And once things got so emotional that we were both crying on the call. I was asking you to stay with me and you were in the kitchen at that time because your tablet didn't have any charge.
-</p>
-
-<p>
-Some moments aren't easy to explain properly. They stay in your mind because of how real everything felt at that moment.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">😔</span>
-<span class="sticker s2">💭</span>
-<span class="sticker s3">🚬</span>
-<span class="sticker s4">❤️</span>
-
-<div class="box">
-<div class="label">THINGS WE WENT THROUGH</div>
-<h2>I Kept Trying To Make Things Right</h2>
-
-<p>
-There was one time I fell asleep without making up to you and on top of that you saw my ID which had some smoking stories on it so you got even more mad. Then I spent all my time trying to make things right.
-</p>
-
-<p>
-Things went wrong and right between us many times but now things have gotten really messed up. I tried so much and I am still trying but now it's up to you.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">🎁</span>
-<span class="sticker s2">🫶🏻</span>
-<span class="sticker s3">💗</span>
-<span class="sticker s4">✨</span>
-
-<div class="box">
-<div class="label">OUR MEETUP</div>
-<h2>Even Three Minutes Became A Memory</h2>
-
-<p>
-We met up once too and we had such a great time together. Even though our meetup was only around three minutes, it still became one of those memories that matters to me.
-</p>
-
-<p>
-We exchanged gifts and for that small moment we were actually there together instead of behind a screen.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">🤞🏻</span>
-<span class="sticker s2">❤️</span>
-<span class="sticker s3">🫶🏻</span>
-<span class="sticker s4">✨</span>
-
-<div class="box">
-<div class="label">OUR PROMISES</div>
-<h2>I'm Still Trying</h2>
-
-<p>
-We made promises to each other and even if you break yours I will still keep mine because I truly want you.
-</p>
-
-<p>
-If you become mine I will give you all the happiness, do whatever you say and act just the way you want. The rest is up to you, but I will still try my best and keep trying.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">☀️</span>
-<span class="sticker s2">💗</span>
-<span class="sticker s3">💬</span>
-<span class="sticker s4">✨</span>
-
-<div class="box">
-<div class="label">YOU CHANGED MY DAYS</div>
-<h2>You Could Change My Whole Mood</h2>
-
-<p>
-Simply talking to you made my day and I loved talking to you. When I'm with you and talking to you, you make my day better just by talking to me.
-</p>
-
-<p>
-Like bro, you can change my whole mood. You used to say that I talk too much but at one point you used to do the same thing. We used to talk so much.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">👀</span>
-<span class="sticker s2">🦋</span>
-<span class="sticker s3">💗</span>
-<span class="sticker s4">🌸</span>
-
-<div class="box">
-<div class="label">THE LITTLE THINGS</div>
-<h2>I Remember More Than You Think</h2>
-
-<p>
-Just look at what happened in one year but I am not letting go though the rest is up to you. To be honest you look so pretty. Your eyes and that mole on your face when I saw it, oh God, mashaAllah.
-</p>
-
-<p>
-And that day after the exam we were both staring at each other. I was shy but you were with your friends laughing. Actually I love your laugh too. There are so many other things that can't just be said but I remember everything.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">🇵🇰</span>
-<span class="sticker s2">🌙</span>
-<span class="sticker s3">📡</span>
-<span class="sticker s4">💭</span>
-
-<div class="box">
-<div class="label">JULY</div>
-<h2>When Everything Became Quiet</h2>
-
-<p>
-When you went to Pakistan in July we didn't have any contact. I know before you went to Pakistan everything had gotten better between us but after you went there idk maybe something bad happened with you.
-</p>
-
-<p>
-We didn't contact each other because of your network problem. Everything suddenly became quiet.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">💭</span>
-<span class="sticker s2">🎬</span>
-<span class="sticker s3">📱</span>
-<span class="sticker s4">❤️</span>
-
-<div class="box">
-<div class="label">I STILL THOUGHT ABOUT YOU</div>
-<h2>You Were Somehow Everywhere</h2>
-
-<p>
-I would still wonder where you were going throughout the day. I used to think about you all the time. Even while watching reels I would think about you. While watching a movie I would think about you and even when I went outside somehow you were on my mind everywhere.
-</p>
-
-<p>
-I couldn't forget you.
-</p>
-</div>
-</section>
-
-
-<section>
-<span class="sticker s1">💌</span>
-<span class="sticker s2">🎧</span>
-<span class="sticker s3">🥺</span>
-<span class="sticker s4">💗</span>
-
-<div class="box">
-<div class="label">WHERE IS MY FAYEEE?</div>
-<h2>I Still Go Back To Our Messages</h2>
-
-<p>
-I still look at our messages sometimes listening to your old voice messages and damn I think, where is my Fayeee. My most favorite message was that 5 minute one if you remember.
-</p>
-
-<p>
-Some memories don't disappear just because time passes.
-</p>
-</div>
-</section>
-
-
-<!-- TIMELINE -->
-<section>
-<div class="box">
-<div class="label">OUR TIMELINE</div>
-<h2>How The Story Moved</h2>
-
-<div class="timeline">
-<div class="time">🗓️ <b>October</b><br>Where it started</div>
-<div class="time">🌙 <b>November</b><br>Pakistan and 6 AM talks</div>
-<div class="time">📱 <b>Calls</b><br>Reels, video calls and late nights</div>
-<div class="time">🫶🏻 <b>Meetup</b><br>Three minutes and gifts</div>
-<div class="time">🇵🇰 <b>July</b><br>Distance and silence</div>
-</div>
-</div>
-</section>
-
-
-<!-- EXACTLY 6 PHOTOS -->
-<section>
-<span class="sticker s1">💗</span>
-<span class="sticker s2">📸</span>
-<span class="sticker s3">🌸</span>
-<span class="sticker s4">✨</span>
-
-<div class="box">
-<div class="label">OUR MEMORIES</div>
-<h2>Six Little Pieces Of Our Story</h2>
-
-<div class="memories-grid">
-<img src="photo1.jpg" alt="Memory 1">
-<img src="photo2.jpg" alt="Memory 2">
-<img src="photo3.jpg" alt="Memory 3">
-<img src="photo4.jpg" alt="Memory 4">
-<img src="photo5.jpg" alt="Memory 5">
-<img src="photo6.jpg" alt="Memory 6">
-</div>
-
-</div>
-</section>
-
-
-<!-- QUESTION -->
-<section id="question">
-<span class="sticker s1">🐼</span>
-<span class="sticker s2">💗</span>
-<span class="sticker s3">🎀</span>
-<span class="sticker s4">🦋</span>
-
-<div class="box">
-<div class="label">ONE LAST QUESTION</div>
-<h2>Do you love me, Faye? 🥺❤️</h2>
-
-<div style="font-size:48px;margin:20px">🧍🏼‍♂️💍🧍🏼‍♀️</div>
-
-<div>
-<button id="yesBtn">YES ❤️</button>
-<button id="noBtn">NO 🥺</button>
-</div>
-
-<div id="answerMessage"></div>
-
-<div id="afterAnswer">
-<button id="yesAgain">OKAY YES 🥺❤️</button>
-</div>
-</div>
-</section>
-
-
-<!-- FIREWORKS -->
-<section id="fireworkSlide">
-<canvas id="fireworks"></canvas>
-
-<div class="box fire-content">
-<div class="label">YAYYYY</div>
-<h2>YAY FAYE 🥺❤️</h2>
-
-<p><b>IK U DA BEST ✨</b></p>
-<p>THANK YOU FOR BEING A PART OF MY STORY 💗</p>
-<p>NOW SMILE, YOU DESERVE IT 🥹✨</p>
-
-<div style="font-size:50px;margin:25px">🧍🏼‍♂️💍🧍🏼‍♀️</div>
-
-<button id="continueBtn">CONTINUE 💌</button>
-</div>
-</section>
-
-
-<!-- LETTER -->
-<section id="letterSlide">
-<span class="sticker s1">💌</span>
-<span class="sticker s2">💗</span>
-<span class="sticker s3">🌸</span>
-<span class="sticker s4">✨</span>
-
-<div class="box">
-<div class="label">FOR YOU</div>
-<h2>A Little Letter</h2>
-
-<div class="letter">
-<h3>For Fatema ♡</h3>
-
-<p>
-It’s okay, I will wait for you Fatema because you are my last. After you I don't even want to love anyone or even talk to anyone. Everything ends with you and it will always be you.
-</p>
-
-<p>
-To be honest, you look so pretty. Your eyes, that mole on your face, your smile, your laugh, your expressions and all those little things about you. MashaAllah, there are honestly so many things I remember.
-</p>
-
-<p>
-And even when you find flaws in yourself, I wish you could see yourself the way I see you. You don't need to be perfect. The things you worry about don't make you any less beautiful.
-</p>
-
-<p>
-I hope you liked the gifts. Take care of yourself and don't stress about the future. You can do it and you will.
-</p>
-
-<p>
-It's up to you now but I will still try my best or I will keep trying.
-</p>
-
-<p>
-I will wait at the edge of the forgotten road.
-</p>
-</div>
-
-<button id="finalBtn" class="black-btn">ONE MORE THING ✨</button>
-</div>
-</section>
-
-
-<!-- FINAL LILIES -->
-<section id="finalSlide">
-
-<div class="box final-content">
-<div class="label">ALWAYS</div>
-<h2>I LOVE YOU SO MUCH, FAYE 🥺❤️</h2>
-<div class="line"></div>
-
-<p>
-Some stories don't need perfect endings to mean something.
-</p>
-
-<p>
-Thank you for every conversation, every call, every reel, every smile and every little memory.
-</p>
-
-<p>
-Now smile, okay? 🥹✨
-</p>
-
-<div style="font-size:45px;margin-top:30px">💗 🌸 🦋 ✨ 🌸 💗</div>
-</div>
-
-</section>
-
-
 <script>
-/* QUESTION */
+/* =========================================
+   FAYE ♡ — DREAMY AESTHETIC LOVE STORY JS
+========================================= */
 
-const yesBtn=document.getElementById("yesBtn");
-const noBtn=document.getElementById("noBtn");
-const answer=document.getElementById("answerMessage");
-const after=document.getElementById("afterAnswer");
 
-let noClicks=0;
+/* ==============================
+   FLOATING HEARTS + SPARKLES
+============================== */
 
-noBtn.addEventListener("click",function(){
-  noClicks++;
+const aestheticItems = ["♡", "♥", "✦", "⋆", "💗", "✨", "🦋"];
 
-  if(noClicks===1){
-    answer.innerHTML="Think again 🥺💗";
-    after.style.display="block";
-  }else if(noClicks===2){
-    answer.innerHTML="I don't believe you 😭🥺";
-    after.style.display="block";
-  }else{
-    answer.innerHTML="Come onnn Faye 🥺❤️";
-    after.style.display="block";
+function createFloatingItem() {
+  const item = document.createElement("span");
+
+  item.innerHTML =
+    aestheticItems[Math.floor(Math.random() * aestheticItems.length)];
+
+  item.style.position = "fixed";
+  item.style.left = Math.random() * 100 + "vw";
+  item.style.bottom = "-50px";
+  item.style.fontSize = 12 + Math.random() * 20 + "px";
+  item.style.zIndex = "1";
+  item.style.pointerEvents = "none";
+  item.style.opacity = 0.25 + Math.random() * 0.5;
+
+  const duration = 7 + Math.random() * 7;
+
+  item.animate(
+    [
+      {
+        transform: "translateY(0) translateX(0) rotate(0deg)",
+        opacity: 0
+      },
+      {
+        opacity: 0.65
+      },
+      {
+        transform:
+          `translateY(-115vh) translateX(${Math.random() * 140 - 70}px) rotate(360deg)`,
+        opacity: 0
+      }
+    ],
+    {
+      duration: duration * 1000,
+      easing: "linear"
+    }
+  );
+
+  document.body.appendChild(item);
+
+  setTimeout(() => item.remove(), duration * 1000);
+}
+
+setInterval(createFloatingItem, 1100);
+
+
+
+/* ==============================
+   RANDOM TWINKLING STARS
+============================== */
+
+function createStar() {
+
+  const star = document.createElement("span");
+
+  star.className = "random-star";
+  star.innerHTML = "✦";
+
+  star.style.position = "fixed";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.top = Math.random() * 100 + "vh";
+
+  star.style.fontSize = 7 + Math.random() * 15 + "px";
+
+  star.style.color = "white";
+  star.style.opacity = "0";
+
+  star.style.pointerEvents = "none";
+  star.style.zIndex = "0";
+
+  const duration = 1800 + Math.random() * 2500;
+
+  star.animate(
+    [
+      {
+        opacity: 0,
+        transform: "scale(.3) rotate(0deg)"
+      },
+      {
+        opacity: 0.8,
+        transform: "scale(1.4) rotate(100deg)"
+      },
+      {
+        opacity: 0,
+        transform: "scale(.3) rotate(180deg)"
+      }
+    ],
+    {
+      duration: duration,
+      iterations: 2,
+      easing: "ease-in-out"
+    }
+  );
+
+  document.body.appendChild(star);
+
+  setTimeout(() => star.remove(), duration * 2);
+}
+
+setInterval(() => {
+
+  if (document.querySelectorAll(".random-star").length < 14) {
+    createStar();
   }
+
+}, 700);
+
+
+
+/* ==============================
+   CINEMATIC SECTION REVEAL
+============================== */
+
+const sections = document.querySelectorAll("section");
+
+sections.forEach(section => {
+
+  section.style.opacity = "0";
+  section.style.transform = "translateY(35px)";
+  section.style.transition =
+    "opacity 1s ease, transform 1s ease";
+
 });
 
-yesBtn.addEventListener("click",openFireworks);
 
-document.getElementById("yesAgain").addEventListener("click",openFireworks);
+const sectionObserver = new IntersectionObserver(
+  entries => {
 
-function openFireworks(){
-  document.getElementById("question").style.display="none";
+    entries.forEach(entry => {
 
-  const fire=document.getElementById("fireworkSlide");
-  fire.style.display="flex";
+      if (entry.isIntersecting) {
 
-  window.scrollTo({
-    top:fire.offsetTop,
-    behavior:"smooth"
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+
+      }
+
+    });
+
+  },
+  {
+    threshold: 0.12
+  }
+);
+
+sections.forEach(section => {
+  sectionObserver.observe(section);
+});
+
+
+/* Opening section immediately visible */
+
+if (sections[0]) {
+  sections[0].style.opacity = "1";
+  sections[0].style.transform = "translateY(0)";
+}
+
+
+
+/* ==============================
+   PARALLAX STICKERS
+============================== */
+
+document.addEventListener("scroll", () => {
+
+  const scrollY = window.scrollY;
+
+  document.querySelectorAll(".sticker").forEach((sticker, index) => {
+
+    const movement =
+      Math.sin(scrollY * 0.008 + index) * 8;
+
+    sticker.style.translate =
+      `0 ${movement}px`;
+
   });
 
+});
+
+
+
+/* ==============================
+   BUTTON SPARKLE BURST
+============================== */
+
+function createButtonSparkles(x, y) {
+
+  for (let i = 0; i < 14; i++) {
+
+    const sparkle = document.createElement("span");
+
+    sparkle.innerHTML =
+      Math.random() > 0.5 ? "✨" : "♡";
+
+    sparkle.style.position = "fixed";
+
+    sparkle.style.left = x + "px";
+    sparkle.style.top = y + "px";
+
+    sparkle.style.fontSize =
+      11 + Math.random() * 15 + "px";
+
+    sparkle.style.pointerEvents = "none";
+
+    sparkle.style.zIndex = "999";
+
+    const moveX =
+      Math.random() * 180 - 90;
+
+    const moveY =
+      Math.random() * 180 - 90;
+
+    sparkle.animate(
+      [
+        {
+          transform: "translate(0,0) scale(1)",
+          opacity: 1
+        },
+        {
+          transform:
+            `translate(${moveX}px,${moveY}px) scale(.2)`,
+          opacity: 0
+        }
+      ],
+      {
+        duration: 850,
+        easing: "ease-out"
+      }
+    );
+
+    document.body.appendChild(sparkle);
+
+    setTimeout(() => sparkle.remove(), 900);
+  }
+}
+
+
+document.addEventListener("click", function(e) {
+
+  if (
+    e.target.tagName === "BUTTON" ||
+    e.target.classList.contains("start")
+  ) {
+
+    createButtonSparkles(
+      e.clientX,
+      e.clientY
+    );
+
+  }
+
+});
+
+
+
+/* ==============================
+   SOFT CURSOR / TOUCH GLOW
+============================== */
+
+const glow = document.createElement("div");
+
+glow.style.position = "fixed";
+glow.style.width = "280px";
+glow.style.height = "280px";
+
+glow.style.borderRadius = "50%";
+
+glow.style.background =
+  "radial-gradient(circle, rgba(255,70,130,.10), transparent 70%)";
+
+glow.style.pointerEvents = "none";
+
+glow.style.transform =
+  "translate(-50%, -50%)";
+
+glow.style.zIndex = "0";
+
+glow.style.left = "50%";
+glow.style.top = "50%";
+
+glow.style.transition =
+  "left .2s ease, top .2s ease";
+
+document.body.appendChild(glow);
+
+
+document.addEventListener("mousemove", e => {
+
+  glow.style.left = e.clientX + "px";
+  glow.style.top = e.clientY + "px";
+
+});
+
+
+document.addEventListener("touchmove", e => {
+
+  if (e.touches[0]) {
+
+    glow.style.left =
+      e.touches[0].clientX + "px";
+
+    glow.style.top =
+      e.touches[0].clientY + "px";
+
+  }
+
+}, { passive: true });
+
+
+
+/* ==============================
+   TITLE DREAMY GLOW
+============================== */
+
+document.querySelectorAll("h1, h2").forEach(title => {
+
+  title.animate(
+    [
+      {
+        textShadow:
+          "0 0 15px rgba(255,30,100,.3)"
+      },
+      {
+        textShadow:
+          "0 0 35px rgba(255,30,100,.7), 0 0 60px rgba(80,130,255,.35)"
+      }
+    ],
+    {
+      duration: 2800,
+      direction: "alternate",
+      iterations: Infinity,
+      easing: "ease-in-out"
+    }
+  );
+
+});
+
+
+
+/* =========================================
+   QUESTION
+========================================= */
+
+const yesBtn =
+  document.getElementById("yesBtn");
+
+const noBtn =
+  document.getElementById("noBtn");
+
+const answer =
+  document.getElementById("answerMessage");
+
+const after =
+  document.getElementById("afterAnswer");
+
+let noClicks = 0;
+
+
+noBtn.addEventListener("click", function() {
+
+  noClicks++;
+
+  if (noClicks === 1) {
+
+    answer.innerHTML =
+      "Think again 🥺💗";
+
+    after.style.display = "block";
+
+  }
+
+  else if (noClicks === 2) {
+
+    answer.innerHTML =
+      "I don't believe you 😭🥺";
+
+    after.style.display = "block";
+
+  }
+
+  else if (noClicks === 3) {
+
+    answer.innerHTML =
+      "Come onnn Faye 🥺❤️";
+
+    after.style.display = "block";
+
+  }
+
+  else {
+
+    answer.innerHTML =
+      "The YES button is literally waiting for you 😭❤️";
+
+    after.style.display = "block";
+
+  }
+
+});
+
+
+yesBtn.addEventListener(
+  "click",
+  openFireworks
+);
+
+
+document
+  .getElementById("yesAgain")
+  .addEventListener(
+    "click",
+    openFireworks
+  );
+
+
+
+function openFireworks() {
+
+  const question =
+    document.getElementById("question");
+
+  const fire =
+    document.getElementById("fireworkSlide");
+
+
+  question.style.display = "none";
+
+  fire.style.display = "flex";
+
+  fire.style.opacity = "1";
+  fire.style.transform = "translateY(0)";
+
+
+  setTimeout(() => {
+
+    fire.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  }, 100);
+
+
   startFireworks();
-}
-
-
-/* FIREWORKS */
-
-let fireworksStarted=false;
-
-function startFireworks(){
-
-if(fireworksStarted)return;
-fireworksStarted=true;
-
-const canvas=document.getElementById("fireworks");
-const ctx=canvas.getContext("2d");
-
-let W,H;
-let rockets=[];
-let particles=[];
-
-function resize(){
- W=canvas.width=window.innerWidth*devicePixelRatio;
- H=canvas.height=window.innerHeight*devicePixelRatio;
- canvas.style.width=window.innerWidth+"px";
- canvas.style.height=window.innerHeight+"px";
- ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
- W=window.innerWidth;
- H=window.innerHeight;
-}
-
-resize();
-window.addEventListener("resize",resize);
-
-const colors=[
-"#ff174f","#397cff","#ffffff",
-"#ff4f9a","#6da0ff","#ffd4e5"
-];
-
-function launch(){
- rockets.push({
-   x:Math.random()*W,
-   y:H+20,
-   targetY:H*(.08+Math.random()*.5),
-   speed:8+Math.random()*6,
-   color:colors[Math.floor(Math.random()*colors.length)]
- });
-}
-
-function explode(x,y,color){
-
- for(let i=0;i<180;i++){
-
-   const angle=Math.random()*Math.PI*2;
-   const speed=Math.random()*8+1;
-
-   particles.push({
-     x,y,
-     vx:Math.cos(angle)*speed,
-     vy:Math.sin(angle)*speed,
-     alpha:1,
-     size:Math.random()*2.5+1,
-     color
-   });
- }
-
-}
-
-function animate(){
-
- ctx.fillStyle="rgba(3,4,11,.16)";
- ctx.fillRect(0,0,W,H);
-
- rockets.forEach((r,i)=>{
-
-   r.y-=r.speed;
-
-   ctx.beginPath();
-   ctx.moveTo(r.x,r.y+25);
-   ctx.lineTo(r.x,r.y);
-
-   ctx.strokeStyle=r.color;
-   ctx.lineWidth=2;
-   ctx.shadowBlur=18;
-   ctx.shadowColor=r.color;
-   ctx.stroke();
-
-   if(r.y<=r.targetY){
-     explode(r.x,r.y,r.color);
-     rockets.splice(i,1);
-   }
- });
-
- particles.forEach((p,i)=>{
-
-   p.x+=p.vx;
-   p.y+=p.vy;
-   p.vx*=.985;
-   p.vy*=.985;
-   p.vy+=.04;
-   p.alpha-=.008;
-
-   ctx.beginPath();
-   ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
-
-   ctx.fillStyle=p.color;
-   ctx.globalAlpha=Math.max(p.alpha,0);
-   ctx.shadowBlur=16;
-   ctx.shadowColor=p.color;
-   ctx.fill();
-   ctx.globalAlpha=1;
-
-   if(p.alpha<=0)particles.splice(i,1);
- });
-
- requestAnimationFrame(animate);
-}
-
-for(let i=0;i<22;i++){
- setTimeout(launch,i*180);
-}
-
-setInterval(()=>{
- launch();
- if(Math.random()>.5)launch();
-},500);
-
-animate();
 
 }
 
 
-/* LETTER */
 
-document.getElementById("continueBtn").addEventListener("click",function(){
+/* =========================================
+   FIREWORKS
+========================================= */
 
- document.getElementById("fireworkSlide").style.display="none";
-
- const letter=document.getElementById("letterSlide");
- letter.style.display="flex";
-
- window.scrollTo({
-  top:letter.offsetTop,
-  behavior:"smooth"
- });
-
-});
+let fireworksStarted = false;
 
 
-/* FINAL */
+function startFireworks() {
 
-document.getElementById("finalBtn").addEventListener("click",function(){
+  if (fireworksStarted) return;
 
- document.getElementById("letterSlide").style.display="none";
+  fireworksStarted = true;
 
- const final=document.getElementById("finalSlide");
- final.style.display="flex";
 
- window.scrollTo({
-  top:final.offsetTop,
-  behavior:"smooth"
- });
+  const canvas =
+    document.getElementById("fireworks");
 
- for(let i=0;i<120;i++){
+  const ctx =
+    canvas.getContext("2d");
 
-  const p=document.createElement("div");
-  p.className="petal";
 
-  p.textContent=Math.random()>.2?"🌸":"✦";
-  p.style.left=Math.random()*100+"%";
-  p.style.fontSize=(18+Math.random()*25)+"px";
-  p.style.animationDuration=(4+Math.random()*6)+"s";
-  p.style.animationDelay=Math.random()*4+"s";
+  let W, H;
 
-  final.appendChild(p);
- }
+  let rockets = [];
 
-});
+  let particles = [];
+
+
+  function resize() {
+
+    const ratio =
+      window.devicePixelRatio || 1;
+
+    W = window.innerWidth;
+
+    H = window.innerHeight;
+
+
+    canvas.width =
+      W * ratio;
+
+    canvas.height =
+      H * ratio;
+
+
+    canvas.style.width =
+      W + "px";
+
+    canvas.style.height =
+      H + "px";
+
+
+    ctx.setTransform(
+      ratio,
+      0,
+      0,
+      ratio,
+      0,
+      0
+    );
+
+  }
+
+
+  resize();
+
+  window.addEventListener(
+    "resize",
+    resize
+  );
+
+
+  const colors = [
+
+    "#ff174f",
+    "#397cff",
+    "#ffffff",
+    "#ff4f9a",
+    "#6da0ff",
+    "#ffd4e5"
+
+  ];
+
+
+
+  function launch() {
+
+    rockets.push({
+
+      x:
+        Math.random() * W,
+
+      y:
+        H + 30,
+
+      targetY:
+        H * (
+          .1 +
+          Math.random() * .45
+        ),
+
+      speed:
+        7 +
+        Math.random() * 6,
+
+      color:
+        colors[
+          Math.floor(
+            Math.random() *
+            colors.length
+          )
+        ]
+
+    });
+
+  }
+
+
+
+  function explode(
+    x,
+    y,
+    color
+  ) {
+
+    for (
+      let i = 0;
+      i < 130;
+      i++
+    ) {
+
+      const angle =
+        Math.random() *
+        Math.PI * 2;
+
+      const speed =
+        Math.random() * 7 + 1;
+
+
+      particles.push({
+
+        x,
+        y,
+
+        vx:
+          Math.cos(angle) *
+          speed,
+
+        vy:
+          Math.sin(angle) *
+          speed,
+
+        alpha: 1,
+
+        size:
+          Math.random() *
+          2.5 + 1,
+
+        color
+
+      });
+
+    }
+
+  }
+
+
+
+  function animate() {
+
+    ctx.fillStyle =
+      "rgba(3,4,11,.18)";
+
+    ctx.fillRect(
+      0,
+      0,
+      W,
+      H
+    );
+
+
+    rockets.forEach(
+      (r, i) => {
+
+        r.y -= r.speed;
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+          r.x,
+          r.y + 28
+        );
+
+        ctx.lineTo(
+          r.x,
+          r.y
+        );
+
+
+        ctx.strokeStyle =
+          r.color;
+
+        ctx.lineWidth = 2;
+
+        ctx.shadowBlur = 18;
+
+        ctx.shadowColor =
+          r.color;
+
+        ctx.stroke();
+
+
+        if (
+          r.y <= r.targetY
+        ) {
+
+          explode(
+            r.x,
+            r.y,
+            r.color
+          );
+
+          rockets.splice(
+            i,
+            1
+          );
+
+        }
+
+      }
+    );
+
+
+    particles.forEach(
+      (p, i) => {
+
+        p.x += p.vx;
+
+        p.y += p.vy;
+
+
+        p.vx *= .985;
+
+        p.vy *= .985;
+
+        p.vy += .04;
+
+
+        p.alpha -= .009;
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+          p.x,
+          p.y,
+          p.size,
+          0,
+          Math.PI * 2
+        );
+
+
+        ctx.fillStyle =
+          p.color;
+
+        ctx.globalAlpha =
+          Math.max(
+            p.alpha,
+            0
+          );
+
+
+        ctx.shadowBlur = 15;
+
+        ctx.shadowColor =
+          p.color;
+
+        ctx.fill();
+
+        ctx.globalAlpha = 1;
+
+
+        if (
+          p.alpha <= 0
+        ) {
+
+          particles.splice(
+            i,
+            1
+          );
+
+        }
+
+      }
+    );
+
+
+    requestAnimationFrame(
+      animate
+    );
+
+  }
+
+
+  for (
+    let i = 0;
+    i < 18;
+    i++
+  ) {
+
+    setTimeout(
+      launch,
+      i * 220
+    );
+
+  }
+
+
+  setInterval(() => {
+
+    launch();
+
+    if (
+      Math.random() > .5
+    ) {
+
+      launch();
+
+    }
+
+  }, 650);
+
+
+  animate();
+
+}
+
+
+
+/* =========================================
+   CONTINUE → LETTER
+========================================= */
+
+document
+  .getElementById(
+    "continueBtn"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      const fire =
+        document.getElementById(
+          "fireworkSlide"
+        );
+
+
+      const letter =
+        document.getElementById(
+          "letterSlide"
+        );
+
+
+      fire.style.display =
+        "none";
+
+
+      letter.style.display =
+        "flex";
+
+
+      letter.style.opacity =
+        "1";
+
+
+      letter.style.transform =
+        "translateY(0)";
+
+
+      setTimeout(() => {
+
+        letter.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }, 100);
+
+    }
+  );
+
+
+
+/* =========================================
+   FINAL — FLOWERS + SPARKLES
+========================================= */
+
+document
+  .getElementById(
+    "finalBtn"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      const letter =
+        document.getElementById(
+          "letterSlide"
+        );
+
+
+      const final =
+        document.getElementById(
+          "finalSlide"
+        );
+
+
+      letter.style.display =
+        "none";
+
+
+      final.style.display =
+        "flex";
+
+
+      final.style.opacity =
+        "1";
+
+
+      final.style.transform =
+        "translateY(0)";
+
+
+      setTimeout(() => {
+
+        final.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+      }, 100);
+
+
+
+      /* Falling flowers */
+
+      for (
+        let i = 0;
+        i < 90;
+        i++
+      ) {
+
+        const petal =
+          document.createElement(
+            "div"
+          );
+
+
+        petal.className =
+          "petal";
+
+
+        const decorations = [
+          "🌸",
+          "🌹",
+          "💗",
+          "✦",
+          "🦋"
+        ];
+
+
+        petal.textContent =
+          decorations[
+            Math.floor(
+              Math.random() *
+              decorations.length
+            )
+          ];
+
+
+        petal.style.left =
+          Math.random() *
+          100 + "%";
+
+
+        petal.style.fontSize =
+          (
+            15 +
+            Math.random() * 25
+          ) + "px";
+
+
+        petal.style.animationDuration =
+          (
+            5 +
+            Math.random() * 7
+          ) + "s";
+
+
+        petal.style.animationDelay =
+          Math.random() *
+          4 + "s";
+
+
+        final.appendChild(
+          petal
+        );
+
+      }
+
+    }
+  );
+
 </script>
-
-</body>
-</html>
