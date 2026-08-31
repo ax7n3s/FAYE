@@ -1,490 +1,935 @@
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Faye ♡</title>
 
-html{
-  scroll-behavior:smooth;
-}
-
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   background:#03040b;
   color:white;
-  font-family:Georgia,serif;
   overflow-x:hidden;
+  font-family:Georgia,serif;
 }
 
-.bg{
+body:before{
+  content:"";
   position:fixed;
   inset:0;
   z-index:-10;
   background:
-    radial-gradient(circle at 5% 20%,rgba(255,0,75,.22),transparent 30%),
-    radial-gradient(circle at 95% 30%,rgba(35,90,255,.22),transparent 32%),
-    radial-gradient(circle at 50% 90%,rgba(255,0,100,.12),transparent 35%),
-    linear-gradient(135deg,#09000e,#020815,#09000c);
+    radial-gradient(circle at 0% 20%,rgba(255,0,70,.25),transparent 35%),
+    radial-gradient(circle at 100% 70%,rgba(40,100,255,.25),transparent 38%),
+    linear-gradient(135deg,#08000d,#020714,#100008);
 }
 
 /* NEON */
-
 .neon{
   position:fixed;
   top:0;
   bottom:0;
-  width:2px;
+  width:3px;
   z-index:50;
   pointer-events:none;
 }
-
-.neon-left{
-  left:9px;
+.neon.left{
+  left:8px;
   background:linear-gradient(transparent,#ff174f,transparent);
-  box-shadow:
-    0 0 10px #ff174f,
-    0 0 30px #ff174f;
+  box-shadow:0 0 15px #ff174f,0 0 40px #ff174f;
 }
-
-.neon-right{
-  right:9px;
+.neon.right{
+  right:8px;
   background:linear-gradient(transparent,#397cff,transparent);
-  box-shadow:
-    0 0 10px #397cff,
-    0 0 30px #397cff;
+  box-shadow:0 0 15px #397cff,0 0 40px #397cff;
 }
 
-/* PAGE */
-
-.page{
-  min-height:100vh;
-  padding:60px 18px;
+/* SECTIONS — 9:16 FEEL */
+section{
+  min-height:100svh;
+  padding:50px 20px;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   position:relative;
   overflow:hidden;
-}
-
-.content{
-  width:100%;
-  max-width:760px;
   text-align:center;
+}
+
+.box{
+  width:100%;
+  max-width:620px;
   position:relative;
-  z-index:5;
+  z-index:3;
 }
 
-.opening{
-  min-height:100vh;
-}
-
-.eyebrow{
+.label{
   font-family:Arial,sans-serif;
   font-size:10px;
   letter-spacing:5px;
-  opacity:.6;
+  opacity:.55;
   margin-bottom:15px;
 }
 
 h1{
-  font-size:clamp(65px,16vw,120px);
+  font-size:clamp(62px,17vw,110px);
   font-weight:400;
   letter-spacing:7px;
-  text-shadow:
-    0 0 15px #ff174f,
-    0 0 45px rgba(50,100,255,.6);
-}
-
-h1 span{
-  color:#ff7194;
 }
 
 h2{
-  font-size:clamp(35px,8vw,62px);
+  font-size:clamp(34px,9vw,58px);
   font-weight:400;
   line-height:1.1;
-  margin-bottom:20px;
-  text-shadow:
-    0 0 12px rgba(255,255,255,.4),
-    0 0 25px rgba(255,20,80,.4),
-    0 0 35px rgba(40,100,255,.3);
-}
-
-h3{
-  font-size:23px;
-  font-weight:400;
-  margin-bottom:14px;
+  margin-bottom:22px;
+  text-shadow:0 0 20px rgba(255,30,90,.4),
+              0 0 35px rgba(50,110,255,.3);
 }
 
 p{
-  font-size:16px;
-  line-height:1.8;
+  font-size:15px;
+  line-height:1.75;
   color:rgba(255,255,255,.88);
-  margin:12px auto;
+  margin:14px auto;
+  max-width:600px;
 }
 
-.small-text{
-  font-size:13px;
-  opacity:.65;
-  max-width:520px;
-}
-
-.glow-line{
+.line{
   width:100px;
   height:1px;
-  margin:25px auto;
+  margin:20px auto;
   background:linear-gradient(90deg,#ff174f,#fff,#397cff);
-  box-shadow:
-    0 0 12px #ff174f,
-    0 0 15px #397cff;
+  box-shadow:0 0 10px #ff174f,0 0 15px #397cff;
 }
 
-.main-btn,
-.question-buttons button{
-  border:none;
-  color:white;
-  cursor:pointer;
-  border-radius:50px;
+/* STICKERS */
+.sticker{
+  position:absolute;
+  font-size:32px;
+  pointer-events:none;
+  z-index:2;
+  filter:drop-shadow(0 0 10px rgba(255,255,255,.3));
+  animation:float 4s ease-in-out infinite;
+}
+.s1{left:5%;top:7%}
+.s2{right:5%;top:10%;animation-delay:1s}
+.s3{left:6%;bottom:8%;animation-delay:2s}
+.s4{right:6%;bottom:7%;animation-delay:3s}
+
+@keyframes float{
+  50%{transform:translateY(-18px) rotate(8deg)}
+}
+
+/* EXTRA DECORATION */
+.spark{
+  position:absolute;
+  opacity:.5;
+  animation:pulse 2s infinite alternate;
+}
+@keyframes pulse{
+  to{transform:scale(1.5);opacity:1}
+}
+
+/* BUTTON */
+button,.start{
+  position:relative;
+  z-index:20;
+  display:inline-block;
+  margin-top:18px;
   padding:15px 28px;
-  margin-top:20px;
+  border-radius:50px;
+  border:1px solid rgba(255,255,255,.4);
+  background:rgba(255,255,255,.08);
+  color:white;
+  text-decoration:none;
   font-family:Arial,sans-serif;
   font-size:11px;
   letter-spacing:3px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.35);
-  box-shadow:
-    0 0 18px rgba(255,20,80,.2),
-    0 0 25px rgba(40,100,255,.15);
-  transition:.3s;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
 }
 
-.main-btn:hover,
-.question-buttons button:hover{
-  transform:translateY(-3px) scale(1.04);
-  background:white;
-  color:black;
+button:active,.start:active{
+  transform:scale(.96);
 }
 
-.decor,
-.bottom-decor,
-.mini-decor,
-.question-decor,
-.final-decor{
-  font-size:25px;
-  letter-spacing:8px;
-  margin:30px 0;
-  animation:floaty 4s ease-in-out infinite;
-}
-
-.big{
-  font-size:30px;
-}
-
-@keyframes floaty{
-  50%{
-    transform:translateY(-8px);
-  }
-}
-
-/* STORY */
-
-.story-page{
-  padding-top:90px;
-  padding-bottom:90px;
-}
-
-.story-card{
-  margin:30px 0;
-  padding:28px 24px;
-  border-radius:25px;
-  background:linear-gradient(
-    135deg,
-    rgba(255,255,255,.07),
-    rgba(255,255,255,.025)
-  );
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow:
-    inset 0 0 25px rgba(255,255,255,.02),
-    0 0 35px rgba(255,20,80,.06),
-    0 0 35px rgba(40,100,255,.05);
-}
-
-.story-card p{
-  text-align:left;
-}
-
-.story-icon{
-  font-size:32px;
-  margin-bottom:10px;
-}
-
-.end-story{
-  padding:30px;
-  margin-top:45px;
-  font-size:17px;
-  line-height:1.8;
-  border-radius:25px;
-  background:rgba(255,255,255,.04);
+/* BLACK ONE MORE THING */
+.black-btn{
+  background:#050505!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.5);
 }
 
 /* TIMELINE */
-
 .timeline{
-  max-width:560px;
-  margin:35px auto;
-  text-align:left;
+  max-width:500px;
+  margin:25px auto;
 }
-
-.timeline-item{
-  display:flex;
-  align-items:center;
-  gap:20px;
-  margin:20px 0;
-  padding:20px;
-  border-radius:20px;
-  background:rgba(255,255,255,.05);
-  border-left:2px solid #ff174f;
-  box-shadow:0 0 20px rgba(50,100,255,.08);
-}
-
-.timeline-item span{
-  font-size:30px;
-}
-
-.timeline-item b{
-  display:block;
-  font-size:20px;
-}
-
-.timeline-item small{
-  display:block;
-  margin-top:5px;
-  opacity:.65;
+.time{
+  padding:18px;
+  margin:12px 0;
+  border-radius:18px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 0 20px rgba(255,30,80,.08);
 }
 
 /* PHOTOS */
-
-.photo-grid{
+.memories-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  margin-top:30px;
-}
-
-.memory-photo{
-  height:310px;
-  border-radius:20px;
-  overflow:hidden;
-  background:#111;
-  border:1px solid rgba(255,255,255,.16);
-  box-shadow:
-    0 0 20px rgba(255,20,80,.12),
-    0 0 20px rgba(40,100,255,.1);
-}
-
-.memory-photo img{
+  gap:10px;
   width:100%;
-  height:100%;
+}
+
+.memories-grid img{
+  width:100%;
+  aspect-ratio:9/16;
   object-fit:cover;
   display:block;
-  transition:.5s;
-}
-
-.memory-photo:hover img{
-  transform:scale(1.06);
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:
+    0 0 20px rgba(255,23,79,.2),
+    0 0 20px rgba(57,124,255,.15);
 }
 
 /* QUESTION */
-
-.question-content{
-  min-height:80vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
+#answerMessage{
+  min-height:35px;
+  margin-top:20px;
+  font-size:18px;
 }
 
-.couple{
-  font-size:50px;
-  margin:15px;
-  filter:drop-shadow(0 0 15px rgba(255,255,255,.4));
-}
-
-.question-buttons{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
-.yes-btn{
-  background:rgba(255,30,90,.22)!important;
-}
-
-.no-btn{
-  background:rgba(40,100,255,.18)!important;
-}
-
-/* FIREWORKS */
-
-.fireworks-page{
+#afterAnswer{
   display:none;
-  min-height:100vh;
 }
 
-#fireworksCanvas{
+/* FIREWORK SECTION */
+#fireworkSlide{
+  display:none;
+  min-height:100svh;
+  position:relative;
+}
+
+#fireworks{
   position:absolute;
   inset:0;
   width:100%;
   height:100%;
+  z-index:1;
 }
 
-.fireworks-content{
+.fire-content{
   position:relative;
-  z-index:5;
-  max-width:700px;
-  text-align:center;
-}
-
-.future-text{
-  margin:28px auto;
-  padding:20px;
-  line-height:1.9;
-  border-radius:20px;
-  background:rgba(255,255,255,.06);
+  z-index:3;
 }
 
 /* LETTER */
-
-.letter-page{
-  display:none;
-}
-
+#letterSlide{display:none}
 .letter{
-  background:rgba(255,250,248,.96);
-  color:#281f25;
+  background:rgba(255,250,247,.98);
+  color:#2c2027;
+  padding:25px 20px;
+  border-radius:22px;
   text-align:left;
-  padding:28px;
-  border-radius:25px;
-  box-shadow:
-    0 15px 45px rgba(0,0,0,.4),
-    0 0 30px rgba(255,20,80,.15);
+  max-height:72svh;
+  overflow-y:auto;
+  box-shadow:0 0 35px rgba(255,255,255,.15);
 }
 
 .letter h3{
   text-align:center;
-  color:#281f25;
+  font-size:25px;
+  font-weight:400;
+  margin-bottom:18px;
 }
-
 .letter p{
-  color:#30262c;
-  font-size:15px;
-  line-height:1.75;
-}
-
-.quote{
-  text-align:center;
-  font-style:italic;
-  margin-top:25px!important;
+  color:#30242a;
+  font-size:14px;
+  line-height:1.7;
 }
 
 /* FINAL */
-
-.final-page{
-  display:none;
-  min-height:100vh;
+#finalSlide{display:none}
+.petal{
+  position:absolute;
+  top:-60px;
+  z-index:1;
+  pointer-events:none;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  from{transform:translateY(-60px) rotate(0deg)}
+  to{transform:translateY(115vh) rotate(720deg)}
 }
 
 .final-content{
   position:relative;
-  z-index:5;
+  z-index:4;
 }
 
-.final-small{
-  margin-top:30px;
-  font-size:18px;
+@media(max-width:500px){
+  section{padding:45px 17px}
+  p{font-size:14px;line-height:1.68}
+  .sticker{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="neon left"></div>
+<div class="neon right"></div>
+
+<!-- OPENING -->
+<section>
+
+<span class="sticker s1">🐼</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">🎀</span>
+<span class="sticker s4">🦋</span>
+
+<div class="box">
+<div class="label">MADE FOR YOU</div>
+<h1>FAYE ♡</h1>
+<div class="line"></div>
+<p>Hey Faye… I made something for you. 🥹❤️</p>
+<p>Just a little place where some of our memories can stay together. ✨</p>
+<a class="start" href="#october">START ✨</a>
+</div>
+
+</section>
+
+<!-- STORY -->
+<section id="october">
+<span class="sticker s1">💌</span>
+<span class="sticker s2">🌸</span>
+<span class="sticker s3">✨</span>
+
+<div class="box">
+<div class="label">OCTOBER</div>
+<h2>Where Everything Unexpectedly Began</h2>
+
+<p>
+Back in October, when I opened my other account and saw your ID, I sent you a text just for fun. You told me you had changed and that's how we became friends. You always used to talk about death and said you wanted to die. I told you I'll come to bury you and you replied that I should have some rights for that too. Then you said you would die and I told you even if you die I still want you. After that I fell for you deeply, very deeply.
+</p>
+
+<p>
+It's honestly crazy how one random message could slowly become something I would remember this much.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">🥺</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">🫶🏻</span>
+<span class="sticker s4">✨</span>
+
+<div class="box">
+<div class="label">THE WAY WE BECAME</div>
+<h2>Your Efforts Meant More Than You Know</h2>
+
+<p>
+At one time you used to love me a lot too. I remember when you didn't have a phone you would somehow find a way to message me at random times. We never used to ignore each other and we always listened to each other.
+</p>
+
+<p>
+Your efforts at that time, trust me, that's one of the biggest things that made me fall even more for you. It wasn't something huge or complicated. It was simply the fact that you still found a way to talk to me.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">🇵🇰</span>
+<span class="sticker s2">🌙</span>
+<span class="sticker s3">📱</span>
+<span class="sticker s4">💗</span>
+
+<div class="box">
+<div class="label">NOVEMBER</div>
+<h2>Those Nights That Reached 6 AM</h2>
+
+<p>
+When I went to Pakistan in November we would talk until 6 AM and send each other reels. Life was so happy back then honestly. We could keep talking for hours and suddenly realise how late it had become.
+</p>
+
+<p>
+After that we kept getting closer but at the same time we drifted apart too. You would get upset and I would keep trying to make it up to you over and over again. But those nights, those reels and those conversations are still some of the memories that stay with me.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">📱</span>
+<span class="sticker s2">🧸</span>
+<span class="sticker s3">💬</span>
+<span class="sticker s4">🌙</span>
+
+<div class="box">
+<div class="label">OUR CALLS</div>
+<h2>From Messages To Looking At Each Other</h2>
+
+<p>
+We used to call each other too. When I woke up I would see your message and it would be around 12 in the morning. Then after a while you would call me and we would talk. Then we would text and at night we would video call and just keep looking at each other.
+</p>
+
+<p>
+We used to watch reels together and sometimes you would even fall asleep on the call. Those simple calls weren't always about doing something special. Sometimes it was just you being there, and somehow that was enough.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">🥺</span>
+<span class="sticker s2">💧</span>
+<span class="sticker s3">🫶🏻</span>
+<span class="sticker s4">❤️</span>
+
+<div class="box">
+<div class="label">THAT ONE CALL</div>
+<h2>When We Both Couldn't Stop Crying</h2>
+
+<p>
+And once things got so emotional that we were both crying on the call. I was asking you to stay with me and you were in the kitchen at that time because your tablet didn't have any charge.
+</p>
+
+<p>
+Some moments aren't easy to explain properly. They stay in your mind because of how real everything felt at that moment.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">😔</span>
+<span class="sticker s2">💭</span>
+<span class="sticker s3">🚬</span>
+<span class="sticker s4">❤️</span>
+
+<div class="box">
+<div class="label">THINGS WE WENT THROUGH</div>
+<h2>I Kept Trying To Make Things Right</h2>
+
+<p>
+There was one time I fell asleep without making up to you and on top of that you saw my ID which had some smoking stories on it so you got even more mad. Then I spent all my time trying to make things right.
+</p>
+
+<p>
+Things went wrong and right between us many times but now things have gotten really messed up. I tried so much and I am still trying but now it's up to you.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">🎁</span>
+<span class="sticker s2">🫶🏻</span>
+<span class="sticker s3">💗</span>
+<span class="sticker s4">✨</span>
+
+<div class="box">
+<div class="label">OUR MEETUP</div>
+<h2>Even Three Minutes Became A Memory</h2>
+
+<p>
+We met up once too and we had such a great time together. Even though our meetup was only around three minutes, it still became one of those memories that matters to me.
+</p>
+
+<p>
+We exchanged gifts and for that small moment we were actually there together instead of behind a screen.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">🤞🏻</span>
+<span class="sticker s2">❤️</span>
+<span class="sticker s3">🫶🏻</span>
+<span class="sticker s4">✨</span>
+
+<div class="box">
+<div class="label">OUR PROMISES</div>
+<h2>I'm Still Trying</h2>
+
+<p>
+We made promises to each other and even if you break yours I will still keep mine because I truly want you.
+</p>
+
+<p>
+If you become mine I will give you all the happiness, do whatever you say and act just the way you want. The rest is up to you, but I will still try my best and keep trying.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">☀️</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">💬</span>
+<span class="sticker s4">✨</span>
+
+<div class="box">
+<div class="label">YOU CHANGED MY DAYS</div>
+<h2>You Could Change My Whole Mood</h2>
+
+<p>
+Simply talking to you made my day and I loved talking to you. When I'm with you and talking to you, you make my day better just by talking to me.
+</p>
+
+<p>
+Like bro, you can change my whole mood. You used to say that I talk too much but at one point you used to do the same thing. We used to talk so much.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">👀</span>
+<span class="sticker s2">🦋</span>
+<span class="sticker s3">💗</span>
+<span class="sticker s4">🌸</span>
+
+<div class="box">
+<div class="label">THE LITTLE THINGS</div>
+<h2>I Remember More Than You Think</h2>
+
+<p>
+Just look at what happened in one year but I am not letting go though the rest is up to you. To be honest you look so pretty. Your eyes and that mole on your face when I saw it, oh God, mashaAllah.
+</p>
+
+<p>
+And that day after the exam we were both staring at each other. I was shy but you were with your friends laughing. Actually I love your laugh too. There are so many other things that can't just be said but I remember everything.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">🇵🇰</span>
+<span class="sticker s2">🌙</span>
+<span class="sticker s3">📡</span>
+<span class="sticker s4">💭</span>
+
+<div class="box">
+<div class="label">JULY</div>
+<h2>When Everything Became Quiet</h2>
+
+<p>
+When you went to Pakistan in July we didn't have any contact. I know before you went to Pakistan everything had gotten better between us but after you went there idk maybe something bad happened with you.
+</p>
+
+<p>
+We didn't contact each other because of your network problem. Everything suddenly became quiet.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">💭</span>
+<span class="sticker s2">🎬</span>
+<span class="sticker s3">📱</span>
+<span class="sticker s4">❤️</span>
+
+<div class="box">
+<div class="label">I STILL THOUGHT ABOUT YOU</div>
+<h2>You Were Somehow Everywhere</h2>
+
+<p>
+I would still wonder where you were going throughout the day. I used to think about you all the time. Even while watching reels I would think about you. While watching a movie I would think about you and even when I went outside somehow you were on my mind everywhere.
+</p>
+
+<p>
+I couldn't forget you.
+</p>
+</div>
+</section>
+
+<section>
+<span class="sticker s1">💌</span>
+<span class="sticker s2">🎧</span>
+<span class="sticker s3">🥺</span>
+<span class="sticker s4">💗</span>
+
+<div class="box">
+<div class="label">WHERE IS MY FAYEEE?</div>
+<h2>I Still Go Back To Our Messages</h2>
+
+<p>
+I still look at our messages sometimes listening to your old voice messages and damn I think, where is my Fayeee. My most favorite message was that 5 minute one if you remember.
+</p>
+
+<p>
+Some memories don't disappear just because time passes.
+</p>
+</div>
+</section>
+
+<!-- TIMELINE -->
+<section>
+<div class="box">
+<div class="label">OUR TIMELINE</div>
+<h2>How The Story Moved</h2>
+
+<div class="timeline">
+<div class="time">🗓️ <b>October</b><br>Where it started</div>
+<div class="time">🌙 <b>November</b><br>Pakistan and 6 AM talks</div>
+<div class="time">📱 <b>Calls</b><br>Reels, video calls and late nights</div>
+<div class="time">🫶🏻 <b>Meetup</b><br>Three minutes and gifts</div>
+<div class="time">🇵🇰 <b>July</b><br>Distance and silence</div>
+</div>
+</div>
+</section>
+
+<!-- EXACTLY 6 PHOTOS -->
+<section>
+<span class="sticker s1">💗</span>
+<span class="sticker s2">📸</span>
+<span class="sticker s3">🌸</span>
+<span class="sticker s4">✨</span>
+
+<div class="box">
+<div class="label">OUR MEMORIES</div>
+<h2>Six Little Pieces Of Our Story</h2>
+
+<div class="memories-grid">
+<img src="photo1.jpg" alt="Memory 1">
+<img src="photo2.jpg" alt="Memory 2">
+<img src="photo3.jpg" alt="Memory 3">
+<img src="photo4.jpg" alt="Memory 4">
+<img src="photo5.jpg" alt="Memory 5">
+<img src="photo6.jpg" alt="Memory 6">
+</div>
+
+</div>
+</section>
+
+<!-- QUESTION -->
+<section id="question">
+<span class="sticker s1">🐼</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">🎀</span>
+<span class="sticker s4">🦋</span>
+
+<div class="box">
+<div class="label">ONE LAST QUESTION</div>
+<h2>Do you love me, Faye? 🥺❤️</h2>
+
+<div style="font-size:48px;margin:20px">🧍🏼‍♂️💍🧍🏼‍♀️</div>
+
+<div>
+<button id="yesBtn">YES ❤️</button>
+<button id="noBtn">NO 🥺</button>
+</div>
+
+<div id="answerMessage"></div>
+
+<div id="afterAnswer">
+<button id="yesAgain">OKAY YES 🥺❤️</button>
+</div>
+</div>
+</section>
+
+<!-- FIREWORKS -->
+<section id="fireworkSlide">
+<canvas id="fireworks"></canvas>
+
+<div class="box fire-content">
+<div class="label">YAYYYY</div>
+<h2>YAY FAYE 🥺❤️</h2>
+
+<p><b>IK U DA BEST ✨</b></p>
+<p>THANK YOU FOR BEING A PART OF MY STORY 💗</p>
+<p>NOW SMILE, YOU DESERVE IT 🥹✨</p>
+
+<div style="font-size:50px;margin:25px">🧍🏼‍♂️💍🧍🏼‍♀️</div>
+
+<button id="continueBtn">CONTINUE 💌</button>
+</div>
+</section>
+
+<!-- LETTER -->
+<section id="letterSlide">
+<span class="sticker s1">💌</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">🌸</span>
+<span class="sticker s4">✨</span>
+
+<div class="box">
+<div class="label">FOR YOU</div>
+<h2>A Little Letter</h2>
+
+<div class="letter">
+<h3>For Fatema ♡</h3>
+
+<p>
+It’s okay, I will wait for you Fatema because you are my last. After you I don't even want to love anyone or even talk to anyone. Everything ends with you and it will always be you.
+</p>
+
+<p>
+To be honest, you look so pretty. Your eyes, that mole on your face, your smile, your laugh, your expressions and all those little things about you. MashaAllah, there are honestly so many things I remember.
+</p>
+
+<p>
+And even when you find flaws in yourself, I wish you could see yourself the way I see you. You don't need to be perfect. The things you worry about don't make you any less beautiful.
+</p>
+
+<p>
+I hope you liked the gifts. Take care of yourself and don't stress about the future. You can do it and you will.
+</p>
+
+<p>
+It's up to you now but I will still try my best or I will keep trying.
+</p>
+
+<p>
+I will wait at the edge of the forgotten road.
+</p>
+</div>
+
+<button id="finalBtn" class="black-btn">ONE MORE THING ✨</button>
+</div>
+</section>
+
+<!-- FINAL LILIES -->
+<section id="finalSlide">
+
+<div class="box final-content">
+<div class="label">ALWAYS</div>
+<h2>I LOVE YOU SO MUCH, FAYE 🥺❤️</h2>
+<div class="line"></div>
+
+<p>
+Some stories don't need perfect endings to mean something.
+</p>
+
+<p>
+Thank you for every conversation, every call, every reel, every smile and every little memory.
+</p>
+
+<p>
+Now smile, okay? 🥹✨
+</p>
+
+<div style="font-size:45px;margin-top:30px">💗 🌸 🦋 ✨ 🌸 💗</div>
+</div>
+
+</section>
+
+<script>
+/* QUESTION */
+
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const answer=document.getElementById("answerMessage");
+const after=document.getElementById("afterAnswer");
+
+let noClicks=0;
+
+noBtn.addEventListener("click",function(){
+  noClicks++;
+
+  if(noClicks===1){
+    answer.innerHTML="Think again 🥺💗";
+    after.style.display="block";
+  }else if(noClicks===2){
+    answer.innerHTML="I don't believe you 😭🥺";
+    after.style.display="block";
+  }else{
+    answer.innerHTML="Come onnn Faye 🥺❤️";
+    after.style.display="block";
+  }
+});
+
+yesBtn.addEventListener("click",openFireworks);
+
+document.getElementById("yesAgain").addEventListener("click",openFireworks);
+
+function openFireworks(){
+  document.getElementById("question").style.display="none";
+
+  const fire=document.getElementById("fireworkSlide");
+  fire.style.display="flex";
+
+  window.scrollTo({
+    top:fire.offsetTop,
+    behavior:"smooth"
+  });
+
+  startFireworks();
 }
 
-/* LILIES */
+/* FIREWORKS */
 
-.lily{
-  position:fixed;
-  top:-60px;
-  z-index:20;
-  pointer-events:none;
-  animation:fall linear forwards;
-  filter:
-    drop-shadow(0 0 8px white)
-    drop-shadow(0 0 15px rgba(255,20,80,.5));
+let fireworksStarted=false;
+
+function startFireworks(){
+
+if(fireworksStarted)return;
+fireworksStarted=true;
+
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+
+let W,H;
+let rockets=[];
+let particles=[];
+
+function resize(){
+ W=canvas.width=window.innerWidth*devicePixelRatio;
+ H=canvas.height=window.innerHeight*devicePixelRatio;
+ canvas.style.width=window.innerWidth+"px";
+ canvas.style.height=window.innerHeight+"px";
+ ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+ W=window.innerWidth;
+ H=window.innerHeight;
 }
 
-@keyframes fall{
-  from{
-    transform:translateY(-80px) rotate(0deg);
-    opacity:0;
-  }
+resize();
+window.addEventListener("resize",resize);
 
-  10%{
-    opacity:1;
-  }
+const colors=[
+"#ff174f","#397cff","#ffffff",
+"#ff4f9a","#6da0ff","#ffd4e5"
+];
 
-  to{
-    transform:translateY(115vh) rotate(720deg);
-    opacity:0;
-  }
+function launch(){
+ rockets.push({
+   x:Math.random()*W,
+   y:H+20,
+   targetY:H*(.08+Math.random()*.5),
+   speed:8+Math.random()*6,
+   color:colors[Math.floor(Math.random()*colors.length)]
+ });
 }
 
-/* FLYING DECOR */
+function explode(x,y,color){
 
-.flying{
-  position:fixed;
-  z-index:2;
-  pointer-events:none;
-  animation:flying 10s linear infinite;
-  opacity:.65;
-}
+ for(let i=0;i<180;i++){
 
-@keyframes flying{
-  0%{
-    transform:translateY(110vh) rotate(0deg);
-  }
+   const angle=Math.random()*Math.PI*2;
+   const speed=Math.random()*8+1;
 
-  100%{
-    transform:translateY(-20vh) rotate(360deg);
-  }
-}
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-  .page{
-    padding:60px 15px;
-  }
-
-  p{
-    font-size:15px;
-    line-height:1.75;
-  }
-
-  .story-card{
-    padding:25px 18px;
-  }
-
-  .photo-grid{
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-  }
-
-  .memory-photo{
-    height:250px;
-  }
-
-  .decor,
-  .bottom-decor,
-  .mini-decor,
-  .question-decor,
-  .final-decor{
-    font-size:20px;
-    letter-spacing:4px;
-  }
+   particles.push({
+     x,y,
+     vx:Math.cos(angle)*speed,
+     vy:Math.sin(angle)*speed,
+     alpha:1,
+     size:Math.random()*2.5+1,
+     color
+   });
+ }
 
 }
+
+function animate(){
+
+ ctx.fillStyle="rgba(3,4,11,.16)";
+ ctx.fillRect(0,0,W,H);
+
+ rockets.forEach((r,i)=>{
+
+   r.y-=r.speed;
+
+   ctx.beginPath();
+   ctx.moveTo(r.x,r.y+25);
+   ctx.lineTo(r.x,r.y);
+
+   ctx.strokeStyle=r.color;
+   ctx.lineWidth=2;
+   ctx.shadowBlur=18;
+   ctx.shadowColor=r.color;
+   ctx.stroke();
+
+   if(r.y<=r.targetY){
+     explode(r.x,r.y,r.color);
+     rockets.splice(i,1);
+   }
+ });
+
+ particles.forEach((p,i)=>{
+
+   p.x+=p.vx;
+   p.y+=p.vy;
+   p.vx*=.985;
+   p.vy*=.985;
+   p.vy+=.04;
+   p.alpha-=.008;
+
+   ctx.beginPath();
+   ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+
+   ctx.fillStyle=p.color;
+   ctx.globalAlpha=Math.max(p.alpha,0);
+   ctx.shadowBlur=16;
+   ctx.shadowColor=p.color;
+   ctx.fill();
+   ctx.globalAlpha=1;
+
+   if(p.alpha<=0)particles.splice(i,1);
+ });
+
+ requestAnimationFrame(animate);
+}
+
+for(let i=0;i<22;i++){
+ setTimeout(launch,i*180);
+}
+
+setInterval(()=>{
+ launch();
+ if(Math.random()>.5)launch();
+},500);
+
+animate();
+
+}
+
+/* LETTER */
+
+document.getElementById("continueBtn").addEventListener("click",function(){
+
+ document.getElementById("fireworkSlide").style.display="none";
+
+ const letter=document.getElementById("letterSlide");
+ letter.style.display="flex";
+
+ window.scrollTo({
+  top:letter.offsetTop,
+  behavior:"smooth"
+ });
+
+});
+
+/* FINAL */
+
+document.getElementById("finalBtn").addEventListener("click",function(){
+
+ document.getElementById("letterSlide").style.display="none";
+
+ const final=document.getElementById("finalSlide");
+ final.style.display="flex";
+
+ window.scrollTo({
+  top:final.offsetTop,
+  behavior:"smooth"
+ });
+
+ for(let i=0;i<120;i++){
+
+  const p=document.createElement("div");
+  p.className="petal";
+
+  p.textContent=Math.random()>.2?"🌸":"✦";
+  p.style.left=Math.random()*100+"%";
+  p.style.fontSize=(18+Math.random()*25)+"px";
+  p.style.animationDuration=(4+Math.random()*6)+"s";
+  p.style.animationDelay=Math.random()*4+"s";
+
+  final.appendChild(p);
+ }
+
+});
+</script>
+
+</body>
+</html>
