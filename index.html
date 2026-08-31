@@ -1,576 +1,958 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Faye ♡</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Faye ♡</title>
 
-  <link rel="stylesheet" href="style.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:#03040b;
+  color:white;
+  overflow-x:hidden;
+  font-family:Georgia,serif;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-10;
+  background:
+    radial-gradient(circle at 0% 20%,rgba(255,0,70,.25),transparent 35%),
+    radial-gradient(circle at 100% 70%,rgba(40,100,255,.25),transparent 38%),
+    linear-gradient(135deg,#08000d,#020714,#100008);
+}
+
+/* NEON */
+.neon{
+  position:fixed;
+  top:0;
+  bottom:0;
+  width:3px;
+  z-index:50;
+  pointer-events:none;
+}
+.neon.left{
+  left:8px;
+  background:linear-gradient(transparent,#ff174f,transparent);
+  box-shadow:0 0 15px #ff174f,0 0 40px #ff174f;
+}
+.neon.right{
+  right:8px;
+  background:linear-gradient(transparent,#397cff,transparent);
+  box-shadow:0 0 15px #397cff,0 0 40px #397cff;
+}
+
+/* SECTIONS — 9:16 FEEL */
+section{
+  min-height:100svh;
+  padding:50px 20px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+  text-align:center;
+}
+
+.box{
+  width:100%;
+  max-width:620px;
+  position:relative;
+  z-index:3;
+}
+
+.label{
+  font-family:Arial,sans-serif;
+  font-size:10px;
+  letter-spacing:5px;
+  opacity:.55;
+  margin-bottom:15px;
+}
+
+h1{
+  font-size:clamp(62px,17vw,110px);
+  font-weight:400;
+  letter-spacing:7px;
+}
+
+h2{
+  font-size:clamp(34px,9vw,58px);
+  font-weight:400;
+  line-height:1.1;
+  margin-bottom:22px;
+  text-shadow:0 0 20px rgba(255,30,90,.4),
+              0 0 35px rgba(50,110,255,.3);
+}
+
+p{
+  font-size:15px;
+  line-height:1.75;
+  color:rgba(255,255,255,.88);
+  margin:14px auto;
+  max-width:600px;
+}
+
+.line{
+  width:100px;
+  height:1px;
+  margin:20px auto;
+  background:linear-gradient(90deg,#ff174f,#fff,#397cff);
+  box-shadow:0 0 10px #ff174f,0 0 15px #397cff;
+}
+
+/* STICKERS */
+.sticker{
+  position:absolute;
+  font-size:32px;
+  pointer-events:none;
+  z-index:2;
+  filter:drop-shadow(0 0 10px rgba(255,255,255,.3));
+  animation:float 4s ease-in-out infinite;
+}
+.s1{left:5%;top:7%}
+.s2{right:5%;top:10%;animation-delay:1s}
+.s3{left:6%;bottom:8%;animation-delay:2s}
+.s4{right:6%;bottom:7%;animation-delay:3s}
+
+@keyframes float{
+  50%{transform:translateY(-18px) rotate(8deg)}
+}
+
+/* EXTRA DECORATION */
+.spark{
+  position:absolute;
+  opacity:.5;
+  animation:pulse 2s infinite alternate;
+}
+@keyframes pulse{
+  to{transform:scale(1.5);opacity:1}
+}
+
+/* BUTTON */
+button,.start{
+  position:relative;
+  z-index:20;
+  display:inline-block;
+  margin-top:18px;
+  padding:15px 28px;
+  border-radius:50px;
+  border:1px solid rgba(255,255,255,.4);
+  background:rgba(255,255,255,.08);
+  color:white;
+  text-decoration:none;
+  font-family:Arial,sans-serif;
+  font-size:11px;
+  letter-spacing:3px;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+button:active,.start:active{
+  transform:scale(.96);
+}
+
+/* BLACK ONE MORE THING */
+.black-btn{
+  background:#050505!important;
+  color:#fff!important;
+  border:1px solid rgba(255,255,255,.5);
+}
+
+/* TIMELINE */
+.timeline{
+  max-width:500px;
+  margin:25px auto;
+}
+.time{
+  padding:18px;
+  margin:12px 0;
+  border-radius:18px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 0 20px rgba(255,30,80,.08);
+}
+
+/* PHOTOS */
+.memories-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  width:100%;
+}
+
+.memories-grid img{
+  width:100%;
+  aspect-ratio:9/16;
+  object-fit:cover;
+  display:block;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:
+    0 0 20px rgba(255,23,79,.2),
+    0 0 20px rgba(57,124,255,.15);
+}
+
+/* QUESTION */
+#answerMessage{
+  min-height:35px;
+  margin-top:20px;
+  font-size:18px;
+}
+
+#afterAnswer{
+  display:none;
+}
+
+/* FIREWORK SECTION */
+#fireworkSlide{
+  display:none;
+  min-height:100svh;
+  position:relative;
+}
+
+#fireworks{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+}
+
+.fire-content{
+  position:relative;
+  z-index:3;
+}
+
+/* LETTER */
+#letterSlide{display:none}
+.letter{
+  background:rgba(255,250,247,.98);
+  color:#2c2027;
+  padding:25px 20px;
+  border-radius:22px;
+  text-align:left;
+  max-height:72svh;
+  overflow-y:auto;
+  box-shadow:0 0 35px rgba(255,255,255,.15);
+}
+
+.letter h3{
+  text-align:center;
+  font-size:25px;
+  font-weight:400;
+  margin-bottom:18px;
+}
+.letter p{
+  color:#30242a;
+  font-size:14px;
+  line-height:1.7;
+}
+
+/* FINAL */
+#finalSlide{display:none}
+.petal{
+  position:absolute;
+  top:-60px;
+  z-index:1;
+  pointer-events:none;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  from{transform:translateY(-60px) rotate(0deg)}
+  to{transform:translateY(115vh) rotate(720deg)}
+}
+
+.final-content{
+  position:relative;
+  z-index:4;
+}
+
+@media(max-width:500px){
+  section{padding:45px 17px}
+  p{font-size:14px;line-height:1.68}
+  .sticker{font-size:28px}
+}
+</style>
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
-<div class="bg"></div>
-<div class="neon neon-left"></div>
-<div class="neon neon-right"></div>
-<div id="floatingDecor"></div>
+<div class="neon left"></div>
+<div class="neon right"></div>
 
-<!-- ================= OPENING ================= -->
-<section class="page opening" id="home">
+<!-- OPENING -->
+<section>
 
-  <div class="decor">🐼 💗 🦋 🎀 ✨ 🌸</div>
+<span class="sticker s1">🐼</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">🎀</span>
+<span class="sticker s4">🦋</span>
 
-  <div class="content">
-    <div class="eyebrow">MADE WITH MEMORIES</div>
-
-    <h1>FAYE <span>♡</span></h1>
-
-    <div class="glow-line"></div>
-
-    <p class="intro">
-      Hey Faye… I made something for you. 🥹❤️
-    </p>
-
-    <p class="small-text">
-      A little place filled with memories, random moments,
-      late-night conversations and everything I still remember.
-    </p>
-
-    <button class="main-btn" onclick="goToStory()">
-      START ✨
-    </button>
-
-    <div class="bottom-decor">💌 ⋆ ˚｡⋆୨୧˚ 🦋 ⋆｡°✩</div>
-  </div>
+<div class="box">
+<div class="label">MADE FOR YOU</div>
+<h1>FAYE ♡</h1>
+<div class="line"></div>
+<p>Hey Faye… I made something for you. 🥹❤️</p>
+<p>Just a little place where some of our memories can stay together. ✨</p>
+<a class="start" href="#october">START ✨</a>
+</div>
 
 </section>
 
 
-<!-- ================= STORY ================= -->
-<section class="page story-page" id="story">
+<!-- STORY -->
+<section id="october">
+<span class="sticker s1">💌</span>
+<span class="sticker s2">🌸</span>
+<span class="sticker s3">✨</span>
 
-  <div class="content">
+<div class="box">
+<div class="label">OCTOBER</div>
+<h2>Where Everything Unexpectedly Began</h2>
 
-    <div class="eyebrow">OUR STORY</div>
+<p>
+Back in October, when I opened my other account and saw your ID, I sent you a text just for fun. You told me you had changed and that's how we became friends. You always used to talk about death and said you wanted to die. I told you I'll come to bury you and you replied that I should have some rights for that too. Then you said you would die and I told you even if you die I still want you. After that I fell for you deeply, very deeply.
+</p>
 
-    <h2>Where it all began.</h2>
+<p>
+It's honestly crazy how one random message could slowly become something I would remember this much.
+</p>
+</div>
+</section>
 
-    <div class="story-card">
-      <div class="story-icon">🗓️</div>
-      <h3>October — Where It Started</h3>
 
-      <p>
-        Back in October, when I opened my other account and saw your ID,
-        I sent you a text just for fun. You told me you had changed and
-        that's how we became friends. You always used to talk about death
-        and said you wanted to die. I told you I'll come to bury you and
-        you replied that I should have some rights for that too.
-      </p>
+<section>
+<span class="sticker s1">🥺</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">🫶🏻</span>
+<span class="sticker s4">✨</span>
 
-      <p>
-        Then you said you would die and I told you even if you die I still
-        want you. After that I fell for you deeply… very deeply. What started
-        as one random message slowly became something that I never expected
-        to matter this much to me.
-      </p>
-    </div>
+<div class="box">
+<div class="label">THE WAY WE BECAME</div>
+<h2>Your Efforts Meant More Than You Know</h2>
 
-    <div class="mini-decor">💗 ✦ 🐼 ✦ 💌</div>
+<p>
+At one time you used to love me a lot too. I remember when you didn't have a phone you would somehow find a way to message me at random times. We never used to ignore each other and we always listened to each other.
+</p>
 
-    <div class="story-card">
-      <div class="story-icon">💗</div>
-      <h3>The Way We Became</h3>
+<p>
+Your efforts at that time, trust me, that's one of the biggest things that made me fall even more for you. It wasn't something huge or complicated. It was simply the fact that you still found a way to talk to me.
+</p>
+</div>
+</section>
 
-      <p>
-        At one time you used to love me a lot too. I remember when you
-        didn't have a phone you would somehow find a way to message me at
-        random times. We never used to ignore each other and we always
-        listened to each other.
-      </p>
 
-      <p>
-        Your efforts at that time, trust me, that's one of the biggest things
-        that made me fall even more for you. Even when things weren't easy,
-        somehow seeing that you still found a way to reach me meant a lot.
-        Those little efforts became memories I still hold onto.
-      </p>
-    </div>
+<section>
+<span class="sticker s1">🇵🇰</span>
+<span class="sticker s2">🌙</span>
+<span class="sticker s3">📱</span>
+<span class="sticker s4">💗</span>
 
-    <div class="story-card">
-      <div class="story-icon">🌙</div>
-      <h3>Those Nights</h3>
+<div class="box">
+<div class="label">NOVEMBER</div>
+<h2>Those Nights That Reached 6 AM</h2>
 
-      <p>
-        When I went to Pakistan in November we would talk until 6 AM and
-        send each other reels. Life was so happy back then honestly.
-        Hours would disappear without us even realizing how late it had
-        become.
-      </p>
+<p>
+When I went to Pakistan in November we would talk until 6 AM and send each other reels. Life was so happy back then honestly. We could keep talking for hours and suddenly realise how late it had become.
+</p>
 
-      <p>
-        After that we kept getting closer but at the same time we drifted
-        apart too. You would get upset and I would keep trying to make it
-        up to you over and over again. Still, those nights, those reels,
-        those conversations and those 6 AM moments are things I remember.
-      </p>
-    </div>
+<p>
+After that we kept getting closer but at the same time we drifted apart too. You would get upset and I would keep trying to make it up to you over and over again. But those nights, those reels and those conversations are still some of the memories that stay with me.
+</p>
+</div>
+</section>
 
-    <div class="mini-decor">🌙 ✨ 💗 ✨ 🌙</div>
 
-    <div class="story-card">
-      <div class="story-icon">📱</div>
-      <h3>Our Calls</h3>
+<section>
+<span class="sticker s1">📱</span>
+<span class="sticker s2">🧸</span>
+<span class="sticker s3">💬</span>
+<span class="sticker s4">🌙</span>
 
-      <p>
-        We used to call each other too. When I woke up I would see your
-        message and it would be around 12 in the morning. Then after a
-        while you would call me and we would talk.
-      </p>
+<div class="box">
+<div class="label">OUR CALLS</div>
+<h2>From Messages To Looking At Each Other</h2>
 
-      <p>
-        Then we would text and at night we would video call and just keep
-        looking at each other. We used to watch reels together and sometimes
-        you would even fall asleep on the call. At that time talking to you
-        had become such a normal and important part of my day.
-      </p>
-    </div>
+<p>
+We used to call each other too. When I woke up I would see your message and it would be around 12 in the morning. Then after a while you would call me and we would talk. Then we would text and at night we would video call and just keep looking at each other.
+</p>
 
-    <div class="story-card">
-      <div class="story-icon">🥺</div>
-      <h3>That One Call</h3>
+<p>
+We used to watch reels together and sometimes you would even fall asleep on the call. Those simple calls weren't always about doing something special. Sometimes it was just you being there, and somehow that was enough.
+</p>
+</div>
+</section>
 
-      <p>
-        And once things got so emotional that we were both crying on the
-        call. I was asking you to stay with me and you were in the kitchen
-        at that time because your tablet didn't have any charge.
-      </p>
 
-      <p>
-        It was one of those moments where everything felt real and emotional
-        at the same time. Out of all our calls, some moments were funny,
-        some were peaceful and some became memories that stayed.
-      </p>
-    </div>
+<section>
+<span class="sticker s1">🥺</span>
+<span class="sticker s2">💧</span>
+<span class="sticker s3">🫶🏻</span>
+<span class="sticker s4">❤️</span>
 
-    <div class="story-card">
-      <div class="story-icon">💭</div>
-      <h3>Things We Went Through</h3>
+<div class="box">
+<div class="label">THAT ONE CALL</div>
+<h2>When We Both Couldn't Stop Crying</h2>
 
-      <p>
-        There was one time I fell asleep without making up to you and on top
-        of that you saw my ID which had some smoking stories on it so you got
-        even more mad. Then I spent all my time trying to make things right.
-      </p>
+<p>
+And once things got so emotional that we were both crying on the call. I was asking you to stay with me and you were in the kitchen at that time because your tablet didn't have any charge.
+</p>
 
-      <p>
-        Things went wrong and right between us many times but now things have
-        gotten really messed up. I tried so much and I am still trying but
-        now it's up to you.
-      </p>
-    </div>
+<p>
+Some moments aren't easy to explain properly. They stay in your mind because of how real everything felt at that moment.
+</p>
+</div>
+</section>
 
-    <div class="story-card">
-      <div class="story-icon">🫶🏻</div>
-      <h3>Our Meetup</h3>
 
-      <p>
-        We met up once too and we had such a great time together. Even though
-        it was only a few minutes, it became one of those memories that felt
-        special. We exchanged gifts and had that small moment together.
-      </p>
+<section>
+<span class="sticker s1">😔</span>
+<span class="sticker s2">💭</span>
+<span class="sticker s3">🚬</span>
+<span class="sticker s4">❤️</span>
 
-      <p>
-        Sometimes a memory doesn't need hours to become important. Even a few
-        minutes can stay with you for a very long time.
-      </p>
-    </div>
+<div class="box">
+<div class="label">THINGS WE WENT THROUGH</div>
+<h2>I Kept Trying To Make Things Right</h2>
 
-    <div class="story-card">
-      <div class="story-icon">❤️</div>
-      <h3>Still Trying</h3>
+<p>
+There was one time I fell asleep without making up to you and on top of that you saw my ID which had some smoking stories on it so you got even more mad. Then I spent all my time trying to make things right.
+</p>
 
-      <p>
-        Things went wrong and right between us many times, but I am still
-        here trying. We made promises to each other and even if you break
-        yours I will still keep mine because I truly want you.
-      </p>
+<p>
+Things went wrong and right between us many times but now things have gotten really messed up. I tried so much and I am still trying but now it's up to you.
+</p>
+</div>
+</section>
 
-      <p>
-        If you become mine I will give you all the happiness, do whatever you
-        say and try my best to make you feel loved.
-      </p>
-    </div>
 
-    <div class="story-card">
-      <div class="story-icon">✨</div>
-      <h3>You Changed My Days</h3>
+<section>
+<span class="sticker s1">🎁</span>
+<span class="sticker s2">🫶🏻</span>
+<span class="sticker s3">💗</span>
+<span class="sticker s4">✨</span>
 
-      <p>
-        Simply talking to you made my day and I loved talking to you. When
-        I'm with you and talking to you, you make my day better just by
-        talking to me.
-      </p>
+<div class="box">
+<div class="label">OUR MEETUP</div>
+<h2>Even Three Minutes Became A Memory</h2>
 
-      <p>
-        Like bro… you can change my whole mood. You used to say that I talk
-        too much but at one point you used to do the same thing. We used to
-        talk so much and somehow there was always something else to say.
-      </p>
-    </div>
+<p>
+We met up once too and we had such a great time together. Even though our meetup was only around three minutes, it still became one of those memories that matters to me.
+</p>
 
-    <div class="story-card">
-      <div class="story-icon">👀</div>
-      <h3>The Little Things I Remember</h3>
+<p>
+We exchanged gifts and for that small moment we were actually there together instead of behind a screen.
+</p>
+</div>
+</section>
 
-      <p>
-        Just look at what happened in one year, but I am not letting go.
-        Though the rest is up to you. To be honest you look so pretty.
-        Your eyes and that mole on your face when I saw it… oh God,
-        mashaAllah.
-      </p>
 
-      <p>
-        And that day after the exam we were both staring at each other.
-        I was shy but you were with your friends laughing. Actually,
-        I love your laugh too.
-      </p>
+<section>
+<span class="sticker s1">🤞🏻</span>
+<span class="sticker s2">❤️</span>
+<span class="sticker s3">🫶🏻</span>
+<span class="sticker s4">✨</span>
 
-      <p>
-        There are so many other things that can't just be said but I remember
-        everything. Your smile, your expressions, your laugh, your little
-        habits and the small moments that probably seemed normal at the time.
-      </p>
-    </div>
+<div class="box">
+<div class="label">OUR PROMISES</div>
+<h2>I'm Still Trying</h2>
 
-    <div class="story-card">
-      <div class="story-icon">🇵🇰</div>
-      <h3>July</h3>
+<p>
+We made promises to each other and even if you break yours I will still keep mine because I truly want you.
+</p>
 
-      <p>
-        When you went to Pakistan in July we didn't have any contact.
-        I know before you went to Pakistan everything had gotten better
-        between us but after you went there idk, maybe something bad happened
-        with you.
-      </p>
+<p>
+If you become mine I will give you all the happiness, do whatever you say and act just the way you want. The rest is up to you, but I will still try my best and keep trying.
+</p>
+</div>
+</section>
 
-      <p>
-        We didn't contact each other because of your network problem.
-        Things became quiet, but even during that silence you were still
-        somewhere in my thoughts.
-      </p>
-    </div>
 
-    <div class="story-card">
-      <div class="story-icon">🌙</div>
-      <h3>I Still Thought About You</h3>
+<section>
+<span class="sticker s1">☀️</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">💬</span>
+<span class="sticker s4">✨</span>
 
-      <p>
-        I would still wonder where you were going throughout the day.
-        I used to think about you all the time. Even while watching reels
-        I would think about you.
-      </p>
+<div class="box">
+<div class="label">YOU CHANGED MY DAYS</div>
+<h2>You Could Change My Whole Mood</h2>
 
-      <p>
-        While watching a movie I would think about you and even when I went
-        outside somehow you were on my mind everywhere. I couldn't forget you.
-      </p>
-    </div>
+<p>
+Simply talking to you made my day and I loved talking to you. When I'm with you and talking to you, you make my day better just by talking to me.
+</p>
 
-    <div class="story-card">
-      <div class="story-icon">💌</div>
-      <h3>Where Is My Fayeee?</h3>
+<p>
+Like bro, you can change my whole mood. You used to say that I talk too much but at one point you used to do the same thing. We used to talk so much.
+</p>
+</div>
+</section>
 
-      <p>
-        I still look at our messages sometimes and listen to your old voice
-        messages and damn… I think, where is my Fayeee?
-      </p>
 
-      <p>
-        My most favourite message was that 5 minute one, if you remember.
-        It's strange how old messages and voices can suddenly bring back
-        so many memories.
-      </p>
-    </div>
+<section>
+<span class="sticker s1">👀</span>
+<span class="sticker s2">🦋</span>
+<span class="sticker s3">💗</span>
+<span class="sticker s4">🌸</span>
 
-    <div class="end-story">
-      💗 🦋 ✨ 🌸 💌 🐼 ✨ 💗
-      <br><br>
-      Some memories don't disappear.
-      <br>
-      They just become a part of you.
-    </div>
+<div class="box">
+<div class="label">THE LITTLE THINGS</div>
+<h2>I Remember More Than You Think</h2>
 
-  </div>
+<p>
+Just look at what happened in one year but I am not letting go though the rest is up to you. To be honest you look so pretty. Your eyes and that mole on your face when I saw it, oh God, mashaAllah.
+</p>
+
+<p>
+And that day after the exam we were both staring at each other. I was shy but you were with your friends laughing. Actually I love your laugh too. There are so many other things that can't just be said but I remember everything.
+</p>
+</div>
+</section>
+
+
+<section>
+<span class="sticker s1">🇵🇰</span>
+<span class="sticker s2">🌙</span>
+<span class="sticker s3">📡</span>
+<span class="sticker s4">💭</span>
+
+<div class="box">
+<div class="label">JULY</div>
+<h2>When Everything Became Quiet</h2>
+
+<p>
+When you went to Pakistan in July we didn't have any contact. I know before you went to Pakistan everything had gotten better between us but after you went there idk maybe something bad happened with you.
+</p>
+
+<p>
+We didn't contact each other because of your network problem. Everything suddenly became quiet.
+</p>
+</div>
+</section>
+
+
+<section>
+<span class="sticker s1">💭</span>
+<span class="sticker s2">🎬</span>
+<span class="sticker s3">📱</span>
+<span class="sticker s4">❤️</span>
+
+<div class="box">
+<div class="label">I STILL THOUGHT ABOUT YOU</div>
+<h2>You Were Somehow Everywhere</h2>
+
+<p>
+I would still wonder where you were going throughout the day. I used to think about you all the time. Even while watching reels I would think about you. While watching a movie I would think about you and even when I went outside somehow you were on my mind everywhere.
+</p>
+
+<p>
+I couldn't forget you.
+</p>
+</div>
+</section>
+
+
+<section>
+<span class="sticker s1">💌</span>
+<span class="sticker s2">🎧</span>
+<span class="sticker s3">🥺</span>
+<span class="sticker s4">💗</span>
+
+<div class="box">
+<div class="label">WHERE IS MY FAYEEE?</div>
+<h2>I Still Go Back To Our Messages</h2>
+
+<p>
+I still look at our messages sometimes listening to your old voice messages and damn I think, where is my Fayeee. My most favorite message was that 5 minute one if you remember.
+</p>
+
+<p>
+Some memories don't disappear just because time passes.
+</p>
+</div>
+</section>
+
+
+<!-- TIMELINE -->
+<section>
+<div class="box">
+<div class="label">OUR TIMELINE</div>
+<h2>How The Story Moved</h2>
+
+<div class="timeline">
+<div class="time">🗓️ <b>October</b><br>Where it started</div>
+<div class="time">🌙 <b>November</b><br>Pakistan and 6 AM talks</div>
+<div class="time">📱 <b>Calls</b><br>Reels, video calls and late nights</div>
+<div class="time">🫶🏻 <b>Meetup</b><br>Three minutes and gifts</div>
+<div class="time">🇵🇰 <b>July</b><br>Distance and silence</div>
+</div>
+</div>
+</section>
+
+
+<!-- EXACTLY 6 PHOTOS -->
+<section>
+<span class="sticker s1">💗</span>
+<span class="sticker s2">📸</span>
+<span class="sticker s3">🌸</span>
+<span class="sticker s4">✨</span>
+
+<div class="box">
+<div class="label">OUR MEMORIES</div>
+<h2>Six Little Pieces Of Our Story</h2>
+
+<div class="memories-grid">
+<img src="photo1.jpg" alt="Memory 1">
+<img src="photo2.jpg" alt="Memory 2">
+<img src="photo3.jpg" alt="Memory 3">
+<img src="photo4.jpg" alt="Memory 4">
+<img src="photo5.jpg" alt="Memory 5">
+<img src="photo6.jpg" alt="Memory 6">
+</div>
+
+</div>
+</section>
+
+
+<!-- QUESTION -->
+<section id="question">
+<span class="sticker s1">🐼</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">🎀</span>
+<span class="sticker s4">🦋</span>
+
+<div class="box">
+<div class="label">ONE LAST QUESTION</div>
+<h2>Do you love me, Faye? 🥺❤️</h2>
+
+<div style="font-size:48px;margin:20px">🧍🏼‍♂️💍🧍🏼‍♀️</div>
+
+<div>
+<button id="yesBtn">YES ❤️</button>
+<button id="noBtn">NO 🥺</button>
+</div>
+
+<div id="answerMessage"></div>
+
+<div id="afterAnswer">
+<button id="yesAgain">OKAY YES 🥺❤️</button>
+</div>
+</div>
+</section>
+
+
+<!-- FIREWORKS -->
+<section id="fireworkSlide">
+<canvas id="fireworks"></canvas>
+
+<div class="box fire-content">
+<div class="label">YAYYYY</div>
+<h2>YAY FAYE 🥺❤️</h2>
+
+<p><b>IK U DA BEST ✨</b></p>
+<p>THANK YOU FOR BEING A PART OF MY STORY 💗</p>
+<p>NOW SMILE, YOU DESERVE IT 🥹✨</p>
+
+<div style="font-size:50px;margin:25px">🧍🏼‍♂️💍🧍🏼‍♀️</div>
+
+<button id="continueBtn">CONTINUE 💌</button>
+</div>
+</section>
+
+
+<!-- LETTER -->
+<section id="letterSlide">
+<span class="sticker s1">💌</span>
+<span class="sticker s2">💗</span>
+<span class="sticker s3">🌸</span>
+<span class="sticker s4">✨</span>
+
+<div class="box">
+<div class="label">FOR YOU</div>
+<h2>A Little Letter</h2>
+
+<div class="letter">
+<h3>For Fatema ♡</h3>
+
+<p>
+It’s okay, I will wait for you Fatema because you are my last. After you I don't even want to love anyone or even talk to anyone. Everything ends with you and it will always be you.
+</p>
+
+<p>
+To be honest, you look so pretty. Your eyes, that mole on your face, your smile, your laugh, your expressions and all those little things about you. MashaAllah, there are honestly so many things I remember.
+</p>
+
+<p>
+And even when you find flaws in yourself, I wish you could see yourself the way I see you. You don't need to be perfect. The things you worry about don't make you any less beautiful.
+</p>
+
+<p>
+I hope you liked the gifts. Take care of yourself and don't stress about the future. You can do it and you will.
+</p>
+
+<p>
+It's up to you now but I will still try my best or I will keep trying.
+</p>
+
+<p>
+I will wait at the edge of the forgotten road.
+</p>
+</div>
+
+<button id="finalBtn" class="black-btn">ONE MORE THING ✨</button>
+</div>
+</section>
+
+
+<!-- FINAL LILIES -->
+<section id="finalSlide">
+
+<div class="box final-content">
+<div class="label">ALWAYS</div>
+<h2>I LOVE YOU SO MUCH, FAYE 🥺❤️</h2>
+<div class="line"></div>
+
+<p>
+Some stories don't need perfect endings to mean something.
+</p>
+
+<p>
+Thank you for every conversation, every call, every reel, every smile and every little memory.
+</p>
+
+<p>
+Now smile, okay? 🥹✨
+</p>
+
+<div style="font-size:45px;margin-top:30px">💗 🌸 🦋 ✨ 🌸 💗</div>
+</div>
 
 </section>
 
 
-<!-- ================= TIMELINE ================= -->
-<section class="page">
+<script>
+/* QUESTION */
+
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const answer=document.getElementById("answerMessage");
+const after=document.getElementById("afterAnswer");
 
-  <div class="content">
+let noClicks=0;
 
-    <div class="eyebrow">OUR TIMELINE</div>
-    <h2>How time passed.</h2>
+noBtn.addEventListener("click",function(){
+  noClicks++;
 
-    <div class="timeline">
+  if(noClicks===1){
+    answer.innerHTML="Think again 🥺💗";
+    after.style.display="block";
+  }else if(noClicks===2){
+    answer.innerHTML="I don't believe you 😭🥺";
+    after.style.display="block";
+  }else{
+    answer.innerHTML="Come onnn Faye 🥺❤️";
+    after.style.display="block";
+  }
+});
 
-      <div class="timeline-item">
-        <span>🗓️</span>
-        <div><b>October</b><small>Where it all started</small></div>
-      </div>
+yesBtn.addEventListener("click",openFireworks);
 
-      <div class="timeline-item">
-        <span>🌙</span>
-        <div><b>November</b><small>Pakistan + 6 AM talks</small></div>
-      </div>
+document.getElementById("yesAgain").addEventListener("click",openFireworks);
 
-      <div class="timeline-item">
-        <span>📱</span>
-        <div><b>Calls</b><small>Reels, video calls and nights</small></div>
-      </div>
+function openFireworks(){
+  document.getElementById("question").style.display="none";
 
-      <div class="timeline-item">
-        <span>🫶🏻</span>
-        <div><b>Meetup</b><small>A few special minutes together</small></div>
-      </div>
+  const fire=document.getElementById("fireworkSlide");
+  fire.style.display="flex";
 
-      <div class="timeline-item">
-        <span>🇵🇰</span>
-        <div><b>July</b><small>Distance and silence</small></div>
-      </div>
+  window.scrollTo({
+    top:fire.offsetTop,
+    behavior:"smooth"
+  });
 
-    </div>
+  startFireworks();
+}
 
-  </div>
 
-</section>
+/* FIREWORKS */
 
+let fireworksStarted=false;
 
-<!-- ================= PHOTOS ================= -->
-<section class="page memories">
+function startFireworks(){
+
+if(fireworksStarted)return;
+fireworksStarted=true;
 
-  <div class="content">
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
 
-    <div class="eyebrow">OUR MEMORIES</div>
+let W,H;
+let rockets=[];
+let particles=[];
 
-    <h2>Six little memories.</h2>
+function resize(){
+ W=canvas.width=window.innerWidth*devicePixelRatio;
+ H=canvas.height=window.innerHeight*devicePixelRatio;
+ canvas.style.width=window.innerWidth+"px";
+ canvas.style.height=window.innerHeight+"px";
+ ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+ W=window.innerWidth;
+ H=window.innerHeight;
+}
 
-    <p class="small-text">
-      Replace the image links below with your own 6 photo links.
-    </p>
+resize();
+window.addEventListener("resize",resize);
 
-    <div class="photo-grid">
+const colors=[
+"#ff174f","#397cff","#ffffff",
+"#ff4f9a","#6da0ff","#ffd4e5"
+];
 
-      <!-- PHOTO 1 -->
-      <div class="memory-photo">
-        <img src="YOUR-PHOTO-1-LINK.jpg" alt="Memory 1">
-      </div>
+function launch(){
+ rockets.push({
+   x:Math.random()*W,
+   y:H+20,
+   targetY:H*(.08+Math.random()*.5),
+   speed:8+Math.random()*6,
+   color:colors[Math.floor(Math.random()*colors.length)]
+ });
+}
 
-      <!-- PHOTO 2 -->
-      <div class="memory-photo">
-        <img src="YOUR-PHOTO-2-LINK.jpg" alt="Memory 2">
-      </div>
+function explode(x,y,color){
 
-      <!-- PHOTO 3 -->
-      <div class="memory-photo">
-        <img src="YOUR-PHOTO-3-LINK.jpg" alt="Memory 3">
-      </div>
+ for(let i=0;i<180;i++){
 
-      <!-- PHOTO 4 -->
-      <div class="memory-photo">
-        <img src="YOUR-PHOTO-4-LINK.jpg" alt="Memory 4">
-      </div>
+   const angle=Math.random()*Math.PI*2;
+   const speed=Math.random()*8+1;
 
-      <!-- PHOTO 5 -->
-      <div class="memory-photo">
-        <img src="YOUR-PHOTO-5-LINK.jpg" alt="Memory 5">
-      </div>
+   particles.push({
+     x,y,
+     vx:Math.cos(angle)*speed,
+     vy:Math.sin(angle)*speed,
+     alpha:1,
+     size:Math.random()*2.5+1,
+     color
+   });
+ }
 
-      <!-- PHOTO 6 -->
-      <div class="memory-photo">
-        <img src="YOUR-PHOTO-6-LINK.jpg" alt="Memory 6">
-      </div>
+}
 
-    </div>
+function animate(){
 
-    <div class="mini-decor big">
-      💗 🦋 🌸 ✨ 🐼 🎀 💌 🌙
-    </div>
+ ctx.fillStyle="rgba(3,4,11,.16)";
+ ctx.fillRect(0,0,W,H);
 
-  </div>
+ rockets.forEach((r,i)=>{
 
-</section>
+   r.y-=r.speed;
 
+   ctx.beginPath();
+   ctx.moveTo(r.x,r.y+25);
+   ctx.lineTo(r.x,r.y);
 
-<!-- ================= QUESTION ================= -->
-<section class="page" id="questionPage">
+   ctx.strokeStyle=r.color;
+   ctx.lineWidth=2;
+   ctx.shadowBlur=18;
+   ctx.shadowColor=r.color;
+   ctx.stroke();
 
-  <div class="content question-content">
+   if(r.y<=r.targetY){
+     explode(r.x,r.y,r.color);
+     rockets.splice(i,1);
+   }
+ });
 
-    <div class="eyebrow">ONE LAST QUESTION</div>
+ particles.forEach((p,i)=>{
 
-    <div class="couple">🧍🏼‍♂️💍🧍🏼‍♀️</div>
+   p.x+=p.vx;
+   p.y+=p.vy;
+   p.vx*=.985;
+   p.vy*=.985;
+   p.vy+=.04;
+   p.alpha-=.008;
 
-    <h2>Do you love me,<br>Faye? 🥺❤️</h2>
+   ctx.beginPath();
+   ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
 
-    <p id="questionText">
-      Be honest with me. 🥺
-    </p>
+   ctx.fillStyle=p.color;
+   ctx.globalAlpha=Math.max(p.alpha,0);
+   ctx.shadowBlur=16;
+   ctx.shadowColor=p.color;
+   ctx.fill();
+   ctx.globalAlpha=1;
 
-    <div class="question-buttons">
+   if(p.alpha<=0)particles.splice(i,1);
+ });
 
-      <button class="yes-btn" id="yesBtn">
-        YES ❤️
-      </button>
+ requestAnimationFrame(animate);
+}
 
-      <button class="no-btn" id="noBtn">
-        NO 🥺
-      </button>
+for(let i=0;i<22;i++){
+ setTimeout(launch,i*180);
+}
 
-    </div>
+setInterval(()=>{
+ launch();
+ if(Math.random()>.5)launch();
+},500);
 
-    <div class="question-decor">
-      💗 ✨ 💌 🦋 🌸 🐼 🎀 ✨
-    </div>
+animate();
 
-  </div>
+}
 
-</section>
 
+/* LETTER */
 
-<!-- ================= FIREWORKS ================= -->
-<section class="page fireworks-page" id="fireworksPage">
+document.getElementById("continueBtn").addEventListener("click",function(){
 
-  <canvas id="fireworksCanvas"></canvas>
+ document.getElementById("fireworkSlide").style.display="none";
 
-  <div class="fireworks-content">
+ const letter=document.getElementById("letterSlide");
+ letter.style.display="flex";
 
-    <div class="eyebrow">YAYYY</div>
+ window.scrollTo({
+  top:letter.offsetTop,
+  behavior:"smooth"
+ });
 
-    <div class="couple">🧍🏼‍♂️💍🧍🏼‍♀️</div>
+});
 
-    <h2>YAY FAYE 🥺❤️</h2>
 
-    <p><b>IK U DA BEST ✨</b></p>
+/* FINAL */
 
-    <p>THANK YOU FOR BEING A PART OF MY STORY 💗</p>
+document.getElementById("finalBtn").addEventListener("click",function(){
 
-    <p>NOW SMILE, YOU DESERVE IT 🥹✨</p>
+ document.getElementById("letterSlide").style.display="none";
 
-    <div class="future-text">
-      I hope your future is beautiful.
-      <br>
-      Take care of yourself.
-      <br>
-      Don't stress about the future.
-      <br>
-      You can do it and you will. ✨
-    </div>
+ const final=document.getElementById("finalSlide");
+ final.style.display="flex";
 
-    <button class="main-btn" id="letterBtn">
-      NEXT 💌
-    </button>
+ window.scrollTo({
+  top:final.offsetTop,
+  behavior:"smooth"
+ });
 
-  </div>
+ for(let i=0;i<120;i++){
 
-</section>
+  const p=document.createElement("div");
+  p.className="petal";
 
+  p.textContent=Math.random()>.2?"🌸":"✦";
+  p.style.left=Math.random()*100+"%";
+  p.style.fontSize=(18+Math.random()*25)+"px";
+  p.style.animationDuration=(4+Math.random()*6)+"s";
+  p.style.animationDelay=Math.random()*4+"s";
 
-<!-- ================= LETTER ================= -->
-<section class="page letter-page" id="letterPage">
+  final.appendChild(p);
+ }
 
-  <div class="content">
-
-    <div class="eyebrow">FOR YOU</div>
-
-    <h2>A little letter.</h2>
-
-    <div class="letter">
-
-      <h3>For Fatema ♡</h3>
-
-      <p>
-        To be honest, you look so pretty. Your eyes, that mole on your face,
-        your smile, your expressions and especially your laugh… there are so
-        many things about you that I remember and love.
-      </p>
-
-      <p>
-        And I know sometimes you find flaws in yourself, but you really don't
-        need to be perfect. Even the things you see as flaws don't make you
-        less beautiful. You're already amazing exactly as you are.
-      </p>
-
-      <p>
-        It's okay, I will wait for you Fatima because you are my last.
-        After you I don't even want to love anyone or even talk to anyone.
-        Everything ends with you and it will always be you.
-      </p>
-
-      <p>
-        It's up to you now but I will still try my best or I will keep trying.
-        I hope you liked the gifts.
-      </p>
-
-      <p>
-        Take care of yourself. Don't stress about the future.
-        You can do it and you will.
-      </p>
-
-      <p class="quote">
-        “I will wait at the edge of the forgotten road.”
-      </p>
-
-    </div>
-
-    <button class="main-btn" id="finalBtn">
-      ONE MORE THING 🌸
-    </button>
-
-  </div>
-
-</section>
-
-
-<!-- ================= FINAL ================= -->
-<section class="page final-page" id="finalPage">
-
-  <div id="lilyRain"></div>
-
-  <div class="content final-content">
-
-    <div class="couple">🧍🏼‍♂️💍🧍🏼‍♀️</div>
-
-    <h2>I LOVE YOU SO MUCH,<br>FAYE 🥺❤️</h2>
-
-    <div class="glow-line"></div>
-
-    <p>
-      Thank you for being a part of my story. 💗
-    </p>
-
-    <p>
-      Some memories become a chapter.
-      <br>
-      Some people become a whole story.
-    </p>
-
-    <p class="final-small">
-      Now smile… you deserve it. 🥹✨
-    </p>
-
-    <div class="final-decor">
-      🌸 💗 🦋 ✨ 🌸 💌 🌙 🐼 🎀 🌸
-    </div>
-
-  </div>
-
-</section>
-
-
-<script src="script.js"></script>
+});
+</script>
 
 </body>
 </html>
