@@ -4,18 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Faye ♡</title>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-
 body{
   background:#03040b;
   color:white;
   overflow-x:hidden;
   font-family:Georgia,serif;
 }
-
 body:before{
   content:"";
   position:fixed;
@@ -26,8 +23,6 @@ body:before{
     radial-gradient(circle at 100% 70%,rgba(40,100,255,.25),transparent 38%),
     linear-gradient(135deg,#08000d,#020714,#100008);
 }
-
-/* NEON */
 .neon{
   position:fixed;
   top:0;
@@ -36,20 +31,16 @@ body:before{
   z-index:50;
   pointer-events:none;
 }
-
 .neon.left{
   left:8px;
   background:linear-gradient(transparent,#ff174f,transparent);
   box-shadow:0 0 15px #ff174f,0 0 40px #ff174f;
 }
-
 .neon.right{
   right:8px;
   background:linear-gradient(transparent,#397cff,transparent);
   box-shadow:0 0 15px #397cff,0 0 40px #397cff;
 }
-
-/* SECTIONS */
 section{
   min-height:100svh;
   padding:50px 20px;
@@ -60,14 +51,12 @@ section{
   overflow:hidden;
   text-align:center;
 }
-
 .box{
   width:100%;
   max-width:620px;
   position:relative;
   z-index:3;
 }
-
 .label{
   font-family:Arial,sans-serif;
   font-size:10px;
@@ -75,23 +64,19 @@ section{
   opacity:.55;
   margin-bottom:15px;
 }
-
 h1{
   font-size:clamp(62px,17vw,110px);
   font-weight:400;
   letter-spacing:7px;
 }
-
 h2{
   font-size:clamp(34px,9vw,58px);
   font-weight:400;
   line-height:1.1;
   margin-bottom:22px;
-  text-shadow:
-    0 0 20px rgba(255,30,90,.4),
-    0 0 35px rgba(50,110,255,.3);
+  text-shadow:0 0 20px rgba(255,30,90,.4),
+              0 0 35px rgba(50,110,255,.3);
 }
-
 p{
   font-size:15px;
   line-height:1.75;
@@ -99,7 +84,6 @@ p{
   margin:14px auto;
   max-width:600px;
 }
-
 .line{
   width:100px;
   height:1px;
@@ -107,8 +91,6 @@ p{
   background:linear-gradient(90deg,#ff174f,#fff,#397cff);
   box-shadow:0 0 10px #ff174f,0 0 15px #397cff;
 }
-
-/* STICKERS */
 .sticker{
   position:absolute;
   font-size:32px;
@@ -117,28 +99,21 @@ p{
   filter:drop-shadow(0 0 10px rgba(255,255,255,.3));
   animation:float 4s ease-in-out infinite;
 }
-
 .s1{left:5%;top:7%}
 .s2{right:5%;top:10%;animation-delay:1s}
 .s3{left:6%;bottom:8%;animation-delay:2s}
 .s4{right:6%;bottom:7%;animation-delay:3s}
-
 @keyframes float{
   50%{transform:translateY(-18px) rotate(8deg)}
 }
-
-/* EXTRA DECORATION */
 .spark{
   position:absolute;
   opacity:.5;
   animation:pulse 2s infinite alternate;
 }
-
 @keyframes pulse{
   to{transform:scale(1.5);opacity:1}
 }
-
-/* BUTTON */
 button,.start{
   position:relative;
   z-index:20;
@@ -157,23 +132,18 @@ button,.start{
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
 }
-
 button:active,.start:active{
   transform:scale(.96);
 }
-
 .black-btn{
   background:#050505!important;
   color:#fff!important;
   border:1px solid rgba(255,255,255,.5);
 }
-
-/* TIMELINE */
 .timeline{
   max-width:500px;
   margin:25px auto;
 }
-
 .time{
   padding:18px;
   margin:12px 0;
@@ -182,15 +152,12 @@ button:active,.start:active{
   border:1px solid rgba(255,255,255,.1);
   box-shadow:0 0 20px rgba(255,30,80,.08);
 }
-
-/* PHOTOS */
 .memories-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:10px;
   width:100%;
 }
-
 .memories-grid img{
   width:100%;
   aspect-ratio:9/16;
@@ -202,25 +169,19 @@ button:active,.start:active{
     0 0 20px rgba(255,23,79,.2),
     0 0 20px rgba(57,124,255,.15);
 }
-
-/* QUESTION */
 #answerMessage{
   min-height:35px;
   margin-top:20px;
   font-size:18px;
 }
-
 #afterAnswer{
   display:none;
 }
-
-/* FIREWORK SECTION */
 #fireworkSlide{
   display:none;
   min-height:100svh;
   position:relative;
 }
-
 #fireworks{
   position:absolute;
   inset:0;
@@ -228,17 +189,11 @@ button:active,.start:active{
   height:100%;
   z-index:1;
 }
-
 .fire-content{
   position:relative;
   z-index:3;
 }
-
-/* LETTER */
-#letterSlide{
-  display:none;
-}
-
+#letterSlide{display:none}
 .letter{
   background:rgba(255,250,247,.98);
   color:#2c2027;
@@ -249,14 +204,12 @@ button:active,.start:active{
   overflow-y:auto;
   box-shadow:0 0 35px rgba(255,255,255,.15);
 }
-
 .letter h3{
   text-align:center;
   font-size:25px;
   font-weight:400;
   margin-bottom:18px;
 }
-
 .letter p{
   color:#30242a;
   font-size:14px;
@@ -268,7 +221,6 @@ button:active,.start:active{
   display:none;
   min-height:100svh;
 }
-
 .petal{
   position:absolute;
   top:-60px;
@@ -276,7 +228,6 @@ button:active,.start:active{
   pointer-events:none;
   animation:fall linear infinite;
 }
-
 @keyframes fall{
   from{
     transform:translateY(-60px) rotate(0deg);
@@ -285,10 +236,26 @@ button:active,.start:active{
     transform:translateY(115vh) rotate(720deg);
   }
 }
-
 .final-content{
   position:relative;
   z-index:4;
+}
+
+/* FUNNY SLIDES */
+#funny1,#funny2,#funny3{
+  display:none;
+  min-height:100svh;
+}
+.funny-content{
+  position:relative;
+  z-index:4;
+}
+.funny-big{
+  font-size:55px;
+  margin:25px 0;
+}
+.funny-btn{
+  margin-top:25px;
 }
 
 @media(max-width:500px){
@@ -338,9 +305,12 @@ Back in October, when I opened my other account and saw your ID, I sent you a me
 </p>
 
 <p>
-I don't know exactly when it happened. Maybe it was slowly, maybe it was somewhere between all those conversations, jokes, arguments and random messages. But after that, I fell for you deeply. Very deeply. And it's honestly crazy to think that everything started because I randomly decided to text you.
+You used to talk about death a lot and say that you wanted to die. I remember telling you that if that ever happened, I would come and bury you. You replied that I should have some rights for that too. Then you said that you would die, and I told you something that I still remember clearly: even if you die, I still want you.
 </p>
 
+<p>
+I don't know exactly when it happened. Maybe it was slowly, maybe it was somewhere between all those conversations, jokes, arguments and random messages. But after that, I fell for you deeply. Very deeply. And it's honestly crazy to think that everything started because I randomly decided to text you.
+</p>
 </div>
 </section>
 
@@ -365,7 +335,6 @@ We never used to ignore each other. We would listen to each other and somehow al
 <p>
 Trust me, your efforts at that time are one of the biggest reasons I fell even more for you. I noticed those things. I remembered them. And even after everything that has happened, I still remember how much those little efforts meant to me.
 </p>
-
 </div>
 </section>
 
@@ -390,7 +359,6 @@ Those days felt simple. We didn't need anything special. Just talking to you, se
 <p>
 But at the same time, we also started drifting apart. You would get upset, and I would keep trying to make it up to you over and over again. Things were never completely perfect between us, but even then, I didn't want to stop trying because losing what we had felt worse than trying again.
 </p>
-
 </div>
 </section>
 
@@ -415,7 +383,6 @@ We would watch reels together, laugh at random things and spend time without eve
 <p>
 Sometimes we didn't even need to say much. Just knowing that you were on the other side of the screen was enough. We were there together, even if there was a distance between us.
 </p>
-
 </div>
 </section>
 
@@ -440,7 +407,6 @@ I still remember that moment because everything felt so real. There were no filt
 <p>
 Some memories don't leave your mind because they were happy. Sometimes you remember them because they were real. And that moment was one of those moments for me.
 </p>
-
 </div>
 </section>
 
@@ -465,7 +431,6 @@ I remember spending my time trying to make things right again because whenever s
 <p>
 And somewhere between all the arguments, making up, getting upset and trying again, we also met each other. We met up once and honestly had such a great time together. Even though some moments don't last very long, they can still become memories that stay with you for a very long time.
 </p>
-
 </div>
 </section>
 
@@ -490,7 +455,6 @@ I tried so much, and honestly, I am still trying. But now, a lot of it is up to 
 <p>
 If you become mine, I want to give you all the happiness I can. I would listen to you, care for you and try my best to make you happy. I know love isn't supposed to be perfect, but if it is you, I still want to keep trying.
 </p>
-
 </div>
 </section>
 
@@ -515,7 +479,6 @@ Like bro, you can literally change my whole mood. You used to say that I talk to
 <p>
 And now when I think about it, I realise that those conversations were never just conversations to me. They became a part of my days. A part of my routine. A part of the memories I still go back to.
 </p>
-
 </div>
 </section>
 
@@ -544,7 +507,6 @@ Actually, I love your laugh too. I remember your expressions and so many other l
 <p>
 There are so many things that can't just be said, but I remember everything.
 </p>
-
 </div>
 </section>
 
@@ -569,7 +531,6 @@ We didn't contact each other because of your network problem, and everything sud
 <p>
 Sometimes silence can feel louder than words, especially when you were used to having someone around all the time.
 </p>
-
 </div>
 </section>
 
@@ -594,7 +555,6 @@ While watching a movie, I would think about you. Even when I went outside, someh
 <p>
 I couldn't forget you. And honestly, I don't think I ever really stopped caring.
 </p>
-
 </div>
 </section>
 
@@ -619,14 +579,12 @@ My most favourite message was that five-minute one, if you remember. Even after 
 <p>
 And for a little while, it feels like everything is still there again.
 </p>
-
 </div>
 </section>
 
 <!-- TIMELINE -->
 <section>
 <div class="box">
-
 <div class="label">OUR TIMELINE</div>
 <h2>How The Story Moved</h2>
 
@@ -669,7 +627,6 @@ Distance and silence
 <span class="sticker s4">✨</span>
 
 <div class="box">
-
 <div class="label">OUR MEMORIES</div>
 <h2>Six Little Pieces Of Our Story</h2>
 
@@ -693,7 +650,6 @@ Distance and silence
 <span class="sticker s4">🦋</span>
 
 <div class="box">
-
 <div class="label">ONE LAST QUESTION</div>
 <h2>Do you love me, Faye? 🥺❤️</h2>
 
@@ -717,13 +673,10 @@ Distance and silence
 
 <!-- FIREWORKS -->
 <section id="fireworkSlide">
-
 <canvas id="fireworks"></canvas>
 
 <div class="box fire-content">
-
 <div class="label">YAYYYY</div>
-
 <h2>YAY FAYE 🥺❤️</h2>
 
 <p><b>IK U DA BEST ✨</b></p>
@@ -735,25 +688,21 @@ Distance and silence
 </div>
 
 <button id="continueBtn">CONTINUE 💌</button>
-
 </div>
 </section>
 
 <!-- LETTER -->
 <section id="letterSlide">
-
 <span class="sticker s1">💌</span>
 <span class="sticker s2">💗</span>
 <span class="sticker s3">🌸</span>
 <span class="sticker s4">✨</span>
 
 <div class="box">
-
 <div class="label">FOR YOU</div>
 <h2>A Little Letter</h2>
 
 <div class="letter">
-
 <h3>For Fatema ♡</h3>
 
 <p>
@@ -789,9 +738,8 @@ ONE MORE THING ✨
 </div>
 </section>
 
-<!-- FINAL LILIES -->
+<!-- LILIES -->
 <section id="finalSlide">
-
 <div class="box final-content">
 
 <div class="label">JUST FOR YOU</div>
@@ -815,6 +763,98 @@ I hope you liked your little surprise. 🌸
 </div>
 </section>
 
+<!-- FUNNY SLIDE 1 -->
+<section id="funny1">
+<span class="sticker s1">👀</span>
+<span class="sticker s2">😭</span>
+<span class="sticker s3">🎀</span>
+<span class="sticker s4">💀</span>
+
+<div class="box funny-content">
+
+<div class="label">WAIT… FAYE 👀</div>
+
+<h2>You Thought That Was The End?</h2>
+
+<div class="funny-big">😭</div>
+
+<p>
+Yeah… no. 😭
+</p>
+
+<p>
+I have one tiny problem…
+</p>
+
+<button class="funny-btn" id="funnyNext1">
+WAIT 😭
+</button>
+
+</div>
+</section>
+
+<!-- FUNNY SLIDE 2 -->
+<section id="funny2">
+<span class="sticker s1">💀</span>
+<span class="sticker s2">👀</span>
+<span class="sticker s3">🎀</span>
+<span class="sticker s4">😭</span>
+
+<div class="box funny-content">
+
+<div class="label">FAYE, BE HONEST 😭</div>
+
+<h2>Did You Actually Read All Of That?</h2>
+
+<div class="funny-big">🫡</div>
+
+<p>
+Damn. Respect. 😭
+</p>
+
+<p>
+Ab itna parh hi liya hai toh smile bhi kar do. 😭🎀
+</p>
+
+<button class="funny-btn" id="funnyNext2">
+OKAY 😭
+</button>
+
+</div>
+</section>
+
+<!-- FUNNY SLIDE 3 -->
+<section id="funny3">
+<span class="sticker s1">👀</span>
+<span class="sticker s2">😭</span>
+<span class="sticker s3">🎀</span>
+<span class="sticker s4">🫡</span>
+
+<div class="box funny-content">
+
+<div class="label">FAYE, QUICK QUESTION 👀</div>
+
+<h2>Be honest…</h2>
+
+<p style="font-size:20px;line-height:1.7;margin-top:25px;">
+Did you actually think I'd make this whole thing without annoying you at least once? 😭
+</p>
+
+<p>
+Because… yeah.
+</p>
+
+<p>
+I had to. 🫡🎀
+</p>
+
+<button class="funny-btn" id="funnyNext3">
+NOW YOU CAN GO ♡
+</button>
+
+</div>
+</section>
+
 <script>
 
 /* QUESTION */
@@ -831,20 +871,16 @@ noBtn.addEventListener("click",function(){
   noClicks++;
 
   if(noClicks===1){
-
     answer.innerHTML="Think again 🥺💗";
     after.style.display="block";
 
   }else if(noClicks===2){
-
     answer.innerHTML="I don't believe you 😭🥺";
     after.style.display="block";
 
   }else{
-
     answer.innerHTML="Come onnn Faye 🥺❤️";
     after.style.display="block";
-
   }
 
 });
@@ -930,7 +966,9 @@ function launch(){
 
    x:Math.random()*W,
    y:H+20,
+
    targetY:H*(.08+Math.random()*.5),
+
    speed:8+Math.random()*6,
 
    color:colors[
@@ -957,7 +995,9 @@ function explode(x,y,color){
      vy:Math.sin(angle)*speed,
 
      alpha:1,
+
      size:Math.random()*2.5+1,
+
      color
 
    });
@@ -976,6 +1016,7 @@ function animate(){
    r.y-=r.speed;
 
    ctx.beginPath();
+
    ctx.moveTo(r.x,r.y+25);
    ctx.lineTo(r.x,r.y);
 
@@ -990,6 +1031,7 @@ function animate(){
    if(r.y<=r.targetY){
 
      explode(r.x,r.y,r.color);
+
      rockets.splice(i,1);
 
    }
@@ -1019,6 +1061,7 @@ function animate(){
    );
 
    ctx.fillStyle=p.color;
+
    ctx.globalAlpha=Math.max(p.alpha,0);
 
    ctx.shadowBlur=16;
@@ -1074,16 +1117,14 @@ function(){
  letter.style.display="flex";
 
  window.scrollTo({
-
   top:letter.offsetTop,
   behavior:"smooth"
-
  });
 
 });
 
 
-/* FINAL */
+/* FINAL LILIES → FUNNY 1 */
 
 document.getElementById("finalBtn").addEventListener(
 "click",
@@ -1096,10 +1137,8 @@ function(){
  final.style.display="flex";
 
  window.scrollTo({
-
   top:final.offsetTop,
   behavior:"smooth"
-
  });
 
  /* LILY/PETAL RAIN */
@@ -1129,6 +1168,83 @@ function(){
   final.appendChild(p);
 
  }
+
+ /* Automatically go to funny slide after 5 seconds */
+
+ setTimeout(function(){
+
+   final.style.display="none";
+
+   const funny1=document.getElementById("funny1");
+
+   funny1.style.display="flex";
+
+   window.scrollTo({
+     top:funny1.offsetTop,
+     behavior:"smooth"
+   });
+
+ },5000);
+
+});
+
+
+/* FUNNY 1 → FUNNY 2 */
+
+document.getElementById("funnyNext1").addEventListener(
+"click",
+function(){
+
+ document.getElementById("funny1").style.display="none";
+
+ const funny2=document.getElementById("funny2");
+
+ funny2.style.display="flex";
+
+ window.scrollTo({
+   top:funny2.offsetTop,
+   behavior:"smooth"
+ });
+
+});
+
+
+/* FUNNY 2 → FUNNY 3 */
+
+document.getElementById("funnyNext2").addEventListener(
+"click",
+function(){
+
+ document.getElementById("funny2").style.display="none";
+
+ const funny3=document.getElementById("funny3");
+
+ funny3.style.display="flex";
+
+ window.scrollTo({
+   top:funny3.offsetTop,
+   behavior:"smooth"
+ });
+
+});
+
+
+/* FUNNY 3 → ACTUAL ENDING */
+
+document.getElementById("funnyNext3").addEventListener(
+"click",
+function(){
+
+ document.getElementById("funny3").style.display="none";
+
+ const final=document.getElementById("finalSlide");
+
+ final.style.display="flex";
+
+ window.scrollTo({
+   top:final.offsetTop,
+   behavior:"smooth"
+ });
 
 });
 
