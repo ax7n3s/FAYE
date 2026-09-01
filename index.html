@@ -84,8 +84,9 @@ h2{
   font-weight:400;
   line-height:1.1;
   margin-bottom:22px;
-  text-shadow:0 0 20px rgba(255,30,90,.4),
-              0 0 35px rgba(50,110,255,.3);
+  text-shadow:
+    0 0 20px rgba(255,30,90,.4),
+    0 0 35px rgba(50,110,255,.3);
 }
 
 p{
@@ -120,16 +121,6 @@ p{
 
 @keyframes float{
   50%{transform:translateY(-18px) rotate(8deg)}
-}
-
-/* EXTRA DECORATION */
-.spark{
-  position:absolute;
-  opacity:.5;
-  animation:pulse 2s infinite alternate;
-}
-@keyframes pulse{
-  to{transform:scale(1.5);opacity:1}
 }
 
 /* BUTTON */
@@ -207,7 +198,7 @@ button:active,.start:active{
   display:none;
 }
 
-/* FIREWORK SECTION */
+/* FIREWORKS */
 #fireworkSlide{
   display:none;
   min-height:100svh;
@@ -228,7 +219,9 @@ button:active,.start:active{
 }
 
 /* LETTER */
-#letterSlide{display:none}
+#letterSlide{
+  display:none;
+}
 
 .letter{
   background:rgba(255,250,247,.98);
@@ -254,10 +247,9 @@ button:active,.start:active{
   line-height:1.7;
 }
 
-/* FINAL */
+/* FINAL FLOWERS */
 #finalSlide{
   display:none;
-  min-height:100svh;
 }
 
 .petal{
@@ -282,10 +274,99 @@ button:active,.start:active{
   z-index:4;
 }
 
+/* FUNNY ENDING */
+#funnySlide{
+  display:none;
+  position:relative;
+}
+
+.funny-content{
+  position:relative;
+  z-index:5;
+}
+
+.laugh{
+  position:absolute;
+  font-size:35px;
+  pointer-events:none;
+  animation:
+    laughFloat 3s ease-in-out infinite,
+    laughSpin 4s linear infinite;
+  z-index:2;
+}
+
+.l1{left:4%;top:10%;animation-delay:.1s}
+.l2{right:6%;top:16%;animation-delay:.5s}
+.l3{left:12%;top:32%;animation-delay:1s}
+.l4{right:10%;top:38%;animation-delay:1.5s}
+.l5{left:5%;bottom:25%;animation-delay:.7s}
+.l6{right:5%;bottom:20%;animation-delay:1.2s}
+.l7{left:25%;top:8%;animation-delay:1.8s}
+.l8{right:25%;bottom:10%;animation-delay:2.1s}
+
+@keyframes laughFloat{
+  0%,100%{
+    transform:translateY(0) rotate(-8deg) scale(1);
+  }
+  50%{
+    transform:translateY(-25px) rotate(8deg) scale(1.15);
+  }
+}
+
+@keyframes laughSpin{
+  50%{
+    filter:drop-shadow(0 0 15px rgba(255,255,255,.5));
+  }
+}
+
+.funny-big{
+  font-size:70px;
+  margin:20px 0;
+  animation:funnyBounce 1.2s ease-in-out infinite;
+}
+
+@keyframes funnyBounce{
+  0%,100%{transform:rotate(-3deg) scale(1)}
+  50%{transform:rotate(3deg) scale(1.08)}
+}
+
+.funny-box{
+  margin:25px auto;
+  padding:22px;
+  max-width:500px;
+  border-radius:22px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:
+    0 0 25px rgba(255,23,79,.12),
+    0 0 25px rgba(57,124,255,.1);
+}
+
+.funny-box p{
+  margin:8px auto;
+}
+
 @media(max-width:500px){
-  section{padding:45px 17px}
-  p{font-size:14px;line-height:1.68}
-  .sticker{font-size:28px}
+  section{
+    padding:45px 17px;
+  }
+
+  p{
+    font-size:14px;
+    line-height:1.68;
+  }
+
+  .sticker{
+    font-size:28px;
+  }
+
+  .laugh{
+    font-size:28px;
+  }
+
+  .funny-big{
+    font-size:60px;
+  }
 }
 </style>
 </head>
@@ -309,7 +390,10 @@ button:active,.start:active{
 <div class="line"></div>
 
 <p>Hey Faye… I made something for you. 🥹❤️</p>
-<p>Just a little place where some of our memories can stay together. ✨</p>
+
+<p>
+Just a little place where some of our memories can stay together. ✨
+</p>
 
 <a class="start" href="#october">START ✨</a>
 </div>
@@ -317,7 +401,7 @@ button:active,.start:active{
 </section>
 
 
-<!-- STORY -->
+<!-- OCTOBER -->
 <section id="october">
 
 <span class="sticker s1">💌</span>
@@ -335,17 +419,18 @@ Back in October, when I opened my other account and saw your ID, I sent you a me
 </p>
 
 <p>
-You used to talk about death a lot and say that you wanted to die. I remember telling you that if that ever happened, I would come and bury you. You replied that I should have some rights for that too. Then you said that you would die, and I told you something that I still remember clearly: even if you die, I still want you.
+We started talking more and more, sharing random things, jokes and little moments. Somehow that random conversation became something I genuinely cared about.
 </p>
 
 <p>
-I don't know exactly when it happened. Maybe it was slowly, maybe it was somewhere between all those conversations, jokes, arguments and random messages. But after that, I fell for you deeply. Very deeply. And it's honestly crazy to think that everything started because I randomly decided to text you.
+I don't know exactly when it happened. Maybe it was slowly, somewhere between all those conversations, jokes, arguments and random messages. But after that, I fell for you deeply. Very deeply. And it's honestly crazy to think that everything started because I randomly decided to text you.
 </p>
 
 </div>
 </section>
 
 
+<!-- THE WAY YOU WERE -->
 <section>
 
 <span class="sticker s1">🥺</span>
@@ -360,11 +445,11 @@ I don't know exactly when it happened. Maybe it was slowly, maybe it was somewhe
 <h2>You Always Found A Way Back To Me</h2>
 
 <p>
-At one time, you used to love me a lot too, and I still remember the way you used to try. There was a time when you didn't even have a phone, but somehow you would still find a way to message me at random times. Looking back at it now, that might seem like a small thing to someone else, but for me, it meant so much more than that.
+At one time, you used to love me a lot too, and I still remember the way you used to try. There was a time when you didn't even have a phone, but somehow you would still find a way to message me at random times.
 </p>
 
 <p>
-We never used to ignore each other. We would listen to each other and somehow always make time for each other. No matter what was happening, there was always that effort. You didn't need to do anything huge or expensive to make me feel something. The simple fact that you still found a way to talk to me was enough.
+We never used to ignore each other. We would listen to each other and somehow always make time for each other. No matter what was happening, there was always that effort.
 </p>
 
 <p>
@@ -375,6 +460,7 @@ Trust me, your efforts at that time are one of the biggest reasons I fell even m
 </section>
 
 
+<!-- NOVEMBER -->
 <section>
 
 <span class="sticker s1">🇵🇰</span>
@@ -393,17 +479,18 @@ When I went to Pakistan in November, life honestly felt so happy back then. We w
 </p>
 
 <p>
-Those days felt simple. We didn't need anything special. Just talking to you, sending you something funny, waiting for your reply and knowing that you were there somehow made everything better. We kept getting closer, and for a while, it felt like we understood each other in a way that nobody else could.
+Those days felt simple. We didn't need anything special. Just talking to you, sending you something funny, waiting for your reply and knowing that you were there somehow made everything better.
 </p>
 
 <p>
-But at the same time, we also started drifting apart. You would get upset, and I would keep trying to make it up to you over and over again. Things were never completely perfect between us, but even then, I didn't want to stop trying because losing what we had felt worse than trying again.
+But at the same time, we also started drifting apart. You would get upset, and I would keep trying to make it up to you over and over again. Things were never completely perfect between us, but even then, I didn't want to stop trying.
 </p>
 
 </div>
 </section>
 
 
+<!-- CALLS -->
 <section>
 
 <span class="sticker s1">📱</span>
@@ -418,7 +505,7 @@ But at the same time, we also started drifting apart. You would get upset, and I
 <h2>Somehow, Seeing You Was Always Enough</h2>
 
 <p>
-We used to call each other too. I remember waking up and seeing your message, sometimes around 12 in the morning. After a while, you would call me and we would just talk. Then we would go back to texting, and when the night came, we would video call and just keep looking at each other.
+We used to call each other too. I remember waking up and seeing your message, sometimes around 12 in the morning. After a while, you would call me and we would just talk.
 </p>
 
 <p>
@@ -426,13 +513,14 @@ We would watch reels together, laugh at random things and spend time without eve
 </p>
 
 <p>
-Sometimes we didn't even need to say much. Just knowing that you were on the other side of the screen was enough. We were there together, even if there was a distance between us.
+Sometimes we didn't even need to say much. Just knowing that you were on the other side of the screen was enough.
 </p>
 
 </div>
 </section>
 
 
+<!-- THAT ONE NIGHT -->
 <section>
 
 <span class="sticker s1">🥺</span>
@@ -447,21 +535,22 @@ Sometimes we didn't even need to say much. Just knowing that you were on the oth
 <h2>When Our Tears Said Everything</h2>
 
 <p>
-There was one time when things became so emotional that we were both crying on the call. I was asking you to stay with me, and you were standing in the kitchen because your tablet didn't have any charge.
+There was one time when things became really emotional and we were both crying on the call. I was asking you to stay with me, and you were standing in the kitchen because your tablet didn't have any charge.
 </p>
 
 <p>
-I still remember that moment because everything felt so real. There were no filters, no pretending and no trying to look strong. It was just two people who cared about each other, both emotional, both hurting and both unable to hide what they were feeling.
+I still remember that moment because everything felt so real. There were no filters, no pretending and no trying to look strong. It was just two people who cared about each other and couldn't hide what they were feeling.
 </p>
 
 <p>
-Some memories don't leave your mind because they were happy. Sometimes you remember them because they were real. And that moment was one of those moments for me.
+Some memories stay in your mind simply because they were real. And that moment was one of those moments for me.
 </p>
 
 </div>
 </section>
 
 
+<!-- WHEN I MESSED UP -->
 <section>
 
 <span class="sticker s1">😔</span>
@@ -484,13 +573,14 @@ I remember spending my time trying to make things right again because whenever s
 </p>
 
 <p>
-And somewhere between all the arguments, making up, getting upset and trying again, we also met each other. We met up once and honestly had such a great time together. Even though some moments don't last very long, they can still become memories that stay with you for a very long time.
+And somewhere between all the arguments, making up, getting upset and trying again, we also met each other. We met up once and honestly had such a great time together.
 </p>
 
 </div>
 </section>
 
 
+<!-- AFTER EVERYTHING -->
 <section>
 
 <span class="sticker s1">🎁</span>
@@ -509,17 +599,18 @@ Things went wrong and right between us so many times. There were good days and b
 </p>
 
 <p>
-I tried so much, and honestly, I am still trying. But now, a lot of it is up to you. We made promises to each other, and even if you break yours, I still want to keep mine because I truly want you.
+I tried so much, and honestly, I am still trying. But now, a lot of it is up to you. We made promises to each other, and I still care about what we had.
 </p>
 
 <p>
-If you become mine, I want to give you all the happiness I can. I would listen to you, care for you and try my best to make you happy. I know love isn't supposed to be perfect, but if it is you, I still want to keep trying.
+If things work out between us, I want to give you all the happiness I can. I would listen to you, care for you and try my best to make you happy.
 </p>
 
 </div>
 </section>
 
 
+<!-- WHAT YOU DID TO MY DAYS -->
 <section>
 
 <span class="sticker s1">☀️</span>
@@ -534,21 +625,22 @@ If you become mine, I want to give you all the happiness I can. I would listen t
 <h2>You Could Change My Whole Mood</h2>
 
 <p>
-Simply talking to you could make my entire day better. I loved talking to you. When I was with you and talking to you, things felt lighter somehow. You didn't always have to do anything special. Sometimes just receiving a message from you was enough to change my mood.
+Simply talking to you could make my entire day better. I loved talking to you. When I was with you and talking to you, things felt lighter somehow.
 </p>
 
 <p>
-Like bro, you can literally change my whole mood. You used to say that I talk too much, but at one point, you used to do exactly the same thing. We used to talk so much that sometimes there was always something else to say.
+Like bro, you can literally change my whole mood. You used to say that I talk too much, but at one point, you used to do exactly the same thing.
 </p>
 
 <p>
-And now when I think about it, I realise that those conversations were never just conversations to me. They became a part of my days. A part of my routine. A part of the memories I still go back to.
+Those conversations became a part of my days. A part of my routine. A part of the memories I still go back to.
 </p>
 
 </div>
 </section>
 
 
+<!-- LITTLE THINGS -->
 <section>
 
 <span class="sticker s1">👀</span>
@@ -563,7 +655,7 @@ And now when I think about it, I realise that those conversations were never jus
 <h2>I Remember More Than You Know</h2>
 
 <p>
-Just look at everything that happened in one year. So much changed, so much happened between us, but I am still not letting go. The rest is up to you, but I know that there are so many things about you that stayed in my mind.
+Just look at everything that happened in one year. So much changed, so much happened between us, but I still remember so many little things.
 </p>
 
 <p>
@@ -571,7 +663,7 @@ To be honest, you look so pretty. Your eyes, and that mole on your face—when I
 </p>
 
 <p>
-Actually, I love your laugh too. I remember your expressions and so many other little things that can't just be explained properly in words. Maybe that's the strange thing about caring about someone so much. You start remembering things that other people wouldn't even notice.
+Actually, I love your laugh too. I remember your expressions and so many other little things that can't just be explained properly in words.
 </p>
 
 <p>
@@ -582,6 +674,7 @@ There are so many things that can't just be said, but I remember everything.
 </section>
 
 
+<!-- JULY -->
 <section>
 
 <span class="sticker s1">🇵🇰</span>
@@ -596,7 +689,7 @@ There are so many things that can't just be said, but I remember everything.
 <h2>And Then Everything Became Quiet</h2>
 
 <p>
-When you went to Pakistan in July, we suddenly didn't have any contact. Before you went there, I know things between us had actually started getting better again. But after you went, idk, maybe something bad happened with you.
+When you went to Pakistan in July, we suddenly didn't have any contact. Before you went there, I know things between us had actually started getting better again.
 </p>
 
 <p>
@@ -611,6 +704,7 @@ Sometimes silence can feel louder than words, especially when you were used to h
 </section>
 
 
+<!-- EVEN WHEN YOU WEREN'T THERE -->
 <section>
 
 <span class="sticker s1">💭</span>
@@ -629,7 +723,7 @@ I would still wonder where you were going throughout the day. I used to think ab
 </p>
 
 <p>
-While watching a movie, I would think about you. Even when I went outside, somehow you were still on my mind. It felt like no matter what I was doing, there was always some small moment that would remind me of you.
+While watching a movie, I would think about you. Even when I went outside, somehow you were still on my mind.
 </p>
 
 <p>
@@ -640,6 +734,7 @@ I couldn't forget you. And honestly, I don't think I ever really stopped caring.
 </section>
 
 
+<!-- FAYEEE -->
 <section>
 
 <span class="sticker s1">💌</span>
@@ -734,7 +829,6 @@ Distance and silence
 <img src="photo6.jpg.jpeg" alt="Memory 6">
 
 </div>
-
 </div>
 </section>
 
@@ -787,15 +881,21 @@ Distance and silence
 
 <p><b>IK U DA BEST ✨</b></p>
 
-<p>THANK YOU FOR BEING A PART OF MY STORY 💗</p>
+<p>
+THANK YOU FOR BEING A PART OF MY STORY 💗
+</p>
 
-<p>NOW SMILE, YOU DESERVE IT 🥹✨</p>
+<p>
+NOW SMILE, YOU DESERVE IT 🥹✨
+</p>
 
 <div style="font-size:50px;margin:25px">
 🧍🏼‍♂️💍🧍🏼‍♀️
 </div>
 
-<button id="continueBtn">CONTINUE 💌</button>
+<button id="continueBtn">
+CONTINUE 💌
+</button>
 
 </div>
 </section>
@@ -820,7 +920,7 @@ Distance and silence
 <h3>For Fatema ♡</h3>
 
 <p>
-It’s okay, I will wait for you Fatema because you are my last. After you I don't even want to love anyone or even talk to anyone. Everything ends with you and it will always be you.
+It's okay, I will wait for you Fatema because you are my last. I don't want to rush anything. I just want things to work out naturally and for both of us to be happy.
 </p>
 
 <p>
@@ -828,7 +928,7 @@ To be honest, you look so pretty. Your eyes, that mole on your face, your smile,
 </p>
 
 <p>
-And even when you find flaws in yourself, I wish you could see yourself the way I see you. You don't need to be perfect. The things you worry about don't make you any less beautiful.
+And even when you find flaws in yourself, I wish you could see yourself with a little more kindness. You don't need to be perfect.
 </p>
 
 <p>
@@ -836,7 +936,7 @@ I hope you liked the gifts. Take care of yourself and don't stress about the fut
 </p>
 
 <p>
-It's up to you now but I will still try my best or I will keep trying.
+It's up to you now but I will still try my best.
 </p>
 
 <p>
@@ -853,7 +953,7 @@ ONE MORE THING ✨
 </section>
 
 
-<!-- FINAL LILIES -->
+<!-- FINAL FLOWERS -->
 <section id="finalSlide">
 
 <div class="box final-content">
@@ -874,6 +974,65 @@ I hope you liked your little surprise. 🌸
 
 <div style="font-size:45px;margin-top:30px">
 🌸 🦋 🎀 ✨ 🌸
+</div>
+
+<button id="funnyBtn">
+WAIT... 😂
+</button>
+
+</div>
+
+</section>
+
+
+<!-- NEW FUNNY SLIDE -->
+<section id="funnySlide">
+
+<span class="laugh l1">😂</span>
+<span class="laugh l2">😭</span>
+<span class="laugh l3">🤣</span>
+<span class="laugh l4">😂</span>
+<span class="laugh l5">😭</span>
+<span class="laugh l6">🤣</span>
+<span class="laugh l7">😂</span>
+<span class="laugh l8">😭</span>
+
+<div class="box funny-content">
+
+<div class="label">OKAY FINE</div>
+
+<h2>WAIT... ONE LAST THING 😭</h2>
+
+<div class="funny-big">
+😂😭😂
+</div>
+
+<div class="funny-box">
+
+<p>
+You actually reached the end. 😭
+</p>
+
+<p>
+Bro really read the whole thing 💀
+</p>
+
+<p>
+Respect. 🫡😂
+</p>
+
+<p>
+Now stop scrolling before I add another 47 slides. 😭
+</p>
+
+<p>
+Okay bye. 👋🏻😂
+</p>
+
+</div>
+
+<div style="font-size:40px;margin-top:25px">
+😂 😭 🤣 😂 😭 🤣
 </div>
 
 </div>
@@ -922,6 +1081,9 @@ document.getElementById("yesAgain").addEventListener(
   openFireworks
 );
 
+
+/* FIREWORK OPEN */
+
 function openFireworks(){
 
   document.getElementById("question").style.display="none";
@@ -936,7 +1098,6 @@ function openFireworks(){
   });
 
   startFireworks();
-
 }
 
 
@@ -946,262 +1107,298 @@ let fireworksStarted=false;
 
 function startFireworks(){
 
-if(fireworksStarted)return;
+  if(fireworksStarted)return;
 
-fireworksStarted=true;
+  fireworksStarted=true;
 
-const canvas=document.getElementById("fireworks");
-const ctx=canvas.getContext("2d");
+  const canvas=document.getElementById("fireworks");
+  const ctx=canvas.getContext("2d");
 
-let W,H;
-let rockets=[];
-let particles=[];
+  let W,H;
+  let rockets=[];
+  let particles=[];
 
-function resize(){
+  function resize(){
 
- W=canvas.width=window.innerWidth*devicePixelRatio;
- H=canvas.height=window.innerHeight*devicePixelRatio;
+    W=canvas.width=window.innerWidth*devicePixelRatio;
+    H=canvas.height=window.innerHeight*devicePixelRatio;
 
- canvas.style.width=window.innerWidth+"px";
- canvas.style.height=window.innerHeight+"px";
+    canvas.style.width=window.innerWidth+"px";
+    canvas.style.height=window.innerHeight+"px";
 
- ctx.setTransform(
-   devicePixelRatio,
-   0,
-   0,
-   devicePixelRatio,
-   0,
-   0
- );
+    ctx.setTransform(
+      devicePixelRatio,
+      0,
+      0,
+      devicePixelRatio,
+      0,
+      0
+    );
 
- W=window.innerWidth;
- H=window.innerHeight;
-}
+    W=window.innerWidth;
+    H=window.innerHeight;
+  }
 
-resize();
+  resize();
 
-window.addEventListener("resize",resize);
+  window.addEventListener("resize",resize);
 
-const colors=[
-"#ff174f",
-"#397cff",
-"#ffffff",
-"#ff4f9a",
-"#6da0ff",
-"#ffd4e5"
-];
+  const colors=[
+    "#ff174f",
+    "#397cff",
+    "#ffffff",
+    "#ff4f9a",
+    "#6da0ff",
+    "#ffd4e5"
+  ];
 
-function launch(){
+  function launch(){
 
- rockets.push({
+    rockets.push({
 
-   x:Math.random()*W,
-   y:H+20,
-   targetY:H*(.08+Math.random()*.5),
-   speed:8+Math.random()*6,
-   color:colors[
-     Math.floor(Math.random()*colors.length)
-   ]
+      x:Math.random()*W,
+      y:H+20,
+      targetY:H*(.08+Math.random()*.5),
+      speed:8+Math.random()*6,
+      color:colors[
+        Math.floor(Math.random()*colors.length)
+      ]
 
- });
+    });
 
-}
+  }
 
-function explode(x,y,color){
+  function explode(x,y,color){
 
- for(let i=0;i<180;i++){
+    for(let i=0;i<180;i++){
 
-   const angle=Math.random()*Math.PI*2;
-   const speed=Math.random()*8+1;
+      const angle=Math.random()*Math.PI*2;
+      const speed=Math.random()*8+1;
 
-   particles.push({
+      particles.push({
 
-     x,
-     y,
+        x:x,
+        y:y,
 
-     vx:Math.cos(angle)*speed,
-     vy:Math.sin(angle)*speed,
+        vx:Math.cos(angle)*speed,
+        vy:Math.sin(angle)*speed,
 
-     alpha:1,
+        alpha:1,
 
-     size:Math.random()*2.5+1,
+        size:Math.random()*2.5+1,
 
-     color
+        color:color
 
-   });
+      });
 
- }
+    }
 
-}
+  }
 
-function animate(){
+  function animate(){
 
- ctx.fillStyle="rgba(3,4,11,.16)";
- ctx.fillRect(0,0,W,H);
+    ctx.fillStyle="rgba(3,4,11,.16)";
+    ctx.fillRect(0,0,W,H);
 
- rockets.forEach((r,i)=>{
+    rockets.forEach((r,i)=>{
 
-   r.y-=r.speed;
+      r.y-=r.speed;
 
-   ctx.beginPath();
+      ctx.beginPath();
 
-   ctx.moveTo(r.x,r.y+25);
-   ctx.lineTo(r.x,r.y);
+      ctx.moveTo(r.x,r.y+25);
+      ctx.lineTo(r.x,r.y);
 
-   ctx.strokeStyle=r.color;
-   ctx.lineWidth=2;
+      ctx.strokeStyle=r.color;
+      ctx.lineWidth=2;
+      ctx.shadowBlur=18;
+      ctx.shadowColor=r.color;
 
-   ctx.shadowBlur=18;
-   ctx.shadowColor=r.color;
+      ctx.stroke();
 
-   ctx.stroke();
+      if(r.y<=r.targetY){
 
-   if(r.y<=r.targetY){
+        explode(r.x,r.y,r.color);
 
-     explode(r.x,r.y,r.color);
+        rockets.splice(i,1);
 
-     rockets.splice(i,1);
+      }
 
-   }
+    });
 
- });
+    particles.forEach((p,i)=>{
 
- particles.forEach((p,i)=>{
+      p.x+=p.vx;
+      p.y+=p.vy;
 
-   p.x+=p.vx;
-   p.y+=p.vy;
+      p.vx*=.985;
+      p.vy*=.985;
 
-   p.vx*=.985;
-   p.vy*=.985;
-   p.vy+=.04;
+      p.vy+=.04;
 
-   p.alpha-=.008;
+      p.alpha-=.008;
 
-   ctx.beginPath();
+      ctx.beginPath();
 
-   ctx.arc(
-     p.x,
-     p.y,
-     p.size,
-     0,
-     Math.PI*2
-   );
+      ctx.arc(
+        p.x,
+        p.y,
+        p.size,
+        0,
+        Math.PI*2
+      );
 
-   ctx.fillStyle=p.color;
+      ctx.fillStyle=p.color;
 
-   ctx.globalAlpha=Math.max(p.alpha,0);
+      ctx.globalAlpha=Math.max(
+        p.alpha,
+        0
+      );
 
-   ctx.shadowBlur=16;
-   ctx.shadowColor=p.color;
+      ctx.shadowBlur=16;
+      ctx.shadowColor=p.color;
 
-   ctx.fill();
+      ctx.fill();
 
-   ctx.globalAlpha=1;
+      ctx.globalAlpha=1;
 
-   if(p.alpha<=0){
-     particles.splice(i,1);
-   }
+      if(p.alpha<=0){
 
- });
+        particles.splice(i,1);
 
- requestAnimationFrame(animate);
+      }
 
-}
+    });
 
-for(let i=0;i<22;i++){
+    requestAnimationFrame(animate);
 
- setTimeout(
-   launch,
-   i*180
- );
+  }
 
-}
+  for(let i=0;i<22;i++){
 
-setInterval(()=>{
+    setTimeout(
+      launch,
+      i*180
+    );
 
- launch();
+  }
 
- if(Math.random()>.5){
-   launch();
- }
+  setInterval(()=>{
 
-},500);
+    launch();
 
-animate();
+    if(Math.random()>.5){
+      launch();
+    }
+
+  },500);
+
+  animate();
 
 }
 
 
 /* LETTER */
 
-document.getElementById("continueBtn").addEventListener(
-"click",
-function(){
+document.getElementById("continueBtn")
+.addEventListener("click",function(){
 
- document.getElementById("fireworkSlide").style.display="none";
+  document.getElementById(
+    "fireworkSlide"
+  ).style.display="none";
 
- const letter=document.getElementById("letterSlide");
+  const letter=document.getElementById(
+    "letterSlide"
+  );
 
- letter.style.display="flex";
+  letter.style.display="flex";
 
- window.scrollTo({
+  window.scrollTo({
 
-  top:letter.offsetTop,
+    top:letter.offsetTop,
 
-  behavior:"smooth"
+    behavior:"smooth"
 
- });
+  });
 
 });
 
 
-/* FINAL */
+/* FINAL FLOWERS */
 
-document.getElementById("finalBtn").addEventListener(
-"click",
-function(){
+document.getElementById("finalBtn")
+.addEventListener("click",function(){
 
- document.getElementById("letterSlide").style.display="none";
+  document.getElementById(
+    "letterSlide"
+  ).style.display="none";
 
- const final=document.getElementById("finalSlide");
+  const final=document.getElementById(
+    "finalSlide"
+  );
 
- final.style.display="flex";
+  final.style.display="flex";
 
- window.scrollTo({
+  window.scrollTo({
 
-  top:final.offsetTop,
+    top:final.offsetTop,
 
-  behavior:"smooth"
+    behavior:"smooth"
 
- });
+  });
 
- /* LILY/PETAL RAIN */
+  for(let i=0;i<120;i++){
 
- for(let i=0;i<120;i++){
+    const p=document.createElement("div");
 
-  const p=document.createElement("div");
+    p.className="petal";
 
-  p.className="petal";
+    p.textContent=
+      Math.random()>.2
+      ?"🌸"
+      :"✦";
 
-  p.textContent=Math.random()>.2
-    ?"🌸"
-    :"✦";
+    p.style.left=
+      Math.random()*100+"%";
 
-  p.style.left=
-    Math.random()*100+"%";
+    p.style.fontSize=
+      (18+Math.random()*25)+"px";
 
-  p.style.fontSize=
-    (18+Math.random()*25)+"px";
+    p.style.animationDuration=
+      (4+Math.random()*6)+"s";
 
-  p.style.animationDuration=
-    (4+Math.random()*6)+"s";
+    p.style.animationDelay=
+      Math.random()*4+"s";
 
-  p.style.animationDelay=
-    Math.random()*4+"s";
+    final.appendChild(p);
 
-  final.appendChild(p);
+  }
 
- }
+});
+
+
+/* FUNNY SLIDE */
+
+document.getElementById("funnyBtn")
+.addEventListener("click",function(){
+
+  document.getElementById(
+    "finalSlide"
+  ).style.display="none";
+
+  const funny=document.getElementById(
+    "funnySlide"
+  );
+
+  funny.style.display="flex";
+
+  window.scrollTo({
+
+    top:funny.offsetTop,
+
+    behavior:"smooth"
+
+  });
 
 });
 
