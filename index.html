@@ -757,6 +757,10 @@ Okay, now you can smile. 😭🎀
 I hope you liked your little surprise. 🌸
 </p>
 
+<button id="fakeFinalBtn" class="black-btn">
+WAIT… 👀
+</button>
+
 </div>
 </section>
 
@@ -1142,7 +1146,7 @@ function(){
 });
 
 
-/* LETTER → FAKE ENDING → FUNNY 1 */
+/* LETTER → FAKE ENDING */
 
 document.getElementById("finalBtn").addEventListener(
 "click",
@@ -1159,21 +1163,24 @@ function(){
    behavior:"smooth"
  });
 
- /* Immediately continue — NO WAIT */
+});
 
- requestAnimationFrame(function(){
 
-   fakeFinal.style.display="none";
+/* FAKE ENDING → FUNNY 1 */
 
-   const funny1=document.getElementById("funny1");
+document.getElementById("fakeFinalBtn").addEventListener(
+"click",
+function(){
 
-   funny1.style.display="flex";
+ document.getElementById("fakeFinal").style.display="none";
 
-   window.scrollTo({
-     top:funny1.offsetTop,
-     behavior:"smooth"
-   });
+ const funny1=document.getElementById("funny1");
 
+ funny1.style.display="flex";
+
+ window.scrollTo({
+   top:funny1.offsetTop,
+   behavior:"smooth"
  });
 
 });
