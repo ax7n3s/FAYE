@@ -23,7 +23,6 @@ body:before{
     radial-gradient(circle at 100% 70%,rgba(40,100,255,.25),transparent 38%),
     linear-gradient(135deg,#08000d,#020714,#100008);
 }
-/* NEON */
 .neon{
   position:fixed;
   top:0;
@@ -42,7 +41,6 @@ body:before{
   background:linear-gradient(transparent,#397cff,transparent);
   box-shadow:0 0 15px #397cff,0 0 40px #397cff;
 }
-/* SECTIONS */
 section{
   min-height:100svh;
   padding:50px 20px;
@@ -93,7 +91,6 @@ p{
   background:linear-gradient(90deg,#ff174f,#fff,#397cff);
   box-shadow:0 0 10px #ff174f,0 0 15px #397cff;
 }
-/* STICKERS */
 .sticker{
   position:absolute;
   font-size:32px;
@@ -109,16 +106,6 @@ p{
 @keyframes float{
   50%{transform:translateY(-18px) rotate(8deg)}
 }
-/* EXTRA DECORATION */
-.spark{
-  position:absolute;
-  opacity:.5;
-  animation:pulse 2s infinite alternate;
-}
-@keyframes pulse{
-  to{transform:scale(1.5);opacity:1}
-}
-/* BUTTON */
 button,.start{
   position:relative;
   z-index:20;
@@ -145,7 +132,6 @@ button:active,.start:active{
   color:#fff!important;
   border:1px solid rgba(255,255,255,.5);
 }
-/* TIMELINE */
 .timeline{
   max-width:500px;
   margin:25px auto;
@@ -158,7 +144,6 @@ button:active,.start:active{
   border:1px solid rgba(255,255,255,.1);
   box-shadow:0 0 20px rgba(255,30,80,.08);
 }
-/* PHOTOS */
 .memories-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
@@ -176,7 +161,6 @@ button:active,.start:active{
     0 0 20px rgba(255,23,79,.2),
     0 0 20px rgba(57,124,255,.15);
 }
-/* QUESTION */
 #answerMessage{
   min-height:35px;
   margin-top:20px;
@@ -185,7 +169,6 @@ button:active,.start:active{
 #afterAnswer{
   display:none;
 }
-/* FIREWORK SECTION */
 #fireworkSlide{
   display:none;
   min-height:100svh;
@@ -202,7 +185,6 @@ button:active,.start:active{
   position:relative;
   z-index:3;
 }
-/* LETTER */
 #letterSlide{display:none}
 .letter{
   background:rgba(255,250,247,.98);
@@ -225,7 +207,6 @@ button:active,.start:active{
   font-size:14px;
   line-height:1.7;
 }
-/* FINAL */
 #finalSlide{
   display:none;
   min-height:100svh;
@@ -249,6 +230,27 @@ button:active,.start:active{
   position:relative;
   z-index:4;
 }
+
+/* WAIT + FUNNY ENDING */
+#waitSlide,
+#funny1,
+#funny2,
+#funny3{
+  display:none;
+  min-height:100svh;
+}
+.wait-text{
+  font-size:clamp(45px,12vw,75px);
+  margin-bottom:20px;
+}
+.funny-emoji{
+  font-size:70px;
+  margin:25px 0;
+}
+.funny-title{
+  font-size:clamp(38px,10vw,60px);
+}
+
 @media(max-width:500px){
   section{padding:45px 17px}
   p{font-size:14px;line-height:1.68}
@@ -256,9 +258,12 @@ button:active,.start:active{
 }
 </style>
 </head>
+
 <body>
+
 <div class="neon left"></div>
 <div class="neon right"></div>
+
 <!-- OPENING -->
 <section>
 <span class="sticker s1">🐼</span>
@@ -274,6 +279,7 @@ button:active,.start:active{
 <a class="start" href="#october">START ✨</a>
 </div>
 </section>
+
 <!-- STORY -->
 <section id="october">
 <span class="sticker s1">💌</span>
@@ -282,17 +288,21 @@ button:active,.start:active{
 <div class="box">
 <div class="label">OCTOBER</div>
 <h2>A Random Message That Changed Everything</h2>
+
 <p>
 Back in October, when I opened my other account and saw your ID, I sent you a message just for fun. At that moment, I had absolutely no idea that one random message would slowly become the beginning of such a big part of my life. You told me that you had changed, and somehow from that conversation, we became friends.
 </p>
+
 <p>
-You used to talk about death a lot and say that you wanted to die. I remember telling you that if that ever happened, I would come and bury you. You replied that I should have some rights for that too. Then you said that you would die, and I told you something that I still remember clearly: even if you die, I still want you.
+I remember some of the difficult conversations we had back then too. Even through those emotional moments, I wanted you to know that I cared about you and wanted you to be okay.
 </p>
+
 <p>
 I don't know exactly when it happened. Maybe it was slowly, maybe it was somewhere between all those conversations, jokes, arguments and random messages. But after that, I fell for you deeply. Very deeply. And it's honestly crazy to think that everything started because I randomly decided to text you.
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">🥺</span>
 <span class="sticker s2">💗</span>
@@ -312,6 +322,7 @@ Trust me, your efforts at that time are one of the biggest reasons I fell even m
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">🇵🇰</span>
 <span class="sticker s2">🌙</span>
@@ -331,6 +342,7 @@ But at the same time, we also started drifting apart. You would get upset, and I
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">📱</span>
 <span class="sticker s2">🧸</span>
@@ -350,6 +362,7 @@ Sometimes we didn't even need to say much. Just knowing that you were on the oth
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">🥺</span>
 <span class="sticker s2">💧</span>
@@ -369,6 +382,7 @@ Some memories don't leave your mind because they were happy. Sometimes you remem
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">😔</span>
 <span class="sticker s2">💭</span>
@@ -388,6 +402,7 @@ And somewhere between all the arguments, making up, getting upset and trying aga
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">🎁</span>
 <span class="sticker s2">🫶🏻</span>
@@ -407,6 +422,7 @@ If you become mine, I want to give you all the happiness I can. I would listen t
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">☀️</span>
 <span class="sticker s2">💗</span>
@@ -426,6 +442,7 @@ And now when I think about it, I realise that those conversations were never jus
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">👀</span>
 <span class="sticker s2">🦋</span>
@@ -448,6 +465,7 @@ There are so many things that can't just be said, but I remember everything.
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">🇵🇰</span>
 <span class="sticker s2">🌙</span>
@@ -467,6 +485,7 @@ Sometimes silence can feel louder than words, especially when you were used to h
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">💭</span>
 <span class="sticker s2">🎬</span>
@@ -486,6 +505,7 @@ I couldn't forget you. And honestly, I don't think I ever really stopped caring.
 </p>
 </div>
 </section>
+
 <section>
 <span class="sticker s1">💌</span>
 <span class="sticker s2">🎧</span>
@@ -505,35 +525,22 @@ And for a little while, it feels like everything is still there again.
 </p>
 </div>
 </section>
+
 <!-- TIMELINE -->
 <section>
 <div class="box">
 <div class="label">OUR TIMELINE</div>
 <h2>How The Story Moved</h2>
 <div class="timeline">
-<div class="time">
-🗓️ <b>October</b><br>
-Where it started
-</div>
-<div class="time">
-🌙 <b>November</b><br>
-Pakistan and 6 AM talks
-</div>
-<div class="time">
-📱 <b>Calls</b><br>
-Reels, video calls and late nights
-</div>
-<div class="time">
-🫶🏻 <b>Meetup</b><br>
-Three minutes and gifts
-</div>
-<div class="time">
-🇵🇰 <b>July</b><br>
-Distance and silence
-</div>
+<div class="time">🗓️ <b>October</b><br>Where it started</div>
+<div class="time">🌙 <b>November</b><br>Pakistan and 6 AM talks</div>
+<div class="time">📱 <b>Calls</b><br>Reels, video calls and late nights</div>
+<div class="time">🫶🏻 <b>Meetup</b><br>Three minutes and gifts</div>
+<div class="time">🇵🇰 <b>July</b><br>Distance and silence</div>
 </div>
 </div>
 </section>
+
 <!-- EXACTLY 6 PHOTOS -->
 <section>
 <span class="sticker s1">💗</span>
@@ -553,6 +560,7 @@ Distance and silence
 </div>
 </div>
 </section>
+
 <!-- QUESTION -->
 <section id="question">
 <span class="sticker s1">🐼</span>
@@ -575,6 +583,7 @@ Distance and silence
 </div>
 </div>
 </section>
+
 <!-- FIREWORKS -->
 <section id="fireworkSlide">
 <canvas id="fireworks"></canvas>
@@ -590,6 +599,7 @@ Distance and silence
 <button id="continueBtn">CONTINUE 💌</button>
 </div>
 </section>
+
 <!-- LETTER -->
 <section id="letterSlide">
 <span class="sticker s1">💌</span>
@@ -625,32 +635,114 @@ ONE MORE THING ✨
 </button>
 </div>
 </section>
+
 <!-- FINAL LILIES -->
 <section id="finalSlide">
 <div class="box final-content">
 <div class="label">JUST FOR YOU</div>
 <h2>And that's it… ♡</h2>
 <div class="line"></div>
-<p>
-Okay, now you can smile. 😭🎀
-</p>
-<p>
-I hope you liked your little surprise. 🌸
-</p>
+<p>Okay, now you can smile. 😭🎀</p>
+<p>I hope you liked your little surprise. 🌸</p>
 <div style="font-size:45px;margin-top:30px">
 🌸 🦋 🎀 ✨ 🌸
 </div>
 </div>
 </section>
+
+<!-- WAIT -->
+<section id="waitSlide">
+<div class="box">
+<div class="label">WAIT A SECOND</div>
+<div class="wait-text">WAIT… 👀</div>
+<h2>Faye…</h2>
+<p>I forgot something.</p>
+<button id="waitBtn">WAIT 😭</button>
+</div>
+</section>
+
+<!-- FUNNY 1 -->
+<section id="funny1">
+<span class="sticker s1">😭</span>
+<span class="sticker s2">🐼</span>
+<span class="sticker s3">💀</span>
+<span class="sticker s4">🎀</span>
+<div class="box">
+<div class="label">BRO REALLY THOUGHT</div>
+<div class="funny-emoji">🧍🏼‍♂️💭</div>
+<h2 class="funny-title">You thought it was actually over? 😭</h2>
+<p>NAHHHH FAYE, WE'RE NOT DONE YET 💀</p>
+<button id="funnyBtn1">NEXT 😭</button>
+</div>
+</section>
+
+<!-- FUNNY 2 -->
+<section id="funny2">
+<span class="sticker s1">🫠</span>
+<span class="sticker s2">😭</span>
+<span class="sticker s3">🎀</span>
+<span class="sticker s4">💗</span>
+<div class="box">
+<div class="label">ONE MORE THING</div>
+<div class="funny-emoji">📱👀</div>
+<h2 class="funny-title">Me checking if you actually read all of this 👀</h2>
+<p>Don't lie. I KNOW YOU SKIPPED SOMETHING 😭</p>
+<button id="funnyBtn2">I READ IT 😭</button>
+</div>
+</section>
+
+<!-- FUNNY 3 -->
+<section id="funny3">
+<span class="sticker s1">🐼</span>
+<span class="sticker s2">💀</span>
+<span class="sticker s3">😭</span>
+<span class="sticker s4">❤️</span>
+<div class="box">
+<div class="label">OKAY OKAY</div>
+<div class="funny-emoji">🧍🏼‍♂️👉🏻👈🏻</div>
+<h2 class="funny-title">Okay NOW I'm actually done 😭</h2>
+<p>Promise.</p>
+<button id="actualEndBtn">ACTUAL ENDING 🫡</button>
+</div>
+</section>
+
+<!-- ACTUAL ENDING -->
+<section id="actualEnding">
+<div class="box final-content">
+<div class="label">ACTUALLY FOR REAL THIS TIME</div>
+<h2>I Love You So Much, Fatema ♡</h2>
+<div class="line"></div>
+<p>
+And yeah… that's actually it. 🥹❤️
+</p>
+<p>
+Thank you for being such a special part of my life and for giving me all these memories.
+</p>
+<p>
+Whatever happens next, I'll always be grateful for everything we shared. 🌸
+</p>
+<div style="font-size:48px;margin-top:30px">
+🌸 🦋 🎀 ❤️ ✨
+</div>
+<p style="margin-top:25px">
+Take care, Faye. ♡
+</p>
+</div>
+</section>
+
 <script>
+
 /* QUESTION */
 const yesBtn=document.getElementById("yesBtn");
 const noBtn=document.getElementById("noBtn");
 const answer=document.getElementById("answerMessage");
 const after=document.getElementById("afterAnswer");
+
 let noClicks=0;
+
 noBtn.addEventListener("click",function(){
   noClicks++;
+
   if(noClicks===1){
     answer.innerHTML="Think again 🥺💗";
     after.style.display="block";
@@ -662,36 +754,56 @@ noBtn.addEventListener("click",function(){
     after.style.display="block";
   }
 });
+
 yesBtn.addEventListener("click",openFireworks);
+
 document.getElementById("yesAgain").addEventListener(
   "click",
   openFireworks
 );
+
 function openFireworks(){
+
   document.getElementById("question").style.display="none";
+
   const fire=document.getElementById("fireworkSlide");
+
   fire.style.display="flex";
+
   window.scrollTo({
     top:fire.offsetTop,
     behavior:"smooth"
   });
+
   startFireworks();
 }
+
+
 /* FIREWORKS */
+
 let fireworksStarted=false;
+
 function startFireworks(){
+
 if(fireworksStarted)return;
+
 fireworksStarted=true;
+
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
+
 let W,H;
 let rockets=[];
 let particles=[];
+
 function resize(){
+
  W=canvas.width=window.innerWidth*devicePixelRatio;
  H=canvas.height=window.innerHeight*devicePixelRatio;
+
  canvas.style.width=window.innerWidth+"px";
  canvas.style.height=window.innerHeight+"px";
+
  ctx.setTransform(
    devicePixelRatio,
    0,
@@ -700,11 +812,15 @@ function resize(){
    0,
    0
  );
+
  W=window.innerWidth;
  H=window.innerHeight;
 }
+
 resize();
+
 window.addEventListener("resize",resize);
+
 const colors=[
 "#ff174f",
 "#397cff",
@@ -713,7 +829,9 @@ const colors=[
 "#6da0ff",
 "#ffd4e5"
 ];
+
 function launch(){
+
  rockets.push({
    x:Math.random()*W,
    y:H+20,
@@ -723,11 +841,16 @@ function launch(){
      Math.floor(Math.random()*colors.length)
    ]
  });
+
 }
+
 function explode(x,y,color){
+
  for(let i=0;i<180;i++){
+
    const angle=Math.random()*Math.PI*2;
    const speed=Math.random()*8+1;
+
    particles.push({
      x,
      y,
@@ -737,13 +860,20 @@ function explode(x,y,color){
      size:Math.random()*2.5+1,
      color
    });
+
  }
+
 }
+
 function animate(){
+
  ctx.fillStyle="rgba(3,4,11,.16)";
  ctx.fillRect(0,0,W,H);
+
  rockets.forEach((r,i)=>{
+
    r.y-=r.speed;
+
    ctx.beginPath();
    ctx.moveTo(r.x,r.y+25);
    ctx.lineTo(r.x,r.y);
@@ -752,19 +882,27 @@ function animate(){
    ctx.shadowBlur=18;
    ctx.shadowColor=r.color;
    ctx.stroke();
+
    if(r.y<=r.targetY){
      explode(r.x,r.y,r.color);
      rockets.splice(i,1);
    }
+
  });
+
  particles.forEach((p,i)=>{
+
    p.x+=p.vx;
    p.y+=p.vy;
+
    p.vx*=.985;
    p.vy*=.985;
    p.vy+=.04;
+
    p.alpha-=.008;
+
    ctx.beginPath();
+
    ctx.arc(
      p.x,
      p.y,
@@ -772,231 +910,212 @@ function animate(){
      0,
      Math.PI*2
    );
+
    ctx.fillStyle=p.color;
    ctx.globalAlpha=Math.max(p.alpha,0);
    ctx.shadowBlur=16;
    ctx.shadowColor=p.color;
    ctx.fill();
+
    ctx.globalAlpha=1;
+
    if(p.alpha<=0){
      particles.splice(i,1);
    }
+
  });
+
  requestAnimationFrame(animate);
+
 }
+
 for(let i=0;i<22;i++){
+
  setTimeout(
    launch,
    i*180
  );
+
 }
+
 setInterval(()=>{
+
  launch();
+
  if(Math.random()>.5){
    launch();
  }
+
 },500);
+
 animate();
+
 }
+
+
 /* LETTER */
+
 document.getElementById("continueBtn").addEventListener(
 "click",
 function(){
+
  document.getElementById("fireworkSlide").style.display="none";
+
  const letter=document.getElementById("letterSlide");
+
  letter.style.display="flex";
+
  window.scrollTo({
   top:letter.offsetTop,
   behavior:"smooth"
  });
+
 });
-/* FINAL */
+
+
+/* LILIES */
+
 document.getElementById("finalBtn").addEventListener(
 "click",
 function(){
+
  document.getElementById("letterSlide").style.display="none";
+
  const final=document.getElementById("finalSlide");
+
  final.style.display="flex";
+
  window.scrollTo({
   top:final.offsetTop,
   behavior:"smooth"
  });
- /* LILY/PETAL RAIN */
+
  for(let i=0;i<120;i++){
+
   const p=document.createElement("div");
+
   p.className="petal";
+
   p.textContent=Math.random()>.2
     ?"🌸"
     :"✦";
+
   p.style.left=
     Math.random()*100+"%";
+
   p.style.fontSize=
     (18+Math.random()*25)+"px";
+
   p.style.animationDuration=
     (4+Math.random()*6)+"s";
+
   p.style.animationDelay=
     Math.random()*4+"s";
+
   final.appendChild(p);
+
  }
-});
-</script>
-</body>
-</html>
-<!-- FINAL LILIES -->
-<section id="finalSlide">
-  <div class="box final-content">
-    <div class="label">JUST FOR YOU</div>
-    <h2>And that's it… ♡</h2>
-    <div class="line"></div>
 
-    <p>Okay, Faye… now you can smile. 😭🎀</p>
-    <p>I hope you liked your little surprise. 🌸</p>
+ /* AUTOMATIC 5 SECOND WAIT SCREEN */
 
-    <div style="font-size:45px;margin-top:30px">
-      🌸 🦋 🎀 ✨ 🌸
-    </div>
-  </div>
-</section>
+ setTimeout(function(){
 
-<!-- FUNNY ENDING -->
-<section id="waitSlide" style="display:none;">
-  <div class="box">
-    <div class="label">WAIT...</div>
-    <h2>One Minute 👀</h2>
-    <p>The ending isn't here yet...</p>
-    <button id="waitBtn">WAIT 😭</button>
-  </div>
-</section>
+   final.style.display="none";
 
-<section id="funnySlide" style="display:none;">
-  <div class="box">
-    <div class="label" id="funnyCount">1 / 3</div>
-    <h2 id="funnyTitle">WAIT... 😭</h2>
-    <p id="funnyText">You thought the website was over? 💀</p>
-    <button id="funnyNext">NEXT 😂</button>
-  </div>
-</section>
+   const wait=document.getElementById("waitSlide");
 
-<section id="funnyFinal" style="display:none;">
-  <div class="box">
-    <div class="label">THE ACTUAL ENDING</div>
-    <h2>Okay, now it's actually over 😭</h2>
+   wait.style.display="flex";
 
-    <div style="font-size:55px;margin:25px 0;">
-      🧍🏻‍♂️👉😂👈🧍🏻‍♀️
-    </div>
+   window.scrollTo({
+     top:wait.offsetTop,
+     behavior:"smooth"
+   });
 
-    <p>
-      After all these slides, if you're still here...
-      congratulations, you survived. 💀
-    </p>
-
-    <p>
-      Now go smile. 😭❤️
-    </p>
-
-    <div class="line"></div>
-
-    <p style="font-size:12px;opacity:.6;">
-      THE END. FOR REAL THIS TIME. 🫡
-    </p>
-  </div>
-</section>
-
-<script>
-/* FUNNY ENDING */
-
-const finalSlide = document.getElementById("finalSlide");
-const waitSlide = document.getElementById("waitSlide");
-const funnySlide = document.getElementById("funnySlide");
-const funnyFinal = document.getElementById("funnyFinal");
-
-const waitBtn = document.getElementById("waitBtn");
-const funnyNext = document.getElementById("funnyNext");
-
-const funnyTitle = document.getElementById("funnyTitle");
-const funnyText = document.getElementById("funnyText");
-const funnyCount = document.getElementById("funnyCount");
-
-const funnySlides = [
-  [
-    "WAIT A SECOND 😭",
-    "You thought the website was over? 💀"
-  ],
-  [
-    "BRO... 💀",
-    "You really thought I would end it that easily? 😂"
-  ],
-  [
-    "OKAY FINE 😭",
-    "Now it's actually the last one... promise. 🫡❤️"
-  ]
-];
-
-let funnyIndex = 0;
-
-/* SHOW WAIT AFTER LILIES */
-document.getElementById("finalBtn").addEventListener("click", function(){
-
-  setTimeout(() => {
-
-    finalSlide.style.display = "none";
-    waitSlide.style.display = "flex";
-
-    window.scrollTo({
-      top: waitSlide.offsetTop,
-      behavior: "smooth"
-    });
-
-  }, 5000);
+ },5000);
 
 });
+
 
 /* WAIT BUTTON */
-waitBtn.addEventListener("click", function(){
 
-  waitSlide.style.display = "none";
-  funnySlide.style.display = "flex";
+document.getElementById("waitBtn").addEventListener(
+"click",
+function(){
 
-  funnyIndex = 0;
+ document.getElementById("waitSlide").style.display="none";
 
-  funnyCount.textContent = "1 / 3";
-  funnyTitle.textContent = funnySlides[0][0];
-  funnyText.textContent = funnySlides[0][1];
+ const funny=document.getElementById("funny1");
 
-  window.scrollTo({
-    top: funnySlide.offsetTop,
-    behavior: "smooth"
-  });
+ funny.style.display="flex";
+
+ window.scrollTo({
+   top:funny.offsetTop,
+   behavior:"smooth"
+ });
+
+});
+
+
+/* FUNNY SLIDE 1 */
+
+document.getElementById("funnyBtn1").addEventListener(
+"click",
+function(){
+
+ document.getElementById("funny1").style.display="none";
+
+ const funny=document.getElementById("funny2");
+
+ funny.style.display="flex";
+
+ window.scrollTo({
+   top:funny.offsetTop,
+   behavior:"smooth"
+ });
 
 });
 
-/* NEXT BUTTON */
-funnyNext.addEventListener("click", function(){
 
-  funnyIndex++;
+/* FUNNY SLIDE 2 */
 
-  if(funnyIndex >= funnySlides.length){
+document.getElementById("funnyBtn2").addEventListener(
+"click",
+function(){
 
-    funnySlide.style.display = "none";
-    funnyFinal.style.display = "flex";
+ document.getElementById("funny2").style.display="none";
 
-    window.scrollTo({
-      top: funnyFinal.offsetTop,
-      behavior: "smooth"
-    });
+ const funny=document.getElementById("funny3");
 
-    return;
-  }
+ funny.style.display="flex";
 
-  funnyCount.textContent = (funnyIndex + 1) + " / 3";
-  funnyTitle.textContent = funnySlides[funnyIndex][0];
-  funnyText.textContent = funnySlides[funnyIndex][1];
-
-  window.scrollTo({
-    top: funnySlide.offsetTop,
-    behavior: "smooth"
-  });
+ window.scrollTo({
+   top:funny.offsetTop,
+   behavior:"smooth"
+ });
 
 });
+
+
+/* ACTUAL FINAL ENDING */
+
+document.getElementById("actualEndBtn").addEventListener(
+"click",
+function(){
+
+ document.getElementById("funny3").style.display="none";
+
+ const ending=document.getElementById("actualEnding");
+
+ ending.style.display="flex";
+
+ window.scrollTo({
+   top:ending.offsetTop,
+   behavior:"smooth"
+ });
+
+});
+
 </script>
+
+</body>
+</html>
