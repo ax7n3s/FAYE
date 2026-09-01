@@ -217,6 +217,7 @@ button:active,.start:active{
 }
 
 /* FINAL */
+#fakeFinal,
 #finalSlide{
   display:none;
   min-height:100svh;
@@ -305,7 +306,7 @@ Back in October, when I opened my other account and saw your ID, I sent you a me
 </p>
 
 <p>
-You used to talk about death a lot and say that you wanted to die. I remember telling you that if that ever happened, I would come and bury you. You replied that I should have some rights for that too. Then you said that you would die, and I told you something that I still remember clearly: even if you die, I still want you.
+[This paragraph has been omitted.]
 </p>
 
 <p>
@@ -738,13 +739,13 @@ ONE MORE THING ✨
 </div>
 </section>
 
-<!-- LILIES -->
-<section id="finalSlide">
+<!-- FAKE FINAL ENDING -->
+<section id="fakeFinal">
 <div class="box final-content">
 
 <div class="label">JUST FOR YOU</div>
 
-<h2>And that's it… ♡</h2>
+<h2>And that’s it… ♡</h2>
 
 <div class="line"></div>
 
@@ -755,10 +756,6 @@ Okay, now you can smile. 😭🎀
 <p>
 I hope you liked your little surprise. 🌸
 </p>
-
-<div style="font-size:45px;margin-top:30px">
-🌸 🦋 🎀 ✨ 🌸
-</div>
 
 </div>
 </section>
@@ -772,18 +769,18 @@ I hope you liked your little surprise. 🌸
 
 <div class="box funny-content">
 
-<div class="label">WAIT… FAYE 👀</div>
+<div class="label">WAIT… THERE’S MORE 👀</div>
 
 <h2>You Thought That Was The End?</h2>
 
 <div class="funny-big">😭</div>
 
 <p>
-Yeah… no. 😭
+Nahhh. 😭
 </p>
 
 <p>
-I have one tiny problem…
+I’m not done annoying you yet. 🎀
 </p>
 
 <button class="funny-btn" id="funnyNext1">
@@ -802,14 +799,14 @@ WAIT 😭
 
 <div class="box funny-content">
 
-<div class="label">FAYE, BE HONEST 😭</div>
+<div class="label">HOLD ONNN 😭</div>
 
-<h2>Did You Actually Read All Of That?</h2>
+<h2>I Forgot Something…</h2>
 
 <div class="funny-big">🫡</div>
 
 <p>
-Damn. Respect. 😭
+Damn. I almost forgot. 😭
 </p>
 
 <p>
@@ -823,7 +820,7 @@ OKAY 😭
 </div>
 </section>
 
-<!-- FUNNY SLIDE 3 -->
+<!-- FUNNY SLIDE 3 / QUICK QUESTION -->
 <section id="funny3">
 <span class="sticker s1">👀</span>
 <span class="sticker s2">😭</span>
@@ -832,9 +829,9 @@ OKAY 😭
 
 <div class="box funny-content">
 
-<div class="label">FAYE, QUICK QUESTION 👀</div>
+<div class="label">BEFORE YOU GO… 👀</div>
 
-<h2>Be honest…</h2>
+<h2>Just One Tiny Thing.</h2>
 
 <p style="font-size:20px;line-height:1.7;margin-top:25px;">
 Did you actually think I'd make this whole thing without annoying you at least once? 😭
@@ -851,6 +848,27 @@ I had to. 🫡🎀
 <button class="funny-btn" id="funnyNext3">
 NOW YOU CAN GO ♡
 </button>
+
+</div>
+</section>
+
+<!-- ACTUAL FINAL ENDING -->
+<section id="finalSlide">
+<div class="box final-content">
+
+<div class="label">JUST FOR YOU</div>
+
+<h2>And that’s it… ♡</h2>
+
+<div class="line"></div>
+
+<p>
+Okay, now you can smile. 😭🎀
+</p>
+
+<p>
+I hope you liked your little surprise. 🌸
+</p>
 
 </div>
 </section>
@@ -1124,7 +1142,7 @@ function(){
 });
 
 
-/* FINAL LILIES → FUNNY 1 */
+/* LETTER → FAKE ENDING → FUNNY 1 */
 
 document.getElementById("finalBtn").addEventListener(
 "click",
@@ -1132,48 +1150,20 @@ function(){
 
  document.getElementById("letterSlide").style.display="none";
 
- const final=document.getElementById("finalSlide");
+ const fakeFinal=document.getElementById("fakeFinal");
 
- final.style.display="flex";
+ fakeFinal.style.display="flex";
 
  window.scrollTo({
-  top:final.offsetTop,
-  behavior:"smooth"
+   top:fakeFinal.offsetTop,
+   behavior:"smooth"
  });
 
- /* LILY/PETAL RAIN */
+ /* Immediately continue — NO WAIT */
 
- for(let i=0;i<120;i++){
+ requestAnimationFrame(function(){
 
-  const p=document.createElement("div");
-
-  p.className="petal";
-
-  p.textContent=Math.random()>.2
-    ?"🌸"
-    :"✦";
-
-  p.style.left=
-    Math.random()*100+"%";
-
-  p.style.fontSize=
-    (18+Math.random()*25)+"px";
-
-  p.style.animationDuration=
-    (4+Math.random()*6)+"s";
-
-  p.style.animationDelay=
-    Math.random()*4+"s";
-
-  final.appendChild(p);
-
- }
-
- /* Automatically go to funny slide after 5 seconds */
-
- setTimeout(function(){
-
-   final.style.display="none";
+   fakeFinal.style.display="none";
 
    const funny1=document.getElementById("funny1");
 
@@ -1184,7 +1174,7 @@ function(){
      behavior:"smooth"
    });
 
- },5000);
+ });
 
 });
 
@@ -1229,7 +1219,7 @@ function(){
 });
 
 
-/* FUNNY 3 → ACTUAL ENDING */
+/* FUNNY 3 → ACTUAL FINAL ENDING */
 
 document.getElementById("funnyNext3").addEventListener(
 "click",
@@ -1245,6 +1235,32 @@ function(){
    top:final.offsetTop,
    behavior:"smooth"
  });
+
+ /* EXACTLY 120 LILIES */
+
+ for(let i=0;i<120;i++){
+
+  const p=document.createElement("div");
+
+  p.className="petal";
+
+  p.textContent="🌸";
+
+  p.style.left=
+    Math.random()*100+"%";
+
+  p.style.fontSize=
+    (18+Math.random()*25)+"px";
+
+  p.style.animationDuration=
+    (4+Math.random()*6)+"s";
+
+  p.style.animationDelay=
+    Math.random()*4+"s";
+
+  final.appendChild(p);
+
+ }
 
 });
 
