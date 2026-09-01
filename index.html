@@ -862,8 +862,8 @@ function(){
 <section id="waitSlide" style="display:none;">
   <div class="box">
     <div class="label">WAIT...</div>
-    <h2>Faye… 👀</h2>
-    <p>You really thought that was the ending? 😭</p>
+    <h2>One Minute 👀</h2>
+    <p>The ending isn't here yet...</p>
     <button id="waitBtn">WAIT 😭</button>
   </div>
 </section>
@@ -871,8 +871,8 @@ function(){
 <section id="funnySlide" style="display:none;">
   <div class="box">
     <div class="label" id="funnyCount">1 / 3</div>
-    <h2 id="funnyTitle">BRO... 😭</h2>
-    <p id="funnyText">Faye, we're not done yet. 💀</p>
+    <h2 id="funnyTitle">WAIT... 😭</h2>
+    <p id="funnyText">You thought the website was over? 💀</p>
     <button id="funnyNext">NEXT 😂</button>
   </div>
 </section>
@@ -880,19 +880,19 @@ function(){
 <section id="funnyFinal" style="display:none;">
   <div class="box">
     <div class="label">THE ACTUAL ENDING</div>
-
-    <h2>Okay Faye… NOW it's over 😭</h2>
+    <h2>Okay, now it's actually over 😭</h2>
 
     <div style="font-size:55px;margin:25px 0;">
       🧍🏻‍♂️👉😂👈🧍🏻‍♀️
     </div>
 
     <p>
-      I promise there isn't another hidden slide after this. 💀
+      After all these slides, if you're still here...
+      congratulations, you survived. 💀
     </p>
 
     <p>
-      Now go smile, Faye. You made it to the end. 😭❤️
+      Now go smile. 😭❤️
     </p>
 
     <div class="line"></div>
@@ -904,6 +904,8 @@ function(){
 </section>
 
 <script>
+/* FUNNY ENDING */
+
 const finalSlide = document.getElementById("finalSlide");
 const waitSlide = document.getElementById("waitSlide");
 const funnySlide = document.getElementById("funnySlide");
@@ -917,30 +919,47 @@ const funnyText = document.getElementById("funnyText");
 const funnyCount = document.getElementById("funnyCount");
 
 const funnySlides = [
-  ["BRO... 😭", "Faye, we're not done yet. 💀"],
-  ["ONE MORE THING 👀", "Okay Faye, this time we're actually close to the end."],
-  ["ALMOST THERE 🫡", "Alright Faye… now this really is the last one. 😂"]
+  [
+    "WAIT A SECOND 😭",
+    "You thought the website was over? 💀"
+  ],
+  [
+    "BRO... 💀",
+    "You really thought I would end it that easily? 😂"
+  ],
+  [
+    "OKAY FINE 😭",
+    "Now it's actually the last one... promise. 🫡❤️"
+  ]
 ];
 
 let funnyIndex = 0;
 
-/* FINAL -> WAIT */
-function showFunnyEnding() {
-  finalSlide.style.display = "none";
-  waitSlide.style.display = "flex";
+/* SHOW WAIT AFTER LILIES */
+document.getElementById("finalBtn").addEventListener("click", function(){
 
-  window.scrollTo({
-    top: waitSlide.offsetTop,
-    behavior: "smooth"
-  });
-}
+  setTimeout(() => {
 
-/* WAIT -> FUNNY */
-waitBtn.addEventListener("click", function () {
+    finalSlide.style.display = "none";
+    waitSlide.style.display = "flex";
+
+    window.scrollTo({
+      top: waitSlide.offsetTop,
+      behavior: "smooth"
+    });
+
+  }, 5000);
+
+});
+
+/* WAIT BUTTON */
+waitBtn.addEventListener("click", function(){
+
   waitSlide.style.display = "none";
   funnySlide.style.display = "flex";
 
   funnyIndex = 0;
+
   funnyCount.textContent = "1 / 3";
   funnyTitle.textContent = funnySlides[0][0];
   funnyText.textContent = funnySlides[0][1];
@@ -949,13 +968,16 @@ waitBtn.addEventListener("click", function () {
     top: funnySlide.offsetTop,
     behavior: "smooth"
   });
+
 });
 
-/* FUNNY SLIDES */
-funnyNext.addEventListener("click", function () {
+/* NEXT BUTTON */
+funnyNext.addEventListener("click", function(){
+
   funnyIndex++;
 
-  if (funnyIndex >= funnySlides.length) {
+  if(funnyIndex >= funnySlides.length){
+
     funnySlide.style.display = "none";
     funnyFinal.style.display = "flex";
 
@@ -975,5 +997,6 @@ funnyNext.addEventListener("click", function () {
     top: funnySlide.offsetTop,
     behavior: "smooth"
   });
+
 });
 </script>
