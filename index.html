@@ -5,14 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Faye ♡</title>
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-html{
-  scroll-behavior:smooth;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   background:#03040b;
   color:white;
@@ -82,9 +76,8 @@ h2{
   font-weight:400;
   line-height:1.1;
   margin-bottom:22px;
-  text-shadow:
-    0 0 20px rgba(255,30,90,.4),
-    0 0 35px rgba(50,110,255,.3);
+  text-shadow:0 0 20px rgba(255,30,90,.4),
+              0 0 35px rgba(50,110,255,.3);
 }
 p{
   font-size:15px;
@@ -114,17 +107,23 @@ p{
 .s3{left:6%;bottom:8%;animation-delay:2s}
 .s4{right:6%;bottom:7%;animation-delay:3s}
 @keyframes float{
-  50%{
-    transform:translateY(-18px) rotate(8deg);
-  }
+  50%{transform:translateY(-18px) rotate(8deg)}
 }
-/* BUTTONS */
-button,
-.start{
+/* EXTRA DECORATION */
+.spark{
+  position:absolute;
+  opacity:.5;
+  animation:pulse 2s infinite alternate;
+}
+@keyframes pulse{
+  to{transform:scale(1.5);opacity:1}
+}
+/* BUTTON */
+button,.start{
   position:relative;
   z-index:20;
   display:inline-block;
-  margin:8px 4px 0;
+  margin-top:18px;
   padding:15px 28px;
   border-radius:50px;
   border:1px solid rgba(255,255,255,.4);
@@ -138,24 +137,13 @@ button,
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
 }
-button:active,
-.start:active{
+button:active,.start:active{
   transform:scale(.96);
 }
 .black-btn{
   background:#050505!important;
   color:#fff!important;
-}
-/* MUSIC */
-.music-btn{
-  position:fixed;
-  right:22px;
-  top:22px;
-  z-index:100;
-  margin:0;
-  padding:12px 17px;
-  font-size:10px;
-  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.5);
 }
 /* TIMELINE */
 .timeline{
@@ -197,7 +185,7 @@ button:active,
 #afterAnswer{
   display:none;
 }
-/* FIREWORKS */
+/* FIREWORK SECTION */
 #fireworkSlide{
   display:none;
   min-height:100svh;
@@ -215,9 +203,7 @@ button:active,
   z-index:3;
 }
 /* LETTER */
-#letterSlide{
-  display:none;
-}
+#letterSlide{display:none}
 .letter{
   background:rgba(255,250,247,.98);
   color:#2c2027;
@@ -239,10 +225,8 @@ button:active,
   font-size:14px;
   line-height:1.7;
 }
-/* FINAL FLOWERS */
-#finalSlide{
-  display:none;
-}
+/* FINAL */
+#finalSlide{display:none}
 .petal{
   position:absolute;
   top:-60px;
@@ -251,18 +235,14 @@ button:active,
   animation:fall linear infinite;
 }
 @keyframes fall{
-  from{
-    transform:translateY(-60px) rotate(0deg);
-  }
-  to{
-    transform:translateY(115vh) rotate(720deg);
-  }
+  from{transform:translateY(-60px) rotate(0deg)}
+  to{transform:translateY(115vh) rotate(720deg)}
 }
 .final-content{
   position:relative;
   z-index:4;
 }
-/* FUNNY SLIDE */
+/* FUNNY LAST SLIDE — ONLY NEW ADDITION */
 #funnySlide{
   display:none;
   position:relative;
@@ -277,7 +257,7 @@ button:active,
   pointer-events:none;
   animation:
     laughFloat 3s ease-in-out infinite,
-    laughSpin 4s linear infinite;
+    laughGlow 2s ease-in-out infinite;
   z-index:2;
 }
 .l1{left:4%;top:10%;animation-delay:.1s}
@@ -296,7 +276,7 @@ button:active,
     transform:translateY(-25px) rotate(8deg) scale(1.15);
   }
 }
-@keyframes laughSpin{
+@keyframes laughGlow{
   50%{
     filter:drop-shadow(0 0 15px rgba(255,255,255,.5));
   }
@@ -328,42 +308,18 @@ button:active,
 .funny-box p{
   margin:8px auto;
 }
-/* MOBILE */
 @media(max-width:500px){
-  section{
-    padding:45px 17px;
-  }
-  p{
-    font-size:14px;
-    line-height:1.68;
-  }
-  .sticker{
-    font-size:28px;
-  }
-  .laugh{
-    font-size:28px;
-  }
-  .funny-big{
-    font-size:60px;
-  }
-  .music-btn{
-    right:15px;
-    top:15px;
-    padding:10px 13px;
-  }
+  section{padding:45px 17px}
+  p{font-size:14px;line-height:1.68}
+  .sticker{font-size:28px}
+  .laugh{font-size:28px}
+  .funny-big{font-size:60px}
 }
 </style>
 </head>
 <body>
 <div class="neon left"></div>
 <div class="neon right"></div>
-<!-- MUSIC -->
-<audio id="bgMusic" loop preload="auto">
-  <source src="FullSizeRender(1).mp3" type="audio/mpeg">
-</audio>
-<button id="musicBtn" class="music-btn" type="button">
-  ▶ PLAY SONG
-</button>
 <!-- OPENING -->
 <section>
 
@@ -376,18 +332,14 @@ button:active,
 <div class="label">MADE FOR YOU</div>
 <h1>FAYE ♡</h1>
 <div class="line"></div>
-<p>
-Hey Faye… I made something for you. 🥹❤️
-</p>
-<p>
-Just a little place where some of our memories can stay together. ✨
-</p>
-<a class="start" href="#october">
+<p>Hey Faye… I made something for you. 🥹❤️</p>
+<p>Just a little place where some of our memories can stay together. ✨</p>
+
 START ✨
-</a>
+
 </div>
 </section>
-<!-- OCTOBER -->
+<!-- STORY -->
 <section id="october">
 
 💌
@@ -401,14 +353,13 @@ START ✨
 Back in October, when I opened my other account and saw your ID, I sent you a message just for fun. At that moment, I had absolutely no idea that one random message would slowly become the beginning of such a big part of my life. You told me that you had changed, and somehow from that conversation, we became friends.
 </p>
 <p>
-We started talking more and more, sharing random things, jokes and little moments. Somehow that random conversation became something I genuinely cared about.
+That random conversation slowly became something I genuinely cared about. We started talking more, sharing random things, jokes and little moments, and somehow I started feeling closer to you.
 </p>
 <p>
-I don't know exactly when it happened. Maybe it was slowly, somewhere between all those conversations, jokes, arguments and random messages. But after that, I fell for you deeply. Very deeply. And it's honestly crazy to think that everything started because I randomly decided to text you.
+I don't know exactly when it happened. Maybe it was slowly, maybe it was somewhere between all those conversations, jokes, arguments and random messages. But after that, I fell for you deeply. Very deeply. And it's honestly crazy to think that everything started because I randomly decided to text you.
 </p>
 </div>
 </section>
-<!-- THE WAY YOU WERE -->
 <section>
 
 🥺
@@ -420,17 +371,16 @@ I don't know exactly when it happened. Maybe it was slowly, somewhere between al
 <div class="label">THE WAY YOU WERE</div>
 <h2>You Always Found A Way Back To Me</h2>
 <p>
-At one time, you used to love me a lot too, and I still remember the way you used to try. There was a time when you didn't even have a phone, but somehow you would still find a way to message me at random times.
+At one time, you used to love me a lot too, and I still remember the way you used to try. There was a time when you didn't even have a phone, but somehow you would still find a way to message me at random times. Looking back at it now, that might seem like a small thing to someone else, but for me, it meant so much more than that.
 </p>
 <p>
-We never used to ignore each other. We would listen to each other and somehow always make time for each other. No matter what was happening, there was always that effort.
+We never used to ignore each other. We would listen to each other and somehow always make time for each other. No matter what was happening, there was always that effort. You didn't need to do anything huge or expensive to make me feel something. The simple fact that you still found a way to talk to me was enough.
 </p>
 <p>
 Trust me, your efforts at that time are one of the biggest reasons I fell even more for you. I noticed those things. I remembered them. And even after everything that has happened, I still remember how much those little efforts meant to me.
 </p>
 </div>
 </section>
-<!-- NOVEMBER -->
 <section>
 
 🇵🇰
@@ -445,14 +395,13 @@ Trust me, your efforts at that time are one of the biggest reasons I fell even m
 When I went to Pakistan in November, life honestly felt so happy back then. We would talk until 6 AM and send each other reels for hours. We could start talking without even realising how much time was passing, and suddenly the whole night would be gone.
 </p>
 <p>
-Those days felt simple. We didn't need anything special. Just talking to you, sending you something funny, waiting for your reply and knowing that you were there somehow made everything better.
+Those days felt simple. We didn't need anything special. Just talking to you, sending you something funny, waiting for your reply and knowing that you were there somehow made everything better. We kept getting closer, and for a while, it felt like we understood each other in a way that nobody else could.
 </p>
 <p>
-But at the same time, we also started drifting apart. You would get upset, and I would keep trying to make it up to you over and over again. Things were never completely perfect between us, but even then, I didn't want to stop trying.
+But at the same time, we also started drifting apart. You would get upset, and I would keep trying to make it up to you over and over again. Things were never completely perfect between us, but even then, I didn't want to stop trying because losing what we had felt worse than trying again.
 </p>
 </div>
 </section>
-<!-- CALLS -->
 <section>
 
 📱
@@ -464,17 +413,16 @@ But at the same time, we also started drifting apart. You would get upset, and I
 <div class="label">OUR CALLS</div>
 <h2>Somehow, Seeing You Was Always Enough</h2>
 <p>
-We used to call each other too. I remember waking up and seeing your message, sometimes around 12 in the morning. After a while, you would call me and we would just talk.
+We used to call each other too. I remember waking up and seeing your message, sometimes around 12 in the morning. After a while, you would call me and we would just talk. Then we would go back to texting, and when the night came, we would video call and just keep looking at each other.
 </p>
 <p>
 We would watch reels together, laugh at random things and spend time without even needing to have some big plan. Sometimes you would even fall asleep on the call. Those moments might sound ordinary, but to me, they weren't.
 </p>
 <p>
-Sometimes we didn't even need to say much. Just knowing that you were on the other side of the screen was enough.
+Sometimes we didn't even need to say much. Just knowing that you were on the other side of the screen was enough. We were there together, even if there was a distance between us.
 </p>
 </div>
 </section>
-<!-- THAT ONE NIGHT -->
 <section>
 
 🥺
@@ -486,17 +434,16 @@ Sometimes we didn't even need to say much. Just knowing that you were on the oth
 <div class="label">THAT ONE NIGHT</div>
 <h2>When Our Tears Said Everything</h2>
 <p>
-There was one time when things became really emotional and we were both crying on the call. I was asking you to stay with me, and you were standing in the kitchen because your tablet didn't have any charge.
+There was one time when things became so emotional that we were both crying on the call. I was asking you to stay with me, and you were standing in the kitchen because your tablet didn't have any charge.
 </p>
 <p>
-I still remember that moment because everything felt so real. There were no filters, no pretending and no trying to look strong. It was just two people who cared about each other and couldn't hide what they were feeling.
+I still remember that moment because everything felt so real. There were no filters, no pretending and no trying to look strong. It was just two people who cared about each other, both emotional, both hurting and both unable to hide what they were feeling.
 </p>
 <p>
-Some memories stay in your mind simply because they were real. And that moment was one of those moments for me.
+Some memories don't leave your mind because they were happy. Sometimes you remember them because they were real. And that moment was one of those moments for me.
 </p>
 </div>
 </section>
-<!-- WHEN I MESSED UP -->
 <section>
 
 😔
@@ -514,11 +461,10 @@ There was one time when I fell asleep without making things up with you, and the
 I remember spending my time trying to make things right again because whenever something went wrong between us, I never liked leaving it that way. I wanted to fix it. I wanted you to be okay with me again.
 </p>
 <p>
-And somewhere between all the arguments, making up, getting upset and trying again, we also met each other. We met up once and honestly had such a great time together.
+And somewhere between all the arguments, making up, getting upset and trying again, we also met each other. We met up once and honestly had such a great time together. Even though some moments don't last very long, they can still become memories that stay with you for a very long time.
 </p>
 </div>
 </section>
-<!-- AFTER EVERYTHING -->
 <section>
 
 🎁
@@ -533,14 +479,13 @@ And somewhere between all the arguments, making up, getting upset and trying aga
 Things went wrong and right between us so many times. There were good days and bad days. There were moments when everything felt perfect and other moments when everything became completely messed up.
 </p>
 <p>
-I tried so much, and honestly, I am still trying. But now, a lot of it is up to you. We made promises to each other, and I still care about what we had.
+I tried so much, and honestly, I am still trying. But now, a lot of it is up to you. We made promises to each other, and even if you break yours, I still want to keep mine because I truly want you.
 </p>
 <p>
-If things work out between us, I want to give you all the happiness I can. I would listen to you, care for you and try my best to make you happy.
+If you become mine, I want to give you all the happiness I can. I would listen to you, care for you and try my best to make you happy. I know love isn't supposed to be perfect, but if it is you, I still want to keep trying.
 </p>
 </div>
 </section>
-<!-- WHAT YOU DID TO MY DAYS -->
 <section>
 
 ☀️
@@ -552,17 +497,16 @@ If things work out between us, I want to give you all the happiness I can. I wou
 <div class="label">WHAT YOU DID TO MY DAYS</div>
 <h2>You Could Change My Whole Mood</h2>
 <p>
-Simply talking to you could make my entire day better. I loved talking to you. When I was with you and talking to you, things felt lighter somehow.
+Simply talking to you could make my entire day better. I loved talking to you. When I was with you and talking to you, things felt lighter somehow. You didn't always have to do anything special. Sometimes just receiving a message from you was enough to change my mood.
 </p>
 <p>
-Like bro, you can literally change my whole mood. You used to say that I talk too much, but at one point, you used to do exactly the same thing.
+Like bro, you can literally change my whole mood. You used to say that I talk too much, but at one point, you used to do exactly the same thing. We used to talk so much that sometimes there was always something else to say.
 </p>
 <p>
-Those conversations became a part of my days. A part of my routine. A part of the memories I still go back to.
+And now when I think about it, I realise that those conversations were never just conversations to me. They became a part of my days. A part of my routine. A part of the memories I still go back to.
 </p>
 </div>
 </section>
-<!-- LITTLE THINGS -->
 <section>
 
 👀
@@ -574,20 +518,19 @@ Those conversations became a part of my days. A part of my routine. A part of th
 <div class="label">THE LITTLE THINGS</div>
 <h2>I Remember More Than You Know</h2>
 <p>
-Just look at everything that happened in one year. So much changed, so much happened between us, but I still remember so many little things.
+Just look at everything that happened in one year. So much changed, so much happened between us, but I am still not letting go. The rest is up to you, but I know that there are so many things about you that stayed in my mind.
 </p>
 <p>
 To be honest, you look so pretty. Your eyes, and that mole on your face—when I saw it, oh God, mashaAllah. And I still remember that day after the exam when we were both staring at each other. I was shy, while you were with your friends laughing.
 </p>
 <p>
-Actually, I love your laugh too. I remember your expressions and so many other little things that can't just be explained properly in words.
+Actually, I love your laugh too. I remember your expressions and so many other little things that can't just be explained properly in words. Maybe that's the strange thing about caring about someone so much. You start remembering things that other people wouldn't even notice.
 </p>
 <p>
 There are so many things that can't just be said, but I remember everything.
 </p>
 </div>
 </section>
-<!-- JULY -->
 <section>
 
 🇵🇰
@@ -599,7 +542,7 @@ There are so many things that can't just be said, but I remember everything.
 <div class="label">JULY</div>
 <h2>And Then Everything Became Quiet</h2>
 <p>
-When you went to Pakistan in July, we suddenly didn't have any contact. Before you went there, I know things between us had actually started getting better again.
+When you went to Pakistan in July, we suddenly didn't have any contact. Before you went there, I know things between us had actually started getting better again. But after you went, idk, maybe something bad happened with you.
 </p>
 <p>
 We didn't contact each other because of your network problem, and everything suddenly became quiet. It felt strange going from talking so much to barely knowing what was happening with each other.
@@ -609,7 +552,6 @@ Sometimes silence can feel louder than words, especially when you were used to h
 </p>
 </div>
 </section>
-<!-- EVEN WHEN YOU WEREN'T THERE -->
 <section>
 
 💭
@@ -624,14 +566,13 @@ Sometimes silence can feel louder than words, especially when you were used to h
 I would still wonder where you were going throughout the day. I used to think about you all the time. Even while watching reels, I would think about you.
 </p>
 <p>
-While watching a movie, I would think about you. Even when I went outside, somehow you were still on my mind.
+While watching a movie, I would think about you. Even when I went outside, somehow you were still on my mind. It felt like no matter what I was doing, there was always some small moment that would remind me of you.
 </p>
 <p>
 I couldn't forget you. And honestly, I don't think I ever really stopped caring.
 </p>
 </div>
 </section>
-<!-- FAYEEE -->
 <section>
 
 💌
@@ -718,18 +659,14 @@ Distance and silence
 🧍🏼‍♂️💍🧍🏼‍♀️
 </div>
 <div>
-<button id="yesBtn" type="button">
+
 YES ❤️
-</button>
-<button id="noBtn" type="button">
 NO 🥺
-</button>
+
 </div>
 <div id="answerMessage"></div>
 <div id="afterAnswer">
-<button id="yesAgain" type="button">
-OKAY YES 🥺❤️
-</button>
+<button id="yesAgain">OKAY YES 🥺❤️</button>
 </div>
 </div>
 </section>
@@ -748,7 +685,7 @@ NOW SMILE, YOU DESERVE IT 🥹✨
 <div style="font-size:50px;margin:25px">
 🧍🏼‍♂️💍🧍🏼‍♀️
 </div>
-<button id="continueBtn" type="button">
+<button id="continueBtn">
 CONTINUE 💌
 </button>
 </div>
@@ -767,50 +704,54 @@ CONTINUE 💌
 <div class="letter">
 <h3>For Fatema ♡</h3>
 <p>
-It's okay, I will wait for you Fatema because you are my last. I don't want to rush anything. I just want things to work out naturally and for both of us to be happy.
+It’s okay, I will wait for you Fatema because you are my last. After you I don't even want to love anyone or even talk to anyone. Everything ends with you and it will always be you.
 </p>
 <p>
 To be honest, you look so pretty. Your eyes, that mole on your face, your smile, your laugh, your expressions and all those little things about you. MashaAllah, there are honestly so many things I remember.
 </p>
 <p>
-And even when you find flaws in yourself, I wish you could see yourself with a little more kindness. You don't need to be perfect.
+And even when you find flaws in yourself, I wish you could see yourself the way I see you. You don't need to be perfect. The things you worry about don't make you any less beautiful.
 </p>
 <p>
 I hope you liked the gifts. Take care of yourself and don't stress about the future. You can do it and you will.
 </p>
 <p>
-It's up to you now but I will still try my best.
+It's up to you now but I will still try my best or I will keep trying.
 </p>
 <p>
 I will wait at the edge of the forgotten road.
 </p>
 </div>
-<button id="finalBtn" class="black-btn" type="button">
+<button id="finalBtn" class="black-btn">
 ONE MORE THING ✨
 </button>
 </div>
 </section>
-<!-- FINAL FLOWERS -->
+<!-- FINAL LILIES -->
 <section id="finalSlide">
 <div class="box final-content">
-<div class="label">JUST FOR YOU</div>
-<h2>And that's it… ♡</h2>
+<div class="label">ALWAYS</div>
+<h2>I LOVE YOU SO MUCH, FAYE 🥺❤️</h2>
 <div class="line"></div>
 <p>
-Okay, now you can smile. 😭🎀
+Some stories don't need perfect endings to mean something.
 </p>
 <p>
-I hope you liked your little surprise. 🌸
+Thank you for every conversation, every call, every reel, every smile and every little memory.
+</p>
+<p>
+Now smile, okay? 🥹✨
 </p>
 <div style="font-size:45px;margin-top:30px">
-🌸 🦋 🎀 ✨ 🌸
+💗 🌸 🦋 ✨ 🌸 💗
 </div>
-<button id="funnyBtn" type="button">
+<!-- ONLY NEW BUTTON -->
+<button id="funnyBtn">
 WAIT... 😂
 </button>
 </div>
 </section>
-<!-- FUNNY ENDING -->
+<!-- FUNNY LAST SLIDE -->
 <section id="funnySlide">
 
 😂
@@ -851,308 +792,227 @@ Okay bye. 👋🏻😂
 </div>
 </section>
 <script>
-/* =========================
-   MUSIC
-========================= */
-const music = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
-let musicPlaying = false;
-musicBtn.addEventListener("click", async function(){
-  try{
-    if(!musicPlaying){
-      await music.play();
-      musicPlaying = true;
-      musicBtn.textContent = "❚❚ PAUSE SONG";
-    }else{
-      music.pause();
-      musicPlaying = false;
-      musicBtn.textContent = "▶ PLAY SONG";
-    }
-  }catch(error){
-    musicBtn.textContent = "🎵 AUDIO NOT FOUND";
-    console.log("Music error:",error);
-  }
-});
-/* =========================
-   QUESTION
-========================= */
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const answer = document.getElementById("answerMessage");
-const after = document.getElementById("afterAnswer");
-let noClicks = 0;
+/* QUESTION */
+const yesBtn=document.getElementById("yesBtn");
+const noBtn=document.getElementById("noBtn");
+const answer=document.getElementById("answerMessage");
+const after=document.getElementById("afterAnswer");
+let noClicks=0;
 noBtn.addEventListener("click",function(){
   noClicks++;
-  if(noClicks === 1){
-    answer.innerHTML = "Think again 🥺💗";
-    after.style.display = "block";
-  }else if(noClicks === 2){
-    answer.innerHTML = "I don't believe you 😭🥺";
-    after.style.display = "block";
+  if(noClicks===1){
+    answer.innerHTML="Think again 🥺💗";
+    after.style.display="block";
+  }else if(noClicks===2){
+    answer.innerHTML="I don't believe you 😭🥺";
+    after.style.display="block";
   }else{
-    answer.innerHTML = "Come onnn Faye 🥺❤️";
-    after.style.display = "block";
+    answer.innerHTML="Come onnn Faye 🥺❤️";
+    after.style.display="block";
   }
 });
 yesBtn.addEventListener("click",openFireworks);
-document.getElementById("yesAgain")
-.addEventListener("click",openFireworks);
-/* =========================
-   FIREWORKS OPEN
-========================= */
+document.getElementById("yesAgain").addEventListener(
+  "click",
+  openFireworks
+);
+/* FIREWORK OPEN */
 function openFireworks(){
-  const question = document.getElementById("question");
-  const fire = document.getElementById("fireworkSlide");
-  question.style.display = "none";
-  fire.style.display = "flex";
-  fire.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
+  document.getElementById("question").style.display="none";
+  const fire=document.getElementById("fireworkSlide");
+  fire.style.display="flex";
+  window.scrollTo({
+    top:fire.offsetTop,
+    behavior:"smooth"
   });
   startFireworks();
 }
-/* =========================
-   FIREWORKS
-========================= */
-let fireworksStarted = false;
+/* FIREWORKS */
+let fireworksStarted=false;
 function startFireworks(){
-  if(fireworksStarted) return;
-  fireworksStarted = true;
-  const canvas = document.getElementById("fireworks");
-  const ctx = canvas.getContext("2d");
-  let W = 0;
-  let H = 0;
-  let rockets = [];
-  let particles = [];
-  function resize(){
-    const ratio = window.devicePixelRatio || 1;
-    W = window.innerWidth;
-    H = window.innerHeight;
-    canvas.width = W * ratio;
-    canvas.height = H * ratio;
-    canvas.style.width = W + "px";
-    canvas.style.height = H + "px";
-    ctx.setTransform(
-      ratio,
-      0,
-      0,
-      ratio,
-      0,
-      0
-    );
-  }
-  resize();
-  window.addEventListener("resize",resize);
-  const colors = [
-    "#ff174f",
-    "#397cff",
-    "#ffffff",
-    "#ff4f9a",
-    "#6da0ff",
-    "#ffd4e5"
-  ];
-  function launch(){
-    rockets.push({
-      x:Math.random() * W,
-      y:H + 20,
-      targetY:H * (
-        .08 + Math.random() * .5
-      ),
-      speed:8 + Math.random() * 6,
-      color:
-        colors[
-          Math.floor(
-            Math.random() * colors.length
-          )
-        ]
-    });
-  }
-  function explode(x,y,color){
-    for(let i=0;i<180;i++){
-      const angle =
-        Math.random() * Math.PI * 2;
-      const speed =
-        Math.random() * 8 + 1;
-      particles.push({
-        x:x,
-        y:y,
-        vx:Math.cos(angle) * speed,
-        vy:Math.sin(angle) * speed,
-        alpha:1,
-        size:
-          Math.random() * 2.5 + 1,
-        color:color
-      });
-    }
-  }
-  function animate(){
-    ctx.fillStyle =
-      "rgba(3,4,11,.16)";
-    ctx.fillRect(
-      0,
-      0,
-      W,
-      H
-    );
-    for(let i=rockets.length-1;i>=0;i--){
-      const r = rockets[i];
-      r.y -= r.speed;
-      ctx.beginPath();
-      ctx.moveTo(
-        r.x,
-        r.y + 25
-      );
-      ctx.lineTo(
-        r.x,
-        r.y
-      );
-      ctx.strokeStyle = r.color;
-      ctx.lineWidth = 2;
-      ctx.shadowBlur = 18;
-      ctx.shadowColor = r.color;
-      ctx.stroke();
-      if(r.y <= r.targetY){
-        explode(
-          r.x,
-          r.y,
-          r.color
-        );
-        rockets.splice(i,1);
-      }
-    }
-    for(let i=particles.length-1;i>=0;i--){
-      const p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vx *= .985;
-      p.vy *= .985;
-      p.vy += .04;
-      p.alpha -= .008;
-      ctx.beginPath();
-      ctx.arc(
-        p.x,
-        p.y,
-        p.size,
-        0,
-        Math.PI * 2
-      );
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha =
-        Math.max(p.alpha,0);
-      ctx.shadowBlur = 16;
-      ctx.shadowColor = p.color;
-      ctx.fill();
-      ctx.globalAlpha = 1;
-      if(p.alpha <= 0){
-        particles.splice(i,1);
-      }
-    }
-    requestAnimationFrame(animate);
-  }
-  for(let i=0;i<22;i++){
-    setTimeout(
-      launch,
-      i * 180
-    );
-  }
-  setInterval(function(){
-    launch();
-    if(Math.random() > .5){
-      launch();
-    }
-  },500);
-  animate();
+if(fireworksStarted)return;
+fireworksStarted=true;
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+let W,H;
+let rockets=[];
+let particles=[];
+function resize(){
+ W=canvas.width=window.innerWidth*devicePixelRatio;
+ H=canvas.height=window.innerHeight*devicePixelRatio;
+ canvas.style.width=window.innerWidth+"px";
+ canvas.style.height=window.innerHeight+"px";
+ ctx.setTransform(
+   devicePixelRatio,
+   0,
+   0,
+   devicePixelRatio,
+   0,
+   0
+ );
+ W=window.innerWidth;
+ H=window.innerHeight;
 }
-/* =========================
-   FIREWORKS → LETTER
-========================= */
+resize();
+window.addEventListener("resize",resize);
+const colors=[
+"#ff174f",
+"#397cff",
+"#ffffff",
+"#ff4f9a",
+"#6da0ff",
+"#ffd4e5"
+];
+function launch(){
+ rockets.push({
+   x:Math.random()*W,
+   y:H+20,
+   targetY:H*(.08+Math.random()*.5),
+   speed:8+Math.random()*6,
+   color:colors[
+     Math.floor(Math.random()*colors.length)
+   ]
+ });
+}
+function explode(x,y,color){
+ for(let i=0;i<180;i++){
+   const angle=Math.random()*Math.PI*2;
+   const speed=Math.random()*8+1;
+   particles.push({
+     x:x,
+     y:y,
+     vx:Math.cos(angle)*speed,
+     vy:Math.sin(angle)*speed,
+     alpha:1,
+     size:Math.random()*2.5+1,
+     color:color
+   });
+ }
+}
+function animate(){
+ ctx.fillStyle="rgba(3,4,11,.16)";
+ ctx.fillRect(0,0,W,H);
+ rockets.forEach((r,i)=>{
+   r.y-=r.speed;
+   ctx.beginPath();
+   ctx.moveTo(r.x,r.y+25);
+   ctx.lineTo(r.x,r.y);
+   ctx.strokeStyle=r.color;
+   ctx.lineWidth=2;
+   ctx.shadowBlur=18;
+   ctx.shadowColor=r.color;
+   ctx.stroke();
+   if(r.y<=r.targetY){
+     explode(r.x,r.y,r.color);
+     rockets.splice(i,1);
+   }
+ });
+ particles.forEach((p,i)=>{
+   p.x+=p.vx;
+   p.y+=p.vy;
+   p.vx*=.985;
+   p.vy*=.985;
+   p.vy+=.04;
+   p.alpha-=.008;
+   ctx.beginPath();
+   ctx.arc(
+     p.x,
+     p.y,
+     p.size,
+     0,
+     Math.PI*2
+   );
+   ctx.fillStyle=p.color;
+   ctx.globalAlpha=Math.max(
+     p.alpha,
+     0
+   );
+   ctx.shadowBlur=16;
+   ctx.shadowColor=p.color;
+   ctx.fill();
+   ctx.globalAlpha=1;
+   if(p.alpha<=0){
+     particles.splice(i,1);
+   }
+ });
+ requestAnimationFrame(animate);
+}
+for(let i=0;i<22;i++){
+ setTimeout(
+   launch,
+   i*180
+ );
+}
+setInterval(()=>{
+ launch();
+ if(Math.random()>.5){
+   launch();
+ }
+},500);
+animate();
+}
+/* LETTER */
 document.getElementById("continueBtn")
 .addEventListener("click",function(){
-  const fire =
-    document.getElementById("fireworkSlide");
-  const letter =
-    document.getElementById("letterSlide");
-  fire.style.display = "none";
-  letter.style.display = "flex";
-  letter.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+ document.getElementById(
+   "fireworkSlide"
+ ).style.display="none";
+ const letter=document.getElementById(
+   "letterSlide"
+ );
+ letter.style.display="flex";
+ window.scrollTo({
+   top:letter.offsetTop,
+   behavior:"smooth"
+ });
 });
-/* =========================
-   LETTER → FLOWERS
-========================= */
+/* FINAL FLOWERS */
 document.getElementById("finalBtn")
 .addEventListener("click",function(){
-  const letter =
-    document.getElementById("letterSlide");
-  const final =
-    document.getElementById("finalSlide");
-  letter.style.display = "none";
-  final.style.display = "flex";
-  final.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-  /* Remove old petals if button is somehow clicked again */
-  final
-    .querySelectorAll(".petal")
-    .forEach(p => p.remove());
-  /* FLOWER RAIN */
-  for(let i=0;i<120;i++){
-    const p =
-      document.createElement("div");
-    p.className = "petal";
-    p.textContent =
-      Math.random() > .2
-      ? "🌸"
-      : "✦";
-    p.style.left =
-      Math.random() * 100 + "%";
-    p.style.fontSize =
-      18 + Math.random() * 25 + "px";
-    p.style.animationDuration =
-      4 + Math.random() * 6 + "s";
-    p.style.animationDelay =
-      Math.random() * 4 + "s";
-    final.appendChild(p);
-  }
+ document.getElementById(
+   "letterSlide"
+ ).style.display="none";
+ const final=document.getElementById(
+   "finalSlide"
+ );
+ final.style.display="flex";
+ window.scrollTo({
+   top:final.offsetTop,
+   behavior:"smooth"
+ });
+ for(let i=0;i<120;i++){
+   const p=document.createElement("div");
+   p.className="petal";
+   p.textContent=
+     Math.random()>.2
+     ?"🌸"
+     :"✦";
+   p.style.left=
+     Math.random()*100+"%";
+   p.style.fontSize=
+     (18+Math.random()*25)+"px";
+   p.style.animationDuration=
+     (4+Math.random()*6)+"s";
+   p.style.animationDelay=
+     Math.random()*4+"s";
+   final.appendChild(p);
+ }
 });
-/* =========================
-   FLOWERS → FUNNY SLIDE
-========================= */
+/* FUNNY LAST SLIDE — ONLY NEW JAVASCRIPT */
 document.getElementById("funnyBtn")
 .addEventListener("click",function(){
-  const final =
-    document.getElementById("finalSlide");
-  const funny =
-    document.getElementById("funnySlide");
-  final.style.display = "none";
-  funny.style.display = "flex";
-  funny.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
+ document.getElementById(
+   "finalSlide"
+ ).style.display="none";
+ const funny=document.getElementById(
+   "funnySlide"
+ );
+ funny.style.display="flex";
+ window.scrollTo({
+   top:funny.offsetTop,
+   behavior:"smooth"
+ });
 });
-/* =========================
-   SAFETY FALLBACK
-   Makes sure funny button
-   still works even if browser
-   has an old cached script.
-========================= */
-window.showFunnySlide = function(){
-  const final =
-    document.getElementById("finalSlide");
-  const funny =
-    document.getElementById("funnySlide");
-  if(!final || !funny) return;
-  final.style.display = "none";
-  funny.style.display = "flex";
-  funny.scrollIntoView({
-    behavior:"smooth",
-    block:"start"
-  });
-};
 </script>
 </body>
 </html>
